@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project video4fuze -->
-<!-- Saved: 2009-08-16, 17:52:08 -->
+<!-- Saved: 2009-08-18, 00:57:35 -->
 <!-- Copyright (C) 2009 ssorgatem, ssorgatem@esdebian.org -->
 <Project version="4.6">
   <Language>en</Language>
@@ -15,12 +15,25 @@
   <TranslationsBinPath>translations/</TranslationsBinPath>
   <Sources>
     <Source>video4fuze.pyw</Source>
+    <Source>GUI/__init__.py</Source>
+    <Source>GUI/Ui_MainWindow.py</Source>
+    <Source>GUI/MainWindow.py</Source>
+    <Source>fuze.py</Source>
+    <Source>video4fuze_rc.py</Source>
   </Sources>
   <Forms>
+    <Form>GUI/MainWindow.ui</Form>
   </Forms>
   <Translations>
+    <Translation>translations/v4f_es.ts</Translation>
+    <Translation>translations/v4f_en.ts</Translation>
+    <Translation>translations/v4f_ca.ts</Translation>
+    <Translation>translations/v4f_es.qm</Translation>
+    <Translation>translations/v4f_en.qm</Translation>
+    <Translation>translations/v4f_ca.qm</Translation>
   </Translations>
   <Resources>
+    <Resource>video4fuze.qrc</Resource>
   </Resources>
   <Interfaces>
   </Interfaces>
@@ -28,6 +41,8 @@
     <Other>video4fuze.e4p</Other>
     <Other>mencoder.exe</Other>
     <Other></Other>
+    <Other>LICENSE</Other>
+    <Other>README.txt</Other>
   </Others>
   <MainScript>video4fuze/video4fuze.pyw</MainScript>
   <Vcs>
