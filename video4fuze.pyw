@@ -1,20 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+#This is version 0.1
 import sys
+from PyQt4.QtGui import QApplication
+from PyQt4.QtCore import QTranslator, QString, QLocale
+from GUI.MainWindow import MainWindow
 
-if sys.argv[1:] == [] :
-    print """Usage:
-    python video4fuze.pyw INPUTVIDEO[.avi/.mp4/.asf]
-    or, in order to display the GUI:
-    python video4fuze.pyw --gui"""
-    exit(1)
-
-if "--gui" in sys.argv[1]:
-    #TODO:GUI things
-    from PyQt4.QtGui import QApplication
-    from PyQt4.QtCore import QTranslator, QString, QLocale
-    from GUI.MainWindow import MainWindow
-    print "Still In Development"
+if __name__ == "__main__":
     translator = QTranslator()
     translator.load(QString("translations/v4f_%1").arg(QLocale.system().name()))
     qttranslator = QTranslator()
@@ -25,6 +17,3 @@ if "--gui" in sys.argv[1]:
     VentanaP = MainWindow()
     VentanaP.show()
     sys.exit(Vapp.exec_())
-else:
-    import fuze
-    fuze.convert(sys.argv[1:])

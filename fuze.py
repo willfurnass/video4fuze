@@ -2,7 +2,7 @@
 """
 Functions to convert video for the fuze
 """
-import os, tempfile, shutil
+import os, tempfile, shutil, sys
 from subprocess import call
 
 if os.name == 'nt':
@@ -222,4 +222,11 @@ def convert(args, FINALPREFIX =  None, GUI = None):
         os.remove(os.path.join(AMGPrefix,"fuze.amg"))
     if GUI != None:
         qobject.emit(SIGNAL("finished"))
+
+if __name__ == "__main__":
+    if sys.argv[1:] == [] :
+        print """Usage:
+        python fuze.py INPUTVIDEO"""
+        exit(1)
+    convert(sys.argv[1:])
 
