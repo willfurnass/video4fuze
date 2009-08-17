@@ -144,7 +144,7 @@ START """ + output + """
 """
     open(os.path.join(AMGPrefix,"fuze.amg"), "w").write(AMG)
 
-def convert(args):
+def convert(args, FINAL =  None):
     size = "224:176"
     fps = "20"
     vbit = "683"        # in kbit/s
@@ -159,7 +159,8 @@ def convert(args):
     for argument in args:
         if os.path.isfile(argument):
             OUTPUT = os.path.join(AMGPrefix,"temp.avi")
-            FINAL = os.path.splitext(argument)[0] + ".fuze.avi"
+            if FINAL == None:
+                FINAL = os.path.splitext(argument)[0] + ".fuze.avi"
 #            if os.path.splitext(argument)[1].lower() not in extlist: #mencoder seems just to be happy with everything you throw to it.
 #                print "Input video needs to be in a suitable format. Suitable formats are:"
 #                print extlist
@@ -196,7 +197,7 @@ def convert(args):
             except Exception, e:
                 print e
                 continue
-            os.remove(tempavi)
+#            os.remove(tempavi)
             shutil.move(os.path.join(AMGPrefix,"final.avi"),FINAL)
             os.remove(os.path.join(AMGPrefix,"temp.avi"))
             os.remove(os.path.join(AMGPrefix,"fuze.amg"))
@@ -205,8 +206,19 @@ def convert(args):
 
 if "--gui" in sys.argv[1]:
     #TODO:GUI things
+    from GUI import MainWindow
     GUI = True
     print "Still In Development"
+    translator = QTranslator()
+    translator.load(QString("translations/v4f_%1").arg(QLocale.system().name()))
+    qttranslator = QTranslator()
+    qttranslator.load(QString("qt_%1").arg(QLocale.system().name()))
+    Vapp = QApplication(sys.argv)
+    Vapp.installTranslator(translator)
+    Vapp.installTranslator(qttranslator)
+    VentanaP = MainWindow()
+    VentanaP.show()
+    sys.exit(Vapp.exec_())
 else:
     GUI = False
     convert(sys.argv[1:])
