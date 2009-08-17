@@ -27,7 +27,6 @@
   <Others>
     <Other>video4fuze.e4p</Other>
     <Other>mencoder.exe</Other>
-    <Other>ffmpeg.exe</Other>
     <Other></Other>
   </Others>
   <MainScript>video4fuze/video4fuze.pyw</MainScript>

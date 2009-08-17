@@ -9,7 +9,7 @@ if sys.argv[1:] == [] :
     or, in order to display the GUI:
     python video4fuze.pyw --gui"""
     exit(1)
-extlist = [".avi",".mp4",".asf"]
+#extlist = [".avi",".mp4",".asf"]
 if os.name == 'nt':
     AMGPrefix = tempfile.gettempdir()
     WINE = False
@@ -151,7 +151,7 @@ def convert(args):
     abit = "128"        # in kbit/s
     keyint = "15"
 
-    tempavi = os.path.join(tempfile.gettempdir(),"ffmpeg.avi")
+    tempavi = os.path.join(tempfile.gettempdir(),"ffmpeg.avi") #Just in case we need to use ffmpeg and i have to revert it's dropping
 
     pass1 = "keyint=" + keyint + ":turbo:vpass=1"
     pass2 = "keyint=" + keyint + ":vpass=2"
@@ -160,16 +160,17 @@ def convert(args):
         if os.path.isfile(argument):
             OUTPUT = os.path.join(AMGPrefix,"temp.avi")
             FINAL = os.path.splitext(argument)[0] + ".fuze.avi"
-            if os.path.splitext(argument)[1].lower() not in extlist:
-                print "Input video needs to be in a suitable format. Suitable formats are:"
-                print extlist
-                exit(1)
-            print "Calling ffmpeg"
-            try:
-                call(["ffmpeg","-i",argument,"-vcodec","libxvid","-r",fps,"-b","1000k","-acodec","copy","-y",tempavi])
-            except Exception, e:
-                print e
-                continue
+#            if os.path.splitext(argument)[1].lower() not in extlist: #mencoder seems just to be happy with everything you throw to it.
+#                print "Input video needs to be in a suitable format. Suitable formats are:"
+#                print extlist
+#                exit(1)
+#            print "Calling ffmpeg"
+#            try:
+#                call(["ffmpeg","-i",argument,"-vcodec","libxvid","-r",fps,"-b","1000k","-acodec","copy","-y",tempavi])
+#            except Exception, e:
+#                print e
+#                continue #Problems dropping last part of the videos
+            tempavi = argument
             try:
                 print "Calling mencoder #1"
                 call(["mencoder","-ofps",fps,"-vf","scale=" + size + ",harddup","-ovc","lavc","-lavcopts","vcodec=mpeg4:vbitrate=" + vbit + ":" + pass1,"-srate","44100","-af","resample=44100:0:1","-oac","mp3lame","-lameopts","cbr:br=" + abit,tempavi,"-o",OUTPUT])
@@ -203,7 +204,9 @@ def convert(args):
             print "\'" + argument + "\'" + ": file not found"
 
 if "--gui" in sys.argv[1]:
-    #GUI things
+    #TODO:GUI things
+    GUI = True
     print "Still In Development"
 else:
+    GUI = False
     convert(sys.argv[1:])
