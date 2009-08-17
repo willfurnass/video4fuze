@@ -206,7 +206,9 @@ def convert(args, FINAL =  None):
 
 if "--gui" in sys.argv[1]:
     #TODO:GUI things
-    from GUI import MainWindow
+    from PyQt4.QtGui import QApplication
+    from PyQt4.QtCore import QTranslator, QString, QLocale
+    from GUI.MainWindow import MainWindow
     GUI = True
     print "Still In Development"
     translator = QTranslator()
