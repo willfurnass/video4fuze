@@ -178,12 +178,12 @@ def convert(args, FINALPREFIX =  None, GUI = None):
                 if GUI != None:
                     qobject.emit(SIGNAL("working"),"Using mencoder on " + argument + " (pass 2)...")
                 call(["mencoder","-ofps",fps,"-vf","scale=" + size + ",harddup","-ovc","lavc","-lavcopts","vcodec=mpeg4:vbitrate=" + vbit + ":" + pass2,"-srate","44100","-af","resample=44100:0:1","-oac","mp3lame","-lameopts","cbr:br=" + abit,argument,"-o",OUTPUT])
+                tempfiles[OUTPUT] = argument
             except Exception, e:
                 print e
                 if GUI != None:
                     qobject.connect(qobject, SIGNAL("Exception"),GUI.ErrorDiag)
                 continue
-            tempfiles[OUTPUT] = argument
         else:
             print "\'" + argument + "\'" + ": file not found"
 
