@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>582</width>
+    <height>418</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>video4fuze</string>
+  </property>
+  <property name="locale">
+   <locale language="C" country="AnyCountry"/>
+  </property>
+  <property name="unifiedTitleAndToolBarOnMac">
+   <bool>true</bool>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <widget class="QTableWidget" name="tableWidget">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>60</y>
+      <width>501</width>
+      <height>281</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>501</width>
+      <height>281</height>
+     </size>
+    </property>
+    <property name="acceptDrops">
+     <bool>true</bool>
+    </property>
+    <property name="dragDropMode">
+     <enum>QAbstractItemView::NoDragDrop</enum>
+    </property>
+    <property name="selectionMode">
+     <enum>QAbstractItemView::MultiSelection</enum>
+    </property>
+    <column>
+     <property name="text">
+      <string>Input</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Output</string>
+     </property>
+    </column>
+   </widget>
+   <widget class="QPushButton" name="RemoveButton">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>29</y>
+      <width>131</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>131</width>
+      <height>25</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>Remove files</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ConvertButton">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>350</y>
+      <width>131</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>131</width>
+      <height>25</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>Convert!</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="AddButton">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>30</y>
+      <width>131</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>131</width>
+      <height>25</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>Add files...</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="SelectOutputButton">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>30</y>
+      <width>161</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>131</width>
+      <height>25</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>Select output folder</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>582</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionAdd_file"/>
+    <addaction name="actionRemove_selected_files"/>
+    <addaction name="actionSelect_output_folder"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionAbout_video4fuze"/>
+    <addaction name="actionAbout_Qt"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <action name="actionAdd_file">
+   <property name="text">
+    <string>Add files...</string>
+   </property>
+  </action>
+  <action name="actionAbout_video4fuze">
+   <property name="text">
+    <string>About video4fuze</string>
+   </property>
+  </action>
+  <action name="actionAbout_Qt">
+   <property name="text">
+    <string>About Qt</string>
+   </property>
+  </action>
+  <action name="actionRemove_selected_files">
+   <property name="text">
+    <string>Remove selected files</string>
+   </property>
+  </action>
+  <action name="actionSelect_output_folder">
+   <property name="text">
+    <string>Select output folder</string>
+   </property>
+  </action>
+ </widget>
+ <tabstops>
+  <tabstop>tableWidget</tabstop>
+  <tabstop>RemoveButton</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>
