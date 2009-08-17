@@ -6,12 +6,16 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>582</width>
-    <height>418</height>
+    <width>630</width>
+    <height>420</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>video4fuze</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../video4fuze.qrc">
+    <normaloff>:/icons/Sansa_Fuze_Icon_Pack_by_benbrooks/Blue/Charging/fuze_fullsize.png</normaloff>:/icons/Sansa_Fuze_Icon_Pack_by_benbrooks/Blue/Charging/fuze_fullsize.png</iconset>
   </property>
   <property name="locale">
    <locale language="C" country="AnyCountry"/>
@@ -23,43 +27,55 @@
    <widget class="QTableWidget" name="tableWidget">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>60</y>
-      <width>501</width>
+      <x>190</x>
+      <y>41</y>
+      <width>431</width>
       <height>281</height>
      </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>501</width>
-      <height>281</height>
-     </size>
     </property>
     <property name="acceptDrops">
      <bool>true</bool>
     </property>
+    <property name="editTriggers">
+     <set>QAbstractItemView::NoEditTriggers</set>
+    </property>
     <property name="dragDropMode">
      <enum>QAbstractItemView::NoDragDrop</enum>
+    </property>
+    <property name="alternatingRowColors">
+     <bool>true</bool>
     </property>
     <property name="selectionMode">
      <enum>QAbstractItemView::MultiSelection</enum>
     </property>
+    <property name="selectionBehavior">
+     <enum>QAbstractItemView::SelectRows</enum>
+    </property>
+    <property name="showGrid">
+     <bool>false</bool>
+    </property>
+    <attribute name="horizontalHeaderStretchLastSection">
+     <bool>true</bool>
+    </attribute>
+    <attribute name="horizontalHeaderStretchLastSection">
+     <bool>true</bool>
+    </attribute>
     <column>
      <property name="text">
-      <string>Input</string>
+      <string>Input files</string>
      </property>
     </column>
     <column>
      <property name="text">
-      <string>Output</string>
+      <string>Output folder</string>
      </property>
     </column>
    </widget>
    <widget class="QPushButton" name="RemoveButton">
     <property name="geometry">
      <rect>
-      <x>400</x>
-      <y>29</y>
+      <x>420</x>
+      <y>10</y>
       <width>131</width>
       <height>25</height>
      </rect>
@@ -77,10 +93,10 @@
    <widget class="QPushButton" name="ConvertButton">
     <property name="geometry">
      <rect>
-      <x>220</x>
-      <y>350</y>
+      <x>240</x>
+      <y>331</y>
       <width>131</width>
-      <height>25</height>
+      <height>41</height>
      </rect>
     </property>
     <property name="minimumSize">
@@ -96,8 +112,8 @@
    <widget class="QPushButton" name="AddButton">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>30</y>
+      <x>70</x>
+      <y>11</y>
       <width>131</width>
       <height>25</height>
      </rect>
@@ -115,8 +131,8 @@
    <widget class="QPushButton" name="SelectOutputButton">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>30</y>
+      <x>230</x>
+      <y>11</y>
       <width>161</width>
       <height>25</height>
      </rect>
@@ -131,6 +147,28 @@
      <string>Select output folder</string>
     </property>
    </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>-50</x>
+      <y>51</y>
+      <width>281</width>
+      <height>271</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="../video4fuze.qrc">:/icons/Sansa_Fuze_Icon_Pack_by_benbrooks/Black/Charging/fuze_fullsize.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QMenuBar" name="menuBar">
@@ -138,7 +176,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>582</width>
+     <width>630</width>
      <height>22</height>
     </rect>
    </property>
@@ -190,6 +228,8 @@
   <tabstop>tableWidget</tabstop>
   <tabstop>RemoveButton</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../video4fuze.qrc"/>
+ </resources>
  <connections/>
 </ui>
