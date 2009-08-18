@@ -5,19 +5,21 @@ Functions to convert video for the fuze
 import os, tempfile, shutil, sys
 from subprocess import call
 
-if os.name == 'nt':
-    AMGPrefix = tempfile.gettempdir()
-    WINE = False
-else:
-    WINE = True
-    wineprefix = os.environ.get('WINEPREFIX')
-    if wineprefix != None:
-        AMGPrefix = os.path.join(wineprefix,"drive_c")
-    else:
-        AMGPrefix = os.path.join(os.environ.get('HOME'),".wine/drive_c")
 
-def AmgConf(input,output):
-    AMG = """CLEAR
+class Fuze():
+    def __init__(self):
+        if os.name == 'nt':
+            self.AMGPrefix = tempfile.gettempdir()
+            self.WINE = False
+        else:
+            self.WINE = True
+            wineprefix = os.environ.get('WINEPREFIX')
+            if wineprefix != None:
+                self.AMGPrefix = os.path.join(wineprefix,"drive_c")
+            else:
+                self.AMGPrefix = os.path.join(os.environ.get('HOME'),".wine/drive_c")
+    def AmgConf(self,input,output):
+        AMG = """CLEAR
 LOAD """ + input +"""
 LANGUAGE English
 SET OPTION CLOSEAPP 1
@@ -29,7 +31,6 @@ OVERLAPPED 1
 ADD_IMMED 0
 AVI FORCE MP3VBR 0
 END WITH
-LOAD /tmp/test.avi
 WITH SET OPTION
 FILEORDER 1 0
 ADD_IMMED 1
@@ -137,96 +138,101 @@ RANDOMIZE_ORDER 1
 END WITH
 START """ + output + """
 """
-    amgfile = open(os.path.join(AMGPrefix,"fuze.amg"), "w")
-    amgfile.write(AMG)
-    amgfile.close()
+        amgfile = open(os.path.join(self.AMGPrefix,"fuze.amg"), "w")
+        amgfile.write(AMG)
+        amgfile.close()
 
-def convert(args, FINALPREFIX =  None, GUI = None):
-    if GUI != None:
-        from PyQt4.QtCore import QT_TR_NOOP,SIGNAL,QObject
-        qobject = QObject()
-        qobject.connect(qobject, SIGNAL("stop"),GUI.WAIT)
-        qobject.connect(qobject, SIGNAL("working"),GUI.Status)
-        qobject.connect(qobject, SIGNAL("Exception"),GUI.ErrorDiag)
-        qobject.connect(qobject, SIGNAL("itemDone"),GUI.DelItem)
-        qobject.connect(qobject, SIGNAL("finished"),GUI.getReady)
-        qobject.emit(SIGNAL("stop"))
-    tempfiles = {}
-    size = "224:176"
-    fps = "20"
-    vbit = "683"        # in kbit/s
-    abit = "128"        # in kbit/s
-    keyint = "15"
-    pass1 = "keyint=" + keyint + ":turbo:vpass=1"
-    pass2 = "keyint=" + keyint + ":vpass=2"
-
-    for argument in args:
-        if os.path.isfile(argument):
-            OUTPUT = os.path.join(AMGPrefix,os.path.splitext(os.path.basename(argument))[0] + ".temp.avi")
-            try:
-                print "Calling mencoder #1"
-                if GUI != None:
-                    qobject.emit(SIGNAL("working"),"Using mencoder on " + argument + "...")
-                call(["mencoder","-ofps",fps,"-vf","scale=" + size + ",harddup","-ovc","lavc","-lavcopts","vcodec=mpeg4:vbitrate=" + vbit + ":" + pass1,"-srate","44100","-af","resample=44100:0:1","-oac","mp3lame","-lameopts","cbr:br=" + abit,argument,"-o",OUTPUT])
-            except Exception, e:
-                print e
-                if GUI != None:
-                    qobject.connect(qobject, SIGNAL("Exception"),GUI.ErrorDiag)
-                continue
-            try:
-                print "Calling mencoder #2"
-                if GUI != None:
-                    qobject.emit(SIGNAL("working"),"Using mencoder on " + argument + " (pass 2)...")
-                call(["mencoder","-ofps",fps,"-vf","scale=" + size + ",harddup","-ovc","lavc","-lavcopts","vcodec=mpeg4:vbitrate=" + vbit + ":" + pass2,"-srate","44100","-af","resample=44100:0:1","-oac","mp3lame","-lameopts","cbr:br=" + abit,argument,"-o",OUTPUT])
-                tempfiles[OUTPUT] = argument
-            except Exception, e:
-                print e
-                if GUI != None:
-                    qobject.connect(qobject, SIGNAL("Exception"),GUI.ErrorDiag)
-                continue
-        else:
-            print "\'" + argument + "\'" + ": file not found"
-
-    print "temporary files are: "
-    print tempfiles
-
-    for file in tempfiles.keys():
-        if FINALPREFIX == None:
-            FINAL = os.path.splitext(tempfiles[file])[0] + "_fuze.avi"
-        else:
-            FINAL = os.path.join(FINALPREFIX,os.path.splitext(os.path.basename(tempfiles[file]))[0]) + "_fuze.avi"
-        try:
-            print "Calling avi-mux GUI"
-            if GUI != None:
-                qobject.emit(SIGNAL("working"),"Calling avi-mux GUI...")
-            if WINE:
-                print "using wine"
-                OUTPUT =  """C:\\""" + os.path.basename(file)
-                print "Opening file: " + OUTPUT
-                AmgConf(OUTPUT,"C:\\final.avi")
-                call(["wine",os.path.join(os.getcwd(),"avimuxgui","AVIMux_GUI.exe"),"C:\\fuze.amg"])
-            else:
-                OUTPUT = file
-                AmgConf(OUTPUT,os.path.join(AMGPrefix,"final.avi"))
-                call([os.path.join(os.getcwd(),"avimuxgui","AVIMux_GUI.exe"),os.path.join(AMGPrefix,"fuze.amg")])
-        except Exception, e:
-            print e
-            if GUI != None:
-                qobject.connect(qobject, SIGNAL("Exception"),GUI.ErrorDiag)
-            continue
-        print "Moving " + os.path.join(AMGPrefix,"final.avi") + " to " + FINAL + " and cleaning temporary files"
-        shutil.move(os.path.join(AMGPrefix,"final.avi"),FINAL)
+    def convert(self,args, FINALPREFIX =  None, GUI = None):
         if GUI != None:
-            qobject.emit(SIGNAL("itemDone"),tempfiles[file])
-        os.remove(file)
-        os.remove(os.path.join(AMGPrefix,"fuze.amg"))
-    if GUI != None:
-        qobject.emit(SIGNAL("finished"))
+            from PyQt4.QtCore import QT_TR_NOOP,SIGNAL,QObject
+            self.qobject = QObject()
+            self.qobject.connect(self.qobject, SIGNAL("stop"),GUI.WAIT)
+            self.qobject.connect(self.qobject, SIGNAL("working"),GUI.Status)
+            self.qobject.connect(self.qobject, SIGNAL("Exception"),GUI.ErrorDiag)
+            self.qobject.connect(self.qobject, SIGNAL("itemDone"),GUI.DelItem)
+            self.qobject.connect(self.qobject, SIGNAL("finished"),GUI.getReady)
+            self.qobject.emit(SIGNAL("stop"))
+        tempfiles = {}
+        size = "224:176"
+        fps = "20"
+        vbit = "683"        # in kbit/s
+        abit = "128"        # in kbit/s
+        keyint = "15"
+        pass1 = "keyint=" + keyint + ":turbo:vpass=1"
+        pass2 = "keyint=" + keyint + ":vpass=2"
+
+        for argument in args:
+            if os.path.isfile(argument):
+                OUTPUT = os.path.join(self.AMGPrefix,os.path.splitext(os.path.basename(argument))[0] + ".temp.avi")
+                try:
+                    print "Calling mencoder #1"
+                    if GUI != None:
+                        self.qobject.emit(SIGNAL("working"),"Using mencoder on " + argument + "...")
+                    call(["mencoder","-ofps",fps,"-vf","scale=" + size + ",harddup","-ovc","lavc","-lavcopts","vcodec=mpeg4:vbitrate=" + vbit + ":" + pass1,"-srate","44100","-af","resample=44100:0:1","-oac","mp3lame","-lameopts","cbr:br=" + abit,argument,"-o",OUTPUT])
+                except Exception, e:
+                    print e
+                    if GUI != None:
+                        self.qobject.emit(SIGNAL("Exception"),e)
+                    continue
+                try:
+                    print "Calling mencoder #2"
+                    if GUI != None:
+                        self.qobject.emit(SIGNAL("working"),"Using mencoder on " + argument + " (pass 2)...")
+                    call(["mencoder","-ofps",fps,"-vf","scale=" + size + ",harddup","-ovc","lavc","-lavcopts","vcodec=mpeg4:vbitrate=" + vbit + ":" + pass2,"-srate","44100","-af","resample=44100:0:1","-oac","mp3lame","-lameopts","cbr:br=" + abit,argument,"-o",OUTPUT])
+                    tempfiles[OUTPUT] = argument
+                except Exception, e:
+                    print e
+                    if GUI != None:
+                        self.qobject.emit(SIGNAL("Exception"),e)
+                    continue
+            else:
+                print "\'" + argument + "\'" + ": file not found"
+
+        print "temporary files are: "
+        print tempfiles
+
+        for file in tempfiles.keys():
+            if FINALPREFIX == None:
+                FINAL = os.path.splitext(tempfiles[file])[0] + "_fuze.avi"
+            else:
+                FINAL = os.path.join(FINALPREFIX,os.path.splitext(os.path.basename(tempfiles[file]))[0]) + "_fuze.avi"
+            try:
+                print "Calling avi-mux GUI"
+                if GUI != None:
+                    self.qobject.emit(SIGNAL("working"),"Calling avi-mux GUI...")
+                if self.WINE:
+                    print "using wine"
+                    OUTPUT =  """C:\\""" + os.path.basename(file)
+                    print "Opening file: " + OUTPUT
+                    self.AmgConf(OUTPUT,"C:\\final.avi")
+                    call(["wine",os.path.join(os.getcwd(),"avimuxgui","AVIMux_GUI.exe"),"C:\\fuze.amg"])
+                else:
+                    OUTPUT = file
+                    self.AmgConf(OUTPUT,os.path.join(self.AMGPrefix,"final.avi"))
+                    call([os.path.join(os.getcwd(),"avimuxgui","AVIMux_GUI.exe"),os.path.join(self.AMGPrefix,"fuze.amg")])
+            except Exception, e:
+                print e
+                if GUI != None:
+                    self.qobject.emit(SIGNAL("Exception"),e)
+                continue
+            print "Moving " + os.path.join(self.AMGPrefix,"final.avi") + " to " + FINAL + " and cleaning temporary files"
+            try:
+                shutil.move(os.path.join(self.AMGPrefix,"final.avi"),FINAL)
+                if GUI != None:
+                    self.qobject.emit(SIGNAL("itemDone"),tempfiles[file])
+                os.remove(file)
+                os.remove(os.path.join(self.AMGPrefix,"fuze.amg"))
+            except Exception, e:
+                print e
+                if GUI != None:
+                    self.qobject.emit(SIGNAL("Exception"),e)
+        if GUI != None:
+            self.qobject.emit(SIGNAL("finished"))
 
 if __name__ == "__main__":
     if sys.argv[1:] == [] :
         print """Usage:
         python fuze.py INPUTVIDEO"""
         exit(1)
-    convert(sys.argv[1:])
+    Fuze().convert(sys.argv[1:])
 

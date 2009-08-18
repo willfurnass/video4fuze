@@ -19,7 +19,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         """
         QMainWindow.__init__(self, parent)
         self.setupUi(self)
-        self.tableWidget.horizontalHeader().setResizeMode(3)
+        try:
+            self.tableWidget.horizontalHeader().setResizeMode(3)
+        except:
+            print "Your version of PyQt4 seems a bit out of date. This may lead to problems. And may not :)"
         self.output = os.path.expanduser("~")
 
     def ErrorDiag(self, error = QT_TR_NOOP("Unknown error")):
@@ -170,11 +173,10 @@ class Converter(Thread):
     """
     Doing the job in a different thread is always good.
     """
-    #TODO: Status signals
     def __init__(self,args,GUI,FINALPREFIX=None):
         Thread.__init__(self)
         self.args = args
         self.FINALPREFIX = FINALPREFIX
         self.GUI = GUI
     def run(self):
-        fuze.convert(self.args, self.FINALPREFIX, self.GUI)
+        fuze.Fuze().convert(self.args, self.FINALPREFIX, self.GUI)

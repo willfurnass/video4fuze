@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project video4fuze -->
-<!-- Saved: 2009-08-18, 00:57:35 -->
+<!-- Saved: 2009-08-18, 23:16:49 -->
 <!-- Copyright (C) 2009 ssorgatem, ssorgatem@esdebian.org -->
 <Project version="4.6">
   <Language>en</Language>
@@ -43,6 +43,10 @@
     <Other></Other>
     <Other>LICENSE</Other>
     <Other>README.txt</Other>
+    <Other>icons/blue.png</Other>
+    <Other>icons/black.png</Other>
+    <Other>screenshot_video4fuze_0.1_kde4.jpeg</Other>
+    <Other>screenshot_video4fuze_0.1_winxpsp3.jpeg</Other>
   </Others>
   <MainScript>video4fuze/video4fuze.pyw</MainScript>
   <Vcs>

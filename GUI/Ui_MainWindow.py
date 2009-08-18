@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file '/home/ssorgatem/Documents/python/video4fuze/GUI/MainWindow.ui'
 #
-# Created: Mon Aug 17 18:32:51 2009
+# Created: Tue Aug 18 23:17:32 2009
 #      by: PyQt4 UI code generator 4.5.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -12,13 +12,15 @@ from PyQt4 import QtCore, QtGui
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(582, 418)
+        MainWindow.resize(630, 420)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/icons/blue.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        MainWindow.setWindowIcon(icon)
         MainWindow.setUnifiedTitleAndToolBarOnMac(True)
         self.centralWidget = QtGui.QWidget(MainWindow)
         self.centralWidget.setObjectName("centralWidget")
         self.tableWidget = QtGui.QTableWidget(self.centralWidget)
-        self.tableWidget.setGeometry(QtCore.QRect(40, 60, 501, 281))
-        self.tableWidget.setMinimumSize(QtCore.QSize(501, 281))
+        self.tableWidget.setGeometry(QtCore.QRect(190, 41, 431, 281))
         self.tableWidget.setAcceptDrops(True)
         self.tableWidget.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
         self.tableWidget.setDragDropMode(QtGui.QAbstractItemView.NoDragDrop)
@@ -34,27 +36,33 @@ class Ui_MainWindow(object):
         item = QtGui.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(1, item)
         self.RemoveButton = QtGui.QPushButton(self.centralWidget)
-        self.RemoveButton.setGeometry(QtCore.QRect(400, 29, 131, 25))
+        self.RemoveButton.setGeometry(QtCore.QRect(420, 10, 131, 25))
         self.RemoveButton.setMinimumSize(QtCore.QSize(131, 25))
         self.RemoveButton.setObjectName("RemoveButton")
         self.ConvertButton = QtGui.QPushButton(self.centralWidget)
-        self.ConvertButton.setGeometry(QtCore.QRect(220, 350, 131, 25))
+        self.ConvertButton.setGeometry(QtCore.QRect(240, 331, 131, 41))
         self.ConvertButton.setMinimumSize(QtCore.QSize(131, 25))
         self.ConvertButton.setObjectName("ConvertButton")
         self.AddButton = QtGui.QPushButton(self.centralWidget)
-        self.AddButton.setGeometry(QtCore.QRect(50, 30, 131, 25))
+        self.AddButton.setGeometry(QtCore.QRect(70, 11, 131, 25))
         self.AddButton.setMinimumSize(QtCore.QSize(131, 25))
         self.AddButton.setObjectName("AddButton")
         self.SelectOutputButton = QtGui.QPushButton(self.centralWidget)
-        self.SelectOutputButton.setGeometry(QtCore.QRect(210, 30, 161, 25))
+        self.SelectOutputButton.setGeometry(QtCore.QRect(230, 11, 161, 25))
         self.SelectOutputButton.setMinimumSize(QtCore.QSize(131, 25))
         self.SelectOutputButton.setObjectName("SelectOutputButton")
+        self.label = QtGui.QLabel(self.centralWidget)
+        self.label.setGeometry(QtCore.QRect(-50, 51, 281, 271))
+        self.label.setPixmap(QtGui.QPixmap(":/icons/black.png"))
+        self.label.setScaledContents(True)
+        self.label.setAlignment(QtCore.Qt.AlignCenter)
+        self.label.setObjectName("label")
         MainWindow.setCentralWidget(self.centralWidget)
         self.statusBar = QtGui.QStatusBar(MainWindow)
         self.statusBar.setObjectName("statusBar")
         MainWindow.setStatusBar(self.statusBar)
         self.menuBar = QtGui.QMenuBar(MainWindow)
-        self.menuBar.setGeometry(QtCore.QRect(0, 0, 582, 22))
+        self.menuBar.setGeometry(QtCore.QRect(0, 0, 630, 22))
         self.menuBar.setObjectName("menuBar")
         self.menuFile = QtGui.QMenu(self.menuBar)
         self.menuFile.setObjectName("menuFile")
@@ -99,6 +107,7 @@ class Ui_MainWindow(object):
         self.actionRemove_selected_files.setText(QtGui.QApplication.translate("MainWindow", "Remove selected files", None, QtGui.QApplication.UnicodeUTF8))
         self.actionSelect_output_folder.setText(QtGui.QApplication.translate("MainWindow", "Select output folder", None, QtGui.QApplication.UnicodeUTF8))
 
+import video4fuze_rc
 
 if __name__ == "__main__":
     import sys
