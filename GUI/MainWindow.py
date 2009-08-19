@@ -5,9 +5,10 @@ Module implementing MainWindow.
 """
 import os, fuze
 from PyQt4.QtGui import QMainWindow,QFileDialog,QMessageBox, QLabel, QTableWidgetItem
-from PyQt4.QtCore import pyqtSignature,QString,QT_TR_NOOP,SIGNAL,QObject,Qt
+from PyQt4.QtCore import pyqtSignature,QString,QT_TR_NOOP,SIGNAL,QObject,Qt,QSettings
 from threading import Thread
 from Ui_MainWindow import Ui_MainWindow
+from v4fPreferences import PreferencesDialog
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     """
@@ -19,7 +20,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         """
         QMainWindow.__init__(self, parent)
         self.setupUi(self)
-        self.Fuze = fuze.Fuze()
+        self.settings = QSettings()
+        self.Fuze = fuze.Fuze(self)
         try:
             self.tableWidget.horizontalHeader().setResizeMode(3)
         except:
@@ -170,14 +172,20 @@ Thanks to ewelot from the sansa forums for finding the way to convert the videos
             self.tableWidget.item(row,1).setText(self.output)
             row += 1
 
+    @pyqtSignature("")
+    def on_actionPreferences_triggered(self):
+        prefs = PreferencesDialog()
+        prefs.exec_()
+
 class Converter(Thread):
     """
     Doing the job in a different thread is always good.
     """
-    def __init__(self,args,GUI,FINALPREFIX=None):
+    def __init__(self,args, parent, FINALPREFIX=None):
         Thread.__init__(self)
         self.args = args
         self.FINALPREFIX = FINALPREFIX
-        self.GUI = GUI
+        self.parent = parent
     def run(self):
-        self.GUI.Fuze.convert(self.args, self.FINALPREFIX, self.GUI)
+        self.parent.Fuze.LoadSettings()
+        self.parent.Fuze.convert(self.args, self.FINALPREFIX)

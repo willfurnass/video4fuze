@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>video4fuze</string>
+   <string>video4fuze 0.2</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../video4fuze.qrc">
@@ -192,7 +192,14 @@
     <addaction name="actionAbout_video4fuze"/>
     <addaction name="actionAbout_Qt"/>
    </widget>
+   <widget class="QMenu" name="menuAdvanced">
+    <property name="title">
+     <string>Advanced</string>
+    </property>
+    <addaction name="actionPreferences"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuAdvanced"/>
    <addaction name="menuHelp"/>
   </widget>
   <action name="actionAdd_file">
@@ -218,6 +225,11 @@
   <action name="actionSelect_output_folder">
    <property name="text">
     <string>Select output folder</string>
+   </property>
+  </action>
+  <action name="actionPreferences">
+   <property name="text">
+    <string>Preferences</string>
    </property>
   </action>
  </widget>

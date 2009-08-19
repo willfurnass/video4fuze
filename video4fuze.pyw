@@ -12,6 +12,8 @@ if __name__ == "__main__":
     qttranslator = QTranslator()
     qttranslator.load(QString("qt_%1").arg(QLocale.system().name()))
     Vapp = QApplication(sys.argv)
+    Vapp.setOrganizationName("ssorgatem productions")
+    Vapp.setApplicationName("video4fuze")
     Vapp.installTranslator(translator)
     Vapp.installTranslator(qttranslator)
     VentanaP = MainWindow()

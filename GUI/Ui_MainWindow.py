@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file '/home/ssorgatem/Documents/python/video4fuze/GUI/MainWindow.ui'
 #
-# Created: Tue Aug 18 23:17:32 2009
+# Created: Wed Aug 19 13:16:27 2009
 #      by: PyQt4 UI code generator 4.5.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -68,6 +68,8 @@ class Ui_MainWindow(object):
         self.menuFile.setObjectName("menuFile")
         self.menuHelp = QtGui.QMenu(self.menuBar)
         self.menuHelp.setObjectName("menuHelp")
+        self.menuAdvanced = QtGui.QMenu(self.menuBar)
+        self.menuAdvanced.setObjectName("menuAdvanced")
         MainWindow.setMenuBar(self.menuBar)
         self.actionAdd_file = QtGui.QAction(MainWindow)
         self.actionAdd_file.setObjectName("actionAdd_file")
@@ -79,12 +81,16 @@ class Ui_MainWindow(object):
         self.actionRemove_selected_files.setObjectName("actionRemove_selected_files")
         self.actionSelect_output_folder = QtGui.QAction(MainWindow)
         self.actionSelect_output_folder.setObjectName("actionSelect_output_folder")
+        self.actionPreferences = QtGui.QAction(MainWindow)
+        self.actionPreferences.setObjectName("actionPreferences")
         self.menuFile.addAction(self.actionAdd_file)
         self.menuFile.addAction(self.actionRemove_selected_files)
         self.menuFile.addAction(self.actionSelect_output_folder)
         self.menuHelp.addAction(self.actionAbout_video4fuze)
         self.menuHelp.addAction(self.actionAbout_Qt)
+        self.menuAdvanced.addAction(self.actionPreferences)
         self.menuBar.addAction(self.menuFile.menuAction())
+        self.menuBar.addAction(self.menuAdvanced.menuAction())
         self.menuBar.addAction(self.menuHelp.menuAction())
 
         self.retranslateUi(MainWindow)
@@ -92,7 +98,7 @@ class Ui_MainWindow(object):
         MainWindow.setTabOrder(self.tableWidget, self.RemoveButton)
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "video4fuze", None, QtGui.QApplication.UnicodeUTF8))
+        MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "video4fuze 0.2", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidget.horizontalHeaderItem(0).setText(QtGui.QApplication.translate("MainWindow", "Input files", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidget.horizontalHeaderItem(1).setText(QtGui.QApplication.translate("MainWindow", "Output folder", None, QtGui.QApplication.UnicodeUTF8))
         self.RemoveButton.setText(QtGui.QApplication.translate("MainWindow", "Remove files", None, QtGui.QApplication.UnicodeUTF8))
@@ -101,11 +107,13 @@ class Ui_MainWindow(object):
         self.SelectOutputButton.setText(QtGui.QApplication.translate("MainWindow", "Select output folder", None, QtGui.QApplication.UnicodeUTF8))
         self.menuFile.setTitle(QtGui.QApplication.translate("MainWindow", "File", None, QtGui.QApplication.UnicodeUTF8))
         self.menuHelp.setTitle(QtGui.QApplication.translate("MainWindow", "Help", None, QtGui.QApplication.UnicodeUTF8))
+        self.menuAdvanced.setTitle(QtGui.QApplication.translate("MainWindow", "Advanced", None, QtGui.QApplication.UnicodeUTF8))
         self.actionAdd_file.setText(QtGui.QApplication.translate("MainWindow", "Add files...", None, QtGui.QApplication.UnicodeUTF8))
         self.actionAbout_video4fuze.setText(QtGui.QApplication.translate("MainWindow", "About video4fuze", None, QtGui.QApplication.UnicodeUTF8))
         self.actionAbout_Qt.setText(QtGui.QApplication.translate("MainWindow", "About Qt", None, QtGui.QApplication.UnicodeUTF8))
         self.actionRemove_selected_files.setText(QtGui.QApplication.translate("MainWindow", "Remove selected files", None, QtGui.QApplication.UnicodeUTF8))
         self.actionSelect_output_folder.setText(QtGui.QApplication.translate("MainWindow", "Select output folder", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionPreferences.setText(QtGui.QApplication.translate("MainWindow", "Preferences", None, QtGui.QApplication.UnicodeUTF8))
 
 import video4fuze_rc
 

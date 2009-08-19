@@ -1,33 +1,14 @@
 # -*- coding: utf-8 -*-
 """
-Functions to convert video for the fuze
+Class and methods to convert video for the fuze
 """
 import os, tempfile, shutil, sys, commands
 from subprocess import check_call, call
-
+from PyQt4.QtCore import QT_TR_NOOP,SIGNAL,QObject,QString,QVariant
 
 class Fuze():
-    def __init__(self):
-        self.xterm = None
-        if os.name == 'nt':
-            self.AMGPrefix = tempfile.gettempdir()
-            self.WINE = False
-        else:
-            self.WINE = True
-            wineprefix = os.environ.get('WINEPREFIX')
-            if wineprefix != None:
-                self.AMGPrefix = os.path.join(wineprefix,"drive_c")
-            else:
-                self.AMGPrefix = os.path.join(os.environ.get('HOME'),".wine/drive_c")
-            if os.name == 'posix':
-                termloc = commands.getstatusoutput("which xterm")
-                if termloc[0] == 0:
-                    self.xterm = termloc[1]
-                else:
-                    print "xterm not found"
-                print self.xterm
-            else:
-                print "No terminal emulator available"
+    def __init__(self, GUI = None):
+        self.GUI = GUI
 ####################################################################
         size = "224:176"
         fps = "20"
@@ -41,6 +22,39 @@ class Fuze():
 
         self.mencoderpass2 = "mencoder -ofps " + fps + " -vf scale=" + size + ",harddup -ovc lavc -lavcopts vcodec=mpeg4:vbitrate=" + vbit + ":" + pass2 + " -srate 44100 -af resample=44100:0:1 -oac mp3lame -lameopts cbr:br=" + abit
 ####################################################################
+        if self.GUI != None:
+            self.qobject = QObject()
+            self.qobject.connect(self.qobject, SIGNAL("stop"),GUI.WAIT)
+            self.qobject.connect(self.qobject, SIGNAL("working"),GUI.Status)
+            self.qobject.connect(self.qobject, SIGNAL("Exception"),GUI.ErrorDiag)
+            self.qobject.connect(self.qobject, SIGNAL("itemDone"),GUI.DelItem)
+            self.qobject.connect(self.qobject, SIGNAL("finished"),GUI.getReady)
+            self.LoadSettings()
+        self.xterm = None
+        if os.name == 'nt':
+            self.AMGPrefix = tempfile.gettempdir()
+            self.WINE = False
+        else:
+            self.WINE = True
+            wineprefix = os.environ.get('WINEPREFIX')
+            if wineprefix != None:
+                self.AMGPrefix = os.path.join(wineprefix,"drive_c")
+            else:
+                self.AMGPrefix = os.path.join(os.environ.get('HOME'),".wine/drive_c")
+            if os.name == 'posix' and self.GUI != None:
+                termloc = commands.getstatusoutput("which xterm")
+                if termloc[0] == 0:
+                    self.xterm = termloc[1]
+                else:
+                    print "xterm not found"
+                print self.xterm
+            else:
+                print "No terminal emulator available"
+
+    def LoadSettings(self):
+        self.mencoderpass1 = str(self.GUI.settings.value("mencoderpass1", QVariant(self.mencoderpass1)).toString())
+        self.mencoderpass2 = str(self.GUI.settings.value("mencoderpass2", QVariant(self.mencoderpass2)).toString())
+
     def AmgConf(self,input,output):
         AMG = """CLEAR
 LOAD """ + input +"""
@@ -165,45 +179,38 @@ START """ + output + """
         amgfile.write(AMG)
         amgfile.close()
 
-    def convert(self,args, FINALPREFIX =  None, GUI = None):
-        if GUI != None:
-            from PyQt4.QtCore import QT_TR_NOOP,SIGNAL,QObject
-            self.qobject = QObject()
-            self.qobject.connect(self.qobject, SIGNAL("stop"),GUI.WAIT)
-            self.qobject.connect(self.qobject, SIGNAL("working"),GUI.Status)
-            self.qobject.connect(self.qobject, SIGNAL("Exception"),GUI.ErrorDiag)
-            self.qobject.connect(self.qobject, SIGNAL("itemDone"),GUI.DelItem)
-            self.qobject.connect(self.qobject, SIGNAL("finished"),GUI.getReady)
-            self.qobject.emit(SIGNAL("stop"))
+    def convert(self,args, FINALPREFIX =  None):
         tempfiles = {}
+        if self.GUI != None:
+            self.qobject.emit(SIGNAL("stop"))
         for argument in args:
             if os.path.isfile(argument):
                 OUTPUT = os.path.join(self.AMGPrefix,os.path.splitext(os.path.basename(argument))[0] + ".temp.avi")
                 try:
                     print "Calling mencoder #1"
                     mencoderpass1 = self.mencoderpass1 + " " + argument + " -o " + OUTPUT
-                    if GUI != None:
+                    if self.GUI != None:
                         self.qobject.emit(SIGNAL("working"),"Using mencoder on " + argument + "...")
                         if self.xterm != None:
                             mencoderpass1 = self.xterm + " -e " + mencoderpass1
-                    check_call(mencoderpass1.split(" "))
+                    check_call(mencoderpass1.split())
                 except Exception, e:
                     print e
-                    if GUI != None:
+                    if self.GUI != None:
                         self.qobject.emit(SIGNAL("Exception"),e)
                     continue
                 try:
                     print "Calling mencoder #2"
                     mencoderpass2 = self.mencoderpass2 + " " + argument + " -o " + OUTPUT
-                    if GUI != None:
+                    if self.GUI != None:
                         self.qobject.emit(SIGNAL("working"),"Using mencoder on " + argument + " (pass 2)...")
                         if self.xterm != None:
                             mencoderpass2 = self.xterm + " -e " + mencoderpass2
-                    check_call(mencoderpass2.split(" "))
+                    check_call(mencoderpass2.split())
                     tempfiles[OUTPUT] = argument
                 except Exception, e:
                     print e
-                    if GUI != None:
+                    if self.GUI != None:
                         self.qobject.emit(SIGNAL("Exception"),e)
                     continue
             else:
@@ -219,7 +226,7 @@ START """ + output + """
                 FINAL = os.path.join(FINALPREFIX,os.path.splitext(os.path.basename(tempfiles[file]))[0]) + "_fuze.avi"
             try:
                 print "Calling avi-mux GUI"
-                if GUI != None:
+                if self.GUI != None:
                     self.qobject.emit(SIGNAL("working"),"Calling avi-mux GUI...")
                 if self.WINE:
                     print "using wine"
@@ -233,22 +240,22 @@ START """ + output + """
                     call([os.path.join(os.getcwd(),"avimuxgui","AVIMux_GUI.exe"),os.path.join(self.AMGPrefix,"fuze.amg")])
             except Exception, e:
                 print e
-                if GUI != None:
+                if self.GUI != None:
                     self.qobject.emit(SIGNAL("Exception"),e)
                 os.remove(os.path.join(self.AMGPrefix,"final.avi"))
                 continue
             print "Moving " + os.path.join(self.AMGPrefix,"final.avi") + " to " + FINAL + " and cleaning temporary files"
             try:
                 shutil.move(os.path.join(self.AMGPrefix,"final.avi"),FINAL)
-                if GUI != None:
+                if self.GUI != None:
                     self.qobject.emit(SIGNAL("itemDone"),tempfiles[file])
                 os.remove(file)
                 os.remove(os.path.join(self.AMGPrefix,"fuze.amg"))
             except Exception, e:
                 print e
-                if GUI != None:
+                if self.GUI != None:
                     self.qobject.emit(SIGNAL("Exception"),e)
-        if GUI != None:
+        if self.GUI != None:
             self.qobject.emit(SIGNAL("finished"))
 
 if __name__ == "__main__":
