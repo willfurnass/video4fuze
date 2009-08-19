@@ -182,7 +182,7 @@ START """ + output + """
                 OUTPUT = os.path.join(self.AMGPrefix,os.path.splitext(os.path.basename(argument))[0] + ".temp.avi")
                 try:
                     print "Calling mencoder #1"
-                    mencoderpass1 = self.mencoderpass1 + " " + argument + " -o " + OUTPUT
+                    mencoderpass1 = str(self.mencoderpass1 + " " + argument + " -o " + OUTPUT)
                     if self.GUI != None:
                         self.qobject.emit(SIGNAL("working"),"Using mencoder on " + argument + "...")
                         if self.xterm != None:
