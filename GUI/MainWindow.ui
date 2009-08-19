@@ -185,7 +185,7 @@
     </widget>
     <widget class="QWidget" name="Image">
      <attribute name="title">
-      <string>Image</string>
+      <string>Photos</string>
      </attribute>
      <widget class="QLabel" name="label_2">
       <property name="geometry">

@@ -5,7 +5,7 @@ Module implementing MainWindow.
 """
 import os, fuze, p2fuze
 from PyQt4.QtGui import QMainWindow,QFileDialog,QMessageBox, QLabel, QTableWidgetItem
-from PyQt4.QtCore import pyqtSignature,QString,QT_TR_NOOP,SIGNAL,QObject,Qt,QSettings
+from PyQt4.QtCore import pyqtSignature,QString,QT_TR_NOOP,SIGNAL,QObject,Qt,QSettings,QVariant
 from threading import Thread
 from Ui_MainWindow import Ui_MainWindow
 from v4fPreferences import PreferencesDialog
@@ -22,12 +22,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.settings = QSettings()
         self.Fuze = fuze.Fuze(self)
+        self.resis = p2fuze.TransFuze(self)
         try:
             self.tableWidget.horizontalHeader().setResizeMode(3)
             self.tableWidget_2.horizontalHeader().setResizeMode(3)
         except:
             print "Your version of PyQt4 seems a bit out of date. This may lead to problems. And may not :)"
-        self.output = os.path.expanduser("~")
+        self.output = str(self.settings.value("outputdir",QVariant(os.path.expanduser("~"))).toString())
 
     def ErrorDiag(self, error = QT_TR_NOOP("Unknown error")):
             print error
@@ -210,6 +211,7 @@ Thanks to ewelot from the sansa forums for finding the way to convert the videos
             QFileDialog.Options(QFileDialog.ShowDirsOnly))
         if output != None:
             self.output = str(output)
+            self.settings.setValue("outputdir",QVariant(self.output))
         row = 0
         while row < self.tableWidget.rowCount():
             self.tableWidget.item(row,1).setText(self.output)
@@ -243,4 +245,4 @@ class Resizer(Thread):
         self.FINALPREFIX = FINALPREFIX
         self.parent = parent
     def run(self):
-        p2fuze.TransFuze(self.parent).convert(self.args, self.FINALPREFIX)
+        self.parent.resis.convert(self.args, self.FINALPREFIX)

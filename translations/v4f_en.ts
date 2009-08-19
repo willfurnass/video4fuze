@@ -3,7 +3,7 @@
 <context>
     <name>@default</name>
     <message>
-        <location filename="GUI/MainWindow.py" line="30"/>
+        <location filename="GUI/MainWindow.py" line="32"/>
         <source>Unknown error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11,67 +11,67 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="GUI/Ui_MainWindow.py" line="103"/>
+        <location filename="GUI/Ui_MainWindow.py" line="156"/>
         <source>Remove files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="GUI/Ui_MainWindow.py" line="104"/>
+        <location filename="GUI/Ui_MainWindow.py" line="160"/>
         <source>Convert!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="GUI/Ui_MainWindow.py" line="110"/>
+        <location filename="GUI/Ui_MainWindow.py" line="165"/>
         <source>Add files...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="GUI/Ui_MainWindow.py" line="114"/>
+        <location filename="GUI/Ui_MainWindow.py" line="169"/>
         <source>Select output folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="GUI/Ui_MainWindow.py" line="107"/>
+        <location filename="GUI/Ui_MainWindow.py" line="162"/>
         <source>File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="GUI/Ui_MainWindow.py" line="108"/>
+        <location filename="GUI/Ui_MainWindow.py" line="163"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="GUI/Ui_MainWindow.py" line="111"/>
+        <location filename="GUI/Ui_MainWindow.py" line="166"/>
         <source>About video4fuze</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="GUI/Ui_MainWindow.py" line="112"/>
+        <location filename="GUI/Ui_MainWindow.py" line="167"/>
         <source>About Qt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="GUI/Ui_MainWindow.py" line="113"/>
+        <location filename="GUI/Ui_MainWindow.py" line="168"/>
         <source>Remove selected files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="GUI/Ui_MainWindow.py" line="101"/>
+        <location filename="GUI/Ui_MainWindow.py" line="157"/>
         <source>Input files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="GUI/Ui_MainWindow.py" line="102"/>
+        <location filename="GUI/Ui_MainWindow.py" line="158"/>
         <source>Output folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="GUI/MainWindow.py" line="33"/>
+        <location filename="GUI/MainWindow.py" line="35"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="GUI/MainWindow.py" line="34"/>
+        <location filename="GUI/MainWindow.py" line="36"/>
         <source>An error has ocurred:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -81,40 +81,55 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="GUI/MainWindow.py" line="104"/>
+        <location filename="GUI/MainWindow.py" line="135"/>
         <source>Select files to add to the convert queue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="GUI/MainWindow.py" line="132"/>
-        <source>Abut video4fuze</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="GUI/MainWindow.py" line="135"/>
+        <location filename="GUI/MainWindow.py" line="172"/>
         <source>This applications uses mencoder and avi-mux GUI (under wine where necessary) in order to convert your video files to be seen in you sansa fuze.
 
 Thanks to ewelot from the sansa forums for finding the way to convert the videos, without his findings this app wouldn&apos;t exist.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="GUI/MainWindow.py" line="164"/>
+        <location filename="GUI/MainWindow.py" line="208"/>
         <source>Select output directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="GUI/Ui_MainWindow.py" line="100"/>
+        <location filename="GUI/Ui_MainWindow.py" line="147"/>
         <source>video4fuze 0.2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="GUI/Ui_MainWindow.py" line="109"/>
+        <location filename="GUI/Ui_MainWindow.py" line="164"/>
         <source>Advanced</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="GUI/Ui_MainWindow.py" line="115"/>
+        <location filename="GUI/Ui_MainWindow.py" line="170"/>
         <source>Preferences</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="GUI/Ui_MainWindow.py" line="154"/>
+        <source>Video</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="GUI/Ui_MainWindow.py" line="161"/>
+        <source>Photos</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="GUI/Ui_MainWindow.py" line="155"/>
+        <source>Add images...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="GUI/MainWindow.py" line="169"/>
+        <source>About video4fuze 0.2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

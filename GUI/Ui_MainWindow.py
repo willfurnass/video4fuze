@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file '/home/ssorgatem/Documents/python/video4fuze/GUI/MainWindow.ui'
 #
-# Created: Wed Aug 19 18:34:18 2009
+# Created: Wed Aug 19 21:39:37 2009
 #      by: PyQt4 UI code generator 4.5.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -159,7 +159,7 @@ class Ui_MainWindow(object):
         self.tableWidget_2.horizontalHeaderItem(1).setText(QtGui.QApplication.translate("MainWindow", "Output folder", None, QtGui.QApplication.UnicodeUTF8))
         self.SelectOutputButton_2.setText(QtGui.QApplication.translate("MainWindow", "Select output folder", None, QtGui.QApplication.UnicodeUTF8))
         self.ConvertButton_2.setText(QtGui.QApplication.translate("MainWindow", "Convert!", None, QtGui.QApplication.UnicodeUTF8))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.Image), QtGui.QApplication.translate("MainWindow", "Image", None, QtGui.QApplication.UnicodeUTF8))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.Image), QtGui.QApplication.translate("MainWindow", "Photos", None, QtGui.QApplication.UnicodeUTF8))
         self.menuFile.setTitle(QtGui.QApplication.translate("MainWindow", "File", None, QtGui.QApplication.UnicodeUTF8))
         self.menuHelp.setTitle(QtGui.QApplication.translate("MainWindow", "Help", None, QtGui.QApplication.UnicodeUTF8))
         self.menuAdvanced.setTitle(QtGui.QApplication.translate("MainWindow", "Advanced", None, QtGui.QApplication.UnicodeUTF8))

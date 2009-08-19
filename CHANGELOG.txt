@@ -3,5 +3,6 @@
 * mencoder command line no more hard-coded: you can now set it in advanced>preferences
 * Major restructuration of code in fuze.py
 * Changed default mencoder options, using the last suggested by ewelot
+* Now it also supports image conversion!
 --v0.1--
 * First public release
