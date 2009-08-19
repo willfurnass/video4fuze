@@ -28,7 +28,19 @@ class Fuze():
                 print self.xterm
             else:
                 print "No terminal emulator available"
+####################################################################
+        size = "224:176"
+        fps = "20"
+        vbit = "683"        # in kbit/s
+        abit = "128"        # in kbit/s
+        keyint = "15"
+        pass1 = "keyint=" + keyint + ":turbo:vpass=1"
+        pass2 = "keyint=" + keyint + ":vpass=2"
+#TODO: Ability to change mencoder commandline (with QSettings, presumably)
+        self.mencoderpass1 = "mencoder -ofps " + fps + " -vf scale=" + size + ",harddup -ovc lavc -lavcopts vcodec=mpeg4:vbitrate=" + vbit + ":" + pass1 + " -srate 44100 -af resample=44100:0:1 -oac mp3lame -lameopts cbr:br=" + abit
 
+        self.mencoderpass2 = "mencoder -ofps " + fps + " -vf scale=" + size + ",harddup -ovc lavc -lavcopts vcodec=mpeg4:vbitrate=" + vbit + ":" + pass2 + " -srate 44100 -af resample=44100:0:1 -oac mp3lame -lameopts cbr:br=" + abit
+####################################################################
     def AmgConf(self,input,output):
         AMG = """CLEAR
 LOAD """ + input +"""
@@ -164,18 +176,6 @@ START """ + output + """
             self.qobject.connect(self.qobject, SIGNAL("finished"),GUI.getReady)
             self.qobject.emit(SIGNAL("stop"))
         tempfiles = {}
-        size = "224:176"
-        fps = "20"
-        vbit = "683"        # in kbit/s
-        abit = "128"        # in kbit/s
-        keyint = "15"
-        pass1 = "keyint=" + keyint + ":turbo:vpass=1"
-        pass2 = "keyint=" + keyint + ":vpass=2"
-
-        self.mencoderpass1 = "mencoder -ofps " + fps + " -vf scale=" + size + ",harddup -ovc lavc -lavcopts vcodec=mpeg4:vbitrate=" + vbit + ":" + pass1 + " -srate 44100 -af resample=44100:0:1 -oac mp3lame -lameopts cbr:br=" + abit
-
-        self.mencoderpass2 = "mencoder -ofps " + fps + " -vf scale=" + size + ",harddup -ovc lavc -lavcopts vcodec=mpeg4:vbitrate=" + vbit + ":" + pass2 + " -srate 44100 -af resample=44100:0:1 -oac mp3lame -lameopts cbr:br=" + abit
-
         for argument in args:
             if os.path.isfile(argument):
                 OUTPUT = os.path.join(self.AMGPrefix,os.path.splitext(os.path.basename(argument))[0] + ".temp.avi")
