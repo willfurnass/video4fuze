@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
 Class and methods to convert video for the fuze
@@ -18,9 +19,9 @@ class Fuze():
         pass1 = "keyint=" + keyint + ":turbo:vpass=1"
         pass2 = "keyint=" + keyint + ":vpass=2"
 #TODO: Ability to change mencoder commandline (with QSettings, presumably)
-        self.mencoderpass1 = "mencoder -ofps " + fps + " -vf scale=" + size + ",harddup -ovc lavc -lavcopts vcodec=mpeg4:vbitrate=" + vbit + ":" + pass1 + " -srate 44100 -af resample=44100:0:1 -oac mp3lame -lameopts cbr:br=" + abit
+        self.mencoderpass1 = "mencoder -ffourcc DX50 -ofps 20 -vf pp=li,expand=:::::224/176,scale=224:176,harddup     -ovc lavc -lavcopts vcodec=mpeg4:vbitrate=683:vmax_b_frames=0:keyint=15:turbo:vpass=1 -srate 44100 -af resample=44100:0:1,format=s16le -oac mp3lame -lameopts cbr:br=128"
 
-        self.mencoderpass2 = "mencoder -ofps " + fps + " -vf scale=" + size + ",harddup -ovc lavc -lavcopts vcodec=mpeg4:vbitrate=" + vbit + ":" + pass2 + " -srate 44100 -af resample=44100:0:1 -oac mp3lame -lameopts cbr:br=" + abit
+        self.mencoderpass2 = "mencoder -ffourcc DX50 -ofps 20 -vf pp=li,expand=:::::224/176,scale=224:176,harddup     -ovc lavc -lavcopts vcodec=mpeg4:vbitrate=683:vmax_b_frames=0:keyint=15:vpass=2 -srate 44100 -af resample=44100:0:1,format=s16le -oac mp3lame -lameopts cbr:br=128"
 ####################################################################
         if self.GUI != None:
             self.qobject = QObject()
@@ -49,7 +50,8 @@ class Fuze():
                     print "xterm not found"
                 print self.xterm
             else:
-                print "No terminal emulator available"
+                if self.GUI != None:
+                    print "No terminal emulator available"
 
     def LoadSettings(self):
         self.mencoderpass1 = str(self.GUI.settings.value("mencoderpass1", QVariant(self.mencoderpass1)).toString())
@@ -261,7 +263,7 @@ START """ + output + """
 if __name__ == "__main__":
     if sys.argv[1:] == [] :
         print """Usage:
-        python fuze.py INPUTVIDEO"""
+        python fuze.py INPUTVIDEO1 INPUTVIDEO2 ..."""
         exit(1)
     Fuze().convert(sys.argv[1:])
 

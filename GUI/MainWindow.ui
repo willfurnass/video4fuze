@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>630</width>
-    <height>420</height>
+    <width>643</width>
+    <height>456</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,147 +24,312 @@
    <bool>true</bool>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QTableWidget" name="tableWidget">
+   <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>190</x>
-      <y>41</y>
-      <width>431</width>
-      <height>281</height>
+      <x>0</x>
+      <y>0</y>
+      <width>641</width>
+      <height>411</height>
      </rect>
     </property>
-    <property name="acceptDrops">
-     <bool>true</bool>
+    <property name="currentIndex">
+     <number>0</number>
     </property>
-    <property name="editTriggers">
-     <set>QAbstractItemView::NoEditTriggers</set>
-    </property>
-    <property name="dragDropMode">
-     <enum>QAbstractItemView::NoDragDrop</enum>
-    </property>
-    <property name="alternatingRowColors">
-     <bool>true</bool>
-    </property>
-    <property name="selectionMode">
-     <enum>QAbstractItemView::MultiSelection</enum>
-    </property>
-    <property name="selectionBehavior">
-     <enum>QAbstractItemView::SelectRows</enum>
-    </property>
-    <property name="showGrid">
-     <bool>false</bool>
-    </property>
-    <attribute name="horizontalHeaderStretchLastSection">
-     <bool>true</bool>
-    </attribute>
-    <column>
-     <property name="text">
-      <string>Input files</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Output folder</string>
-     </property>
-    </column>
-   </widget>
-   <widget class="QPushButton" name="RemoveButton">
-    <property name="geometry">
-     <rect>
-      <x>420</x>
-      <y>10</y>
-      <width>131</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>131</width>
-      <height>25</height>
-     </size>
-    </property>
-    <property name="text">
-     <string>Remove files</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="ConvertButton">
-    <property name="geometry">
-     <rect>
-      <x>240</x>
-      <y>331</y>
-      <width>131</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>131</width>
-      <height>25</height>
-     </size>
-    </property>
-    <property name="text">
-     <string>Convert!</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="AddButton">
-    <property name="geometry">
-     <rect>
-      <x>70</x>
-      <y>11</y>
-      <width>131</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>131</width>
-      <height>25</height>
-     </size>
-    </property>
-    <property name="text">
-     <string>Add files...</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="SelectOutputButton">
-    <property name="geometry">
-     <rect>
-      <x>230</x>
-      <y>11</y>
-      <width>161</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>131</width>
-      <height>25</height>
-     </size>
-    </property>
-    <property name="text">
-     <string>Select output folder</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>-50</x>
-      <y>51</y>
-      <width>281</width>
-      <height>271</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap resource="../video4fuze.qrc">:/icons/black.png</pixmap>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
+    <widget class="QWidget" name="Video">
+     <attribute name="title">
+      <string>Video</string>
+     </attribute>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>-50</x>
+        <y>50</y>
+        <width>281</width>
+        <height>271</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap resource="../video4fuze.qrc">:/icons/black.png</pixmap>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="AddButton">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>10</y>
+        <width>131</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>131</width>
+        <height>25</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Add files...</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="RemoveButton">
+      <property name="geometry">
+       <rect>
+        <x>420</x>
+        <y>9</y>
+        <width>131</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>131</width>
+        <height>25</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Remove files</string>
+      </property>
+     </widget>
+     <widget class="QTableWidget" name="tableWidget">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>40</y>
+        <width>431</width>
+        <height>281</height>
+       </rect>
+      </property>
+      <property name="acceptDrops">
+       <bool>true</bool>
+      </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
+      </property>
+      <property name="dragDropMode">
+       <enum>QAbstractItemView::NoDragDrop</enum>
+      </property>
+      <property name="alternatingRowColors">
+       <bool>true</bool>
+      </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::MultiSelection</enum>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
+      </property>
+      <property name="showGrid">
+       <bool>false</bool>
+      </property>
+      <attribute name="horizontalHeaderStretchLastSection">
+       <bool>true</bool>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>Input files</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Output folder</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QPushButton" name="SelectOutputButton">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>10</y>
+        <width>161</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>131</width>
+        <height>25</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Select output folder</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="ConvertButton">
+      <property name="geometry">
+       <rect>
+        <x>240</x>
+        <y>330</y>
+        <width>131</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>131</width>
+        <height>25</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Convert!</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="Image">
+     <attribute name="title">
+      <string>Image</string>
+     </attribute>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>-50</x>
+        <y>50</y>
+        <width>281</width>
+        <height>271</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap resource="../video4fuze.qrc">:/icons/red.png</pixmap>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="AddButton_2">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>10</y>
+        <width>131</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>131</width>
+        <height>25</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Add images...</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="RemoveButton_2">
+      <property name="geometry">
+       <rect>
+        <x>420</x>
+        <y>9</y>
+        <width>131</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>131</width>
+        <height>25</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Remove files</string>
+      </property>
+     </widget>
+     <widget class="QTableWidget" name="tableWidget_2">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>40</y>
+        <width>431</width>
+        <height>281</height>
+       </rect>
+      </property>
+      <property name="acceptDrops">
+       <bool>true</bool>
+      </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
+      </property>
+      <property name="dragDropMode">
+       <enum>QAbstractItemView::NoDragDrop</enum>
+      </property>
+      <property name="alternatingRowColors">
+       <bool>true</bool>
+      </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::MultiSelection</enum>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
+      </property>
+      <property name="showGrid">
+       <bool>false</bool>
+      </property>
+      <attribute name="horizontalHeaderStretchLastSection">
+       <bool>true</bool>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>Input files</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Output folder</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QPushButton" name="SelectOutputButton_2">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>10</y>
+        <width>161</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>131</width>
+        <height>25</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Select output folder</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="ConvertButton_2">
+      <property name="geometry">
+       <rect>
+        <x>240</x>
+        <y>330</y>
+        <width>131</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>131</width>
+        <height>25</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Convert!</string>
+      </property>
+     </widget>
+    </widget>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
@@ -173,7 +338,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>630</width>
+     <width>643</width>
      <height>22</height>
     </rect>
    </property>
@@ -233,10 +398,6 @@
    </property>
   </action>
  </widget>
- <tabstops>
-  <tabstop>tableWidget</tabstop>
-  <tabstop>RemoveButton</tabstop>
- </tabstops>
  <resources>
   <include location="../video4fuze.qrc"/>
  </resources>

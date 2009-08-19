@@ -10,6 +10,12 @@ Thanks to ewelot from the sansa forums for finding the way to convert the videos
 For any feedback, suggestions, or if you want to contribute with translations (it's very easy!) or coding,
 feel free to email me at <ssorgatem@esdebian.og>
 
+If you are using the "universal" distribution of video4fuze, in order for it to work you need on your system:
+
+* Python >=2.5, < 3.0
+* PyQt4 >= 4.5 (debian package: python-qt4)
+* PIL (Python Imaging Library) (debian package: python-imaging)
+
 To run video4fuze, just type:
 
     python video4fuze.pyw
@@ -22,5 +28,6 @@ If you prefer the commandline version, just type:
 
     and it will conver every video you throw at it, and put the result in the same folder as the original, with postfix "_fuze" and extension ".avi".
 
-Make sure "mencoder" is in your path (or, in win32, them same folder as the main script),
+
+Make sure "mencoder" is in your path (or, in win32, the same folder as the main script),
 and that avi-mux GUI executable is in the root of the folder "avimuxgui" included in the package.

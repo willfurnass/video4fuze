@@ -24,6 +24,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.Fuze = fuze.Fuze(self)
         try:
             self.tableWidget.horizontalHeader().setResizeMode(3)
+            self.tableWidget_2.horizontalHeader().setResizeMode(3)
         except:
             print "Your version of PyQt4 seems a bit out of date. This may lead to problems. And may not :)"
         self.output = os.path.expanduser("~")

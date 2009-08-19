@@ -2,5 +2,6 @@
   <qresource>
     <file>icons/black.png</file>
     <file>icons/blue.png</file>
+    <file>icons/red.png</file>
   </qresource>
 </RCC>
