@@ -216,6 +216,10 @@ Thanks to ewelot from the sansa forums for finding the way to convert the videos
         while row < self.tableWidget.rowCount():
             self.tableWidget.item(row,1).setText(self.output)
             row += 1
+        row = 0
+        while row < self.tableWidget.rowCount():
+            self.tableWidget_2.item(row,1).setText(self.output)
+            row += 1
 
     @pyqtSignature("")
     def on_actionPreferences_triggered(self):
