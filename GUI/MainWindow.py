@@ -3,7 +3,7 @@
 """
 Module implementing MainWindow.
 """
-import os, fuze
+import os, fuze, p2fuze
 from PyQt4.QtGui import QMainWindow,QFileDialog,QMessageBox, QLabel, QTableWidgetItem
 from PyQt4.QtCore import pyqtSignature,QString,QT_TR_NOOP,SIGNAL,QObject,Qt,QSettings
 from threading import Thread
@@ -38,29 +38,34 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 QMessageBox.Ok),
                 QMessageBox.Ok)
 
-    def getReady(self):
-        self.setEnabled(True)
-        self.setCursor(Qt.ArrowCursor)
-        self.unsetCursor()
+    def getReady(self, tab):
+        tab.setEnabled(True)
         self.statusBar.showMessage(self.trUtf8("Done"))
 
-    def DelItem(self, itemText):
+    def DelItem(self, itemText, image = False):
         """
         Clean the ui
         """
-        row = 0
-        while row < self.tableWidget.rowCount():
-            if itemText == str(self.tableWidget.item(row,0).text()):
-                self.tableWidget.removeRow(row)
-                break
-            row += 1
+        if image:
+            row = 0
+            while row < self.tableWidget_2.rowCount():
+                if itemText == str(self.tableWidget_2.item(row,0).text()):
+                    self.tableWidget_2.removeRow(row)
+                    break
+                row += 1
+        else:
+            row = 0
+            while row < self.tableWidget.rowCount():
+                if itemText == str(self.tableWidget.item(row,0).text()):
+                    self.tableWidget.removeRow(row)
+                    break
+                row += 1
 
     def Status(self,status):
         self.statusBar.showMessage(status)
 
-    def WAIT(self):
-        self.setCursor(Qt.WaitCursor)
-        self.setEnabled(False)
+    def WAIT(self, tab):
+        tab.setEnabled(False)
 
     @pyqtSignature("QPoint")
     def on_tableWidget_customContextMenuRequested(self, pos):
@@ -68,10 +73,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         Slot documentation goes here.
         """
         # TODO: on_tableWidget_customContextMenuRequested
-        raise NotImplementedError
 
     @pyqtSignature("")
     def on_RemoveButton_clicked(self):
+        self. actionRemove_selected_files.emit(SIGNAL("triggered()"))
+
+    @pyqtSignature("")
+    def on_RemoveButton_2_clicked(self):
         self. actionRemove_selected_files.emit(SIGNAL("triggered()"))
 
     @pyqtSignature("")
@@ -88,11 +96,32 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         Conversion.start()
 
     @pyqtSignature("")
+    def on_ConvertButton_2_clicked(self):
+        """
+        Starts image conversion & resizing
+        """
+        args = []
+        row = 0
+        while row < self.tableWidget_2.rowCount():
+            args.append(str(self.tableWidget_2.item(row,0).text()))
+            row += 1
+        Resize = Resizer(args, self, self.output)
+        Resize.start()
+
+    @pyqtSignature("")
     def on_AddButton_clicked(self):
         self. actionAdd_file.emit(SIGNAL("triggered()"))
 
     @pyqtSignature("")
+    def on_AddButton_2_clicked(self):
+        self. actionAdd_file.emit(SIGNAL("triggered()"))
+
+    @pyqtSignature("")
     def on_SelectOutputButton_clicked(self):
+        self. actionSelect_output_folder.emit(SIGNAL("triggered()"))
+
+    @pyqtSignature("")
+    def on_SelectOutputButton_2_clicked(self):
         self. actionSelect_output_folder.emit(SIGNAL("triggered()"))
 
 
@@ -107,23 +136,29 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             os.path.expanduser("~"),
             QString(),
             None)
-        for file in files:
-            print file
-            currentrow = self.tableWidget.rowCount() #+ 1
-            #self.tableWidget.setRowCount(currentrow)
-            self.tableWidget.insertRow(currentrow)
+        if self.tabWidget.currentIndex() == 0:
+            for file in files:
+                currentrow = self.tableWidget.rowCount()
+                self.tableWidget.insertRow(currentrow)
+                filewidget = QTableWidgetItem()
+                filewidget.setText(file)
+                outputitem = QTableWidgetItem()
+                outputitem.setText(self.output)
+                self.tableWidget.setItem(currentrow,0,filewidget)
+                self.tableWidget.setItem(currentrow,1,outputitem)
+                self.tableWidget.resizeColumnsToContents()
 
-            filewidget = QTableWidgetItem()
-            filewidget.setText(file)
-            outputitem = QTableWidgetItem()
-            outputitem.setText(self.output)
-            self.tableWidget.setItem(currentrow,0,filewidget)
-            self.tableWidget.setItem(currentrow,1,outputitem)
-
-            print filewidget.text()
-        self.tableWidget.resizeColumnsToContents()
-
-        #raise NotImplementedError
+        elif self.tabWidget.currentIndex() == 1:
+            for file in files:
+                currentrow = self.tableWidget_2.rowCount()
+                self.tableWidget_2.insertRow(currentrow)
+                filewidget = QTableWidgetItem()
+                filewidget.setText(file)
+                outputitem = QTableWidgetItem()
+                outputitem.setText(self.output)
+                self.tableWidget_2.setItem(currentrow,0,filewidget)
+                self.tableWidget_2.setItem(currentrow,1,outputitem)
+                self.tableWidget_2.resizeColumnsToContents()
 
     @pyqtSignature("")
     def on_actionAbout_video4fuze_triggered(self):
@@ -131,7 +166,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         Slot documentation goes here.
         """
         QMessageBox.about(None,
-            self.trUtf8("Abut video4fuze"),
+            self.trUtf8("About video4fuze 0.2"),
             self.trUtf8("""This applications uses mencoder and avi-mux GUI (under wine where necessary) in order to convert your video files to be seen in you sansa fuze.
 
 Thanks to ewelot from the sansa forums for finding the way to convert the videos, without his findings this app wouldn't exist."""))
@@ -150,11 +185,18 @@ Thanks to ewelot from the sansa forums for finding the way to convert the videos
         Removes files to convert
         """
         remlist = []
-        for item in self.tableWidget.selectedItems():
-            if item.column() == 0:
-                remlist.append(item)
-        for item in remlist:
-            self.tableWidget.removeRow(self.tableWidget.row(item))
+        if self.tabWidget.currentIndex() == 0:
+            for item in self.tableWidget.selectedItems():
+                if item.column() == 0:
+                    remlist.append(item)
+            for item in remlist:
+                self.tableWidget.removeRow(self.tableWidget.row(item))
+        elif self.tabWidget.currentIndex() == 1:
+            for item in self.tableWidget_2.selectedItems():
+                if item.column() == 0:
+                    remlist.append(item)
+            for item in remlist:
+                self.tableWidget_2.removeRow(self.tableWidget_2.row(item))
 
     @pyqtSignature("")
     def on_actionSelect_output_folder_triggered(self):
@@ -190,3 +232,15 @@ class Converter(Thread):
     def run(self):
         self.parent.Fuze.LoadSettings()
         self.parent.Fuze.convert(self.args, self.FINALPREFIX)
+
+class Resizer(Thread):
+    """
+    Doing the job in a different thread is always good.
+    """
+    def __init__(self,args, parent, FINALPREFIX=None):
+        Thread.__init__(self)
+        self.args = args
+        self.FINALPREFIX = FINALPREFIX
+        self.parent = parent
+    def run(self):
+        p2fuze.TransFuze(self.parent).convert(self.args, self.FINALPREFIX)

@@ -11,14 +11,6 @@ class Fuze():
     def __init__(self, GUI = None):
         self.GUI = GUI
 ####################################################################
-        size = "224:176"
-        fps = "20"
-        vbit = "683"        # in kbit/s
-        abit = "128"        # in kbit/s
-        keyint = "15"
-        pass1 = "keyint=" + keyint + ":turbo:vpass=1"
-        pass2 = "keyint=" + keyint + ":vpass=2"
-#TODO: Ability to change mencoder commandline (with QSettings, presumably)
         self.mencoderpass1 = "mencoder -ffourcc DX50 -ofps 20 -vf pp=li,expand=:::::224/176,scale=224:176,harddup     -ovc lavc -lavcopts vcodec=mpeg4:vbitrate=683:vmax_b_frames=0:keyint=15:turbo:vpass=1 -srate 44100 -af resample=44100:0:1,format=s16le -oac mp3lame -lameopts cbr:br=128"
 
         self.mencoderpass2 = "mencoder -ffourcc DX50 -ofps 20 -vf pp=li,expand=:::::224/176,scale=224:176,harddup     -ovc lavc -lavcopts vcodec=mpeg4:vbitrate=683:vmax_b_frames=0:keyint=15:vpass=2 -srate 44100 -af resample=44100:0:1,format=s16le -oac mp3lame -lameopts cbr:br=128"
@@ -184,7 +176,7 @@ START """ + output + """
     def convert(self,args, FINALPREFIX =  None):
         tempfiles = {}
         if self.GUI != None:
-            self.qobject.emit(SIGNAL("stop"))
+            self.qobject.emit(SIGNAL("stop"),self.GUI.Video)
         for argument in args:
             if os.path.isfile(argument):
                 OUTPUT = os.path.join(self.AMGPrefix,os.path.splitext(os.path.basename(argument))[0] + ".temp.avi")
@@ -258,7 +250,7 @@ START """ + output + """
                 if self.GUI != None:
                     self.qobject.emit(SIGNAL("Exception"),e)
         if self.GUI != None:
-            self.qobject.emit(SIGNAL("finished"))
+            self.qobject.emit(SIGNAL("finished"),self.GUI.Video)
 
 if __name__ == "__main__":
     if sys.argv[1:] == [] :

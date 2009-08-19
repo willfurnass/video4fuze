@@ -22,6 +22,7 @@ class TransFuze():
             self.qobject.connect(self.qobject, SIGNAL("Exception"),GUI.ErrorDiag)
             self.qobject.connect(self.qobject, SIGNAL("itemDone"),GUI.DelItem)
             self.qobject.connect(self.qobject, SIGNAL("finished"),GUI.getReady)
+            #TODO:emitting signals!
 
     def convert(self,args, FINALPREFIX =  None):
         for argument in args:
