@@ -2,12 +2,13 @@
 """
 Functions to convert video for the fuze
 """
-import os, tempfile, shutil, sys
-from subprocess import call
+import os, tempfile, shutil, sys, commands
+from subprocess import check_call, call
 
 
 class Fuze():
     def __init__(self):
+        self.xterm = None
         if os.name == 'nt':
             self.AMGPrefix = tempfile.gettempdir()
             self.WINE = False
@@ -18,6 +19,16 @@ class Fuze():
                 self.AMGPrefix = os.path.join(wineprefix,"drive_c")
             else:
                 self.AMGPrefix = os.path.join(os.environ.get('HOME'),".wine/drive_c")
+            if os.name == 'posix':
+                termloc = commands.getstatusoutput("which xterm")
+                if termloc[0] == 0:
+                    self.xterm = termloc[1]
+                else:
+                    print "xterm not found"
+                print self.xterm
+            else:
+                print "No terminal emulator available"
+
     def AmgConf(self,input,output):
         AMG = """CLEAR
 LOAD """ + input +"""
@@ -161,14 +172,21 @@ START """ + output + """
         pass1 = "keyint=" + keyint + ":turbo:vpass=1"
         pass2 = "keyint=" + keyint + ":vpass=2"
 
+        self.mencoderpass1 = "mencoder -ofps " + fps + " -vf scale=" + size + ",harddup -ovc lavc -lavcopts vcodec=mpeg4:vbitrate=" + vbit + ":" + pass1 + " -srate 44100 -af resample=44100:0:1 -oac mp3lame -lameopts cbr:br=" + abit
+
+        self.mencoderpass2 = "mencoder -ofps " + fps + " -vf scale=" + size + ",harddup -ovc lavc -lavcopts vcodec=mpeg4:vbitrate=" + vbit + ":" + pass2 + " -srate 44100 -af resample=44100:0:1 -oac mp3lame -lameopts cbr:br=" + abit
+
         for argument in args:
             if os.path.isfile(argument):
                 OUTPUT = os.path.join(self.AMGPrefix,os.path.splitext(os.path.basename(argument))[0] + ".temp.avi")
                 try:
                     print "Calling mencoder #1"
+                    mencoderpass1 = self.mencoderpass1 + " " + argument + " -o " + OUTPUT
                     if GUI != None:
                         self.qobject.emit(SIGNAL("working"),"Using mencoder on " + argument + "...")
-                    call(["mencoder","-ofps",fps,"-vf","scale=" + size + ",harddup","-ovc","lavc","-lavcopts","vcodec=mpeg4:vbitrate=" + vbit + ":" + pass1,"-srate","44100","-af","resample=44100:0:1","-oac","mp3lame","-lameopts","cbr:br=" + abit,argument,"-o",OUTPUT])
+                        if self.xterm != None:
+                            mencoderpass1 = self.xterm + " -e " + mencoderpass1
+                    check_call(mencoderpass1.split(" "))
                 except Exception, e:
                     print e
                     if GUI != None:
@@ -176,9 +194,12 @@ START """ + output + """
                     continue
                 try:
                     print "Calling mencoder #2"
+                    mencoderpass2 = self.mencoderpass2 + " " + argument + " -o " + OUTPUT
                     if GUI != None:
                         self.qobject.emit(SIGNAL("working"),"Using mencoder on " + argument + " (pass 2)...")
-                    call(["mencoder","-ofps",fps,"-vf","scale=" + size + ",harddup","-ovc","lavc","-lavcopts","vcodec=mpeg4:vbitrate=" + vbit + ":" + pass2,"-srate","44100","-af","resample=44100:0:1","-oac","mp3lame","-lameopts","cbr:br=" + abit,argument,"-o",OUTPUT])
+                        if self.xterm != None:
+                            mencoderpass2 = self.xterm + " -e " + mencoderpass2
+                    check_call(mencoderpass2.split(" "))
                     tempfiles[OUTPUT] = argument
                 except Exception, e:
                     print e
@@ -214,6 +235,7 @@ START """ + output + """
                 print e
                 if GUI != None:
                     self.qobject.emit(SIGNAL("Exception"),e)
+                os.remove(os.path.join(self.AMGPrefix,"final.avi"))
                 continue
             print "Moving " + os.path.join(self.AMGPrefix,"final.avi") + " to " + FINAL + " and cleaning temporary files"
             try:

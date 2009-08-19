@@ -19,6 +19,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         """
         QMainWindow.__init__(self, parent)
         self.setupUi(self)
+        self.Fuze = fuze.Fuze()
         try:
             self.tableWidget.horizontalHeader().setResizeMode(3)
         except:
@@ -179,4 +180,4 @@ class Converter(Thread):
         self.FINALPREFIX = FINALPREFIX
         self.GUI = GUI
     def run(self):
-        fuze.Fuze().convert(self.args, self.FINALPREFIX, self.GUI)
+        self.GUI.Fuze.convert(self.args, self.FINALPREFIX, self.GUI)
