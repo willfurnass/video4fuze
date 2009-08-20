@@ -28,7 +28,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.tableWidget_2.horizontalHeader().setResizeMode(3)
         except:
             print "Your version of PyQt4 seems a bit out of date. This may lead to problems. And may not :)"
-        self.output = str(self.settings.value("outputdir",QVariant(os.path.expanduser("~"))).toString())
+        self.output = unicode(self.settings.value("outputdir",QVariant(os.path.expanduser("~"))).toString(), "utf-8")
 
     def ErrorDiag(self, error = QT_TR_NOOP("Unknown error")):
             print error
@@ -50,14 +50,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if image:
             row = 0
             while row < self.tableWidget_2.rowCount():
-                if itemText == str(self.tableWidget_2.item(row,0).text()):
+                if itemText == unicode(self.tableWidget_2.item(row,0).text(), "utf-8"):
                     self.tableWidget_2.removeRow(row)
                     break
                 row += 1
         else:
             row = 0
             while row < self.tableWidget.rowCount():
-                if itemText == str(self.tableWidget.item(row,0).text()):
+                if itemText == unicode(self.tableWidget.item(row,0).text(), "utf-8"):
                     self.tableWidget.removeRow(row)
                     break
                 row += 1
@@ -91,7 +91,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         args = []
         row = 0
         while row < self.tableWidget.rowCount():
-            args.append(str(self.tableWidget.item(row,0).text()))
+            args.append(unicode(self.tableWidget.item(row,0).text(), "utf-8"))
             row += 1
         Conversion = Converter(args, self, self.output)
         Conversion.start()
@@ -104,7 +104,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         args = []
         row = 0
         while row < self.tableWidget_2.rowCount():
-            args.append(str(self.tableWidget_2.item(row,0).text()))
+            args.append(unicode(self.tableWidget_2.item(row,0).text(), "utf-8"))
             row += 1
         Resize = Resizer(args, self, self.output)
         Resize.start()
@@ -210,14 +210,14 @@ Thanks to ewelot from the sansa forums for finding the way to convert the videos
             os.path.expanduser("~"),
             QFileDialog.Options(QFileDialog.ShowDirsOnly))
         if output != None:
-            self.output = str(output)
+            self.output = unicode(output, "utf-8")
             self.settings.setValue("outputdir",QVariant(self.output))
         row = 0
         while row < self.tableWidget.rowCount():
             self.tableWidget.item(row,1).setText(self.output)
             row += 1
         row = 0
-        while row < self.tableWidget.rowCount():
+        while row < self.tableWidget_2.rowCount():
             self.tableWidget_2.item(row,1).setText(self.output)
             row += 1
 

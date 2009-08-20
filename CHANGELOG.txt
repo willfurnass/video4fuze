@@ -1,4 +1,7 @@
 ###CHANGELOG###
+--v0.2.1
+*Bugfix: Now supports utf-8 paths
+*Bugfix: Now it refreshes correctly the output path.
 --v0.2--
 * mencoder command line no more hard-coded: you can now set it in advanced>preferences
 * Major restructuration of code in fuze.py
