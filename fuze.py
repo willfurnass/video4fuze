@@ -3,7 +3,7 @@
 """
 Class and methods to convert video for the fuze
 """
-import os, tempfile, shutil, sys, commands
+import os, tempfile, shutil, sys, commands, unicodedata
 from subprocess import check_call, call
 from PyQt4.QtCore import QT_TR_NOOP,SIGNAL,QObject,QString,QVariant
 
@@ -179,15 +179,19 @@ START """ + output + """
             self.qobject.emit(SIGNAL("stop"),self.GUI.Video)
         for argument in args:
             if os.path.isfile(argument):
-                OUTPUT = os.path.join(self.AMGPrefix,os.path.splitext(os.path.basename(argument))[0] + ".temp.avi")
+                OUTPUT = os.path.join(self.AMGPrefix,os.path.splitext(os.path.basename(argument))[0] + ".temp.avi").encode("ascii", "ignore")
                 try:
                     print "Calling mencoder #1"
-                    mencoderpass1 = str(self.mencoderpass1 + " " + argument + " -o " + OUTPUT)
+                    mencoderpass1 = str(self.mencoderpass1)
                     if self.GUI != None:
                         self.qobject.emit(SIGNAL("working"),"Using mencoder on " + argument + "...")
                         if self.xterm != None:
                             mencoderpass1 = self.xterm + " -e " + mencoderpass1
-                    check_call(mencoderpass1.split())
+                    mencoderpass1 = mencoderpass1.split()
+                    mencoderpass1.append(argument)
+                    mencoderpass1.append("-o")
+                    mencoderpass1.append(OUTPUT)
+                    check_call(mencoderpass1)
                 except Exception, e:
                     print e
                     if self.GUI != None:
@@ -195,12 +199,16 @@ START """ + output + """
                     continue
                 try:
                     print "Calling mencoder #2"
-                    mencoderpass2 = self.mencoderpass2 + " " + argument + " -o " + OUTPUT
+                    mencoderpass2 = str(self.mencoderpass2)
                     if self.GUI != None:
                         self.qobject.emit(SIGNAL("working"),"Using mencoder on " + argument + " (pass 2)...")
                         if self.xterm != None:
                             mencoderpass2 = self.xterm + " -e " + mencoderpass2
-                    check_call(mencoderpass2.split())
+                    mencoderpass2 = mencoderpass2.split()
+                    mencoderpass2.append(argument)
+                    mencoderpass2.append("-o")
+                    mencoderpass2.append(OUTPUT)
+                    check_call(mencoderpass2)
                     tempfiles[OUTPUT] = argument
                 except Exception, e:
                     print e
@@ -224,12 +232,12 @@ START """ + output + """
                     self.qobject.emit(SIGNAL("working"),"Calling avi-mux GUI...")
                 if self.WINE:
                     print "using wine"
-                    OUTPUT =  """C:\\""" + os.path.basename(file)
+                    OUTPUT =  """C:\\""" + os.path.basename(file).encode("ascii", "replace")
                     print "Opening file: " + OUTPUT
                     self.AmgConf(OUTPUT,"C:\\final.avi")
                     call(["wine",os.path.join(os.getcwd(),"avimuxgui","AVIMux_GUI.exe"),"C:\\fuze.amg"])
                 else:
-                    OUTPUT = file
+                    OUTPUT = file.encode("ascii", "replace")
                     self.AmgConf(OUTPUT,os.path.join(self.AMGPrefix,"final.avi"))
                     call([os.path.join(os.getcwd(),"avimuxgui","AVIMux_GUI.exe"),os.path.join(self.AMGPrefix,"fuze.amg")])
             except Exception, e:

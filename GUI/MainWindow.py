@@ -91,7 +91,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         args = []
         row = 0
         while row < self.tableWidget.rowCount():
-            args.append(unicode(self.tableWidget.item(row,0).text(), "utf-8"))
+            args.append(str(self.tableWidget.item(row,0).text().toUtf8()))
             row += 1
         Conversion = Converter(args, self, self.output)
         Conversion.start()
@@ -104,7 +104,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         args = []
         row = 0
         while row < self.tableWidget_2.rowCount():
-            args.append(unicode(self.tableWidget_2.item(row,0).text(), "utf-8"))
+            args.append(unicode(self.tableWidget_2.item(row,0).text().toUtf8()))
             row += 1
         Resize = Resizer(args, self, self.output)
         Resize.start()
