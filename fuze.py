@@ -6,10 +6,12 @@ Class and methods to convert video for the fuze
 import os, tempfile, shutil, sys, commands, unicodedata
 from subprocess import check_call, call
 from PyQt4.QtCore import QT_TR_NOOP,SIGNAL,QObject,QString,QVariant
+from vthumb import *
 
 class Fuze():
     def __init__(self, GUI = None):
         self.GUI = GUI
+        self.CWD = os.getcwd()
 ####################################################################
         self.mencoderpass1 = "mencoder -ffourcc DX50 -ofps 20 -vf pp=li,expand=:::::224/176,scale=224:176,harddup     -ovc lavc -lavcopts vcodec=mpeg4:vbitrate=683:vmax_b_frames=0:keyint=15:turbo:vpass=1 -srate 44100 -af resample=44100:0:1,format=s16le -oac mp3lame -lameopts cbr:br=128"
 
@@ -25,9 +27,13 @@ class Fuze():
             self.LoadSettings()
         self.xterm = None
         if os.name == 'nt':
+            self.FFMPEG = os.path.join(self.CWD, "ffmpeg.exe")
             self.AMGPrefix = tempfile.gettempdir()
             self.WINE = False
+            self.mencoderpass1 = self.mencoderpass1.replace("mencoder",os.path.join(self.CWD, "mencoder.exe"))
+            self.mencoderpass2 = self.mencoderpass2.replace("mencoder",os.path.join(self.CWD, "mencoder.exe"))
         else:
+            self.FFMPEG = "ffmpeg"
             self.WINE = True
             wineprefix = os.environ.get('WINEPREFIX')
             if wineprefix != None:
@@ -116,7 +122,7 @@ AVI MP3FPC 1
 AVI DTSFPC 2
 AVI ADDJUNKBEFOREHEADERS 0
 OGG PAGESIZE 65025
-AVI RIFFAVISIZE 800
+AVI RIFFAVISIZE 999
 AVI HAALIMODE 0
 OVERLAPPED 0
 MAXFILESIZE 2030
@@ -174,6 +180,7 @@ START """ + output + """
         amgfile.close()
 
     def convert(self,args, FINALPREFIX =  None):
+        os.chdir(self.AMGPrefix)
         tempfiles = {}
         if self.GUI != None:
             self.qobject.emit(SIGNAL("stop"),self.GUI.Video)
@@ -235,11 +242,19 @@ START """ + output + """
                     OUTPUT =  """C:\\""" + os.path.basename(file).encode("ascii", "replace")
                     print "Opening file: " + OUTPUT
                     self.AmgConf(OUTPUT,"C:\\final.avi")
-                    call(["wine",os.path.join(os.getcwd(),"avimuxgui","AVIMux_GUI.exe"),"C:\\fuze.amg"])
+                    wineprefix = os.environ.get('WINEPREFIX')
+                    if wineprefix != None:
+                       amgexe = os.path.join(wineprefix,"drive_c","avimuxgui","AVIMux_GUI.exe")
+                    else:
+                       amgexe = os.path.join(os.environ.get('HOME'),".wine","drive_c","avimuxgui","AVIMux_GUI.exe")
+                    if os.path.isfile(amgexe):
+                        call(["wine",amgexe,"C:\\fuze.amg"])
+                    else:
+                        call(["wine",os.path.join(self.CWD,"avimuxgui","AVIMux_GUI.exe"),"C:\\fuze.amg"])
                 else:
-                    OUTPUT = file.encode("ascii", "replace")
+                    OUTPUT = file.encode("ascii", "ignore")
                     self.AmgConf(OUTPUT,os.path.join(self.AMGPrefix,"final.avi"))
-                    call([os.path.join(os.getcwd(),"avimuxgui","AVIMux_GUI.exe"),os.path.join(self.AMGPrefix,"fuze.amg")])
+                    call([os.path.join(self.CWD,"avimuxgui","AVIMux_GUI.exe"),os.path.join(self.AMGPrefix,"fuze.amg")])
             except Exception, e:
                 print e
                 if self.GUI != None:
@@ -247,14 +262,30 @@ START """ + output + """
                 os.remove(os.path.join(self.AMGPrefix,"final.avi"))
                 continue
             print "Moving " + os.path.join(self.AMGPrefix,"final.avi") + " to " + FINAL + " and cleaning temporary files"
+            print type(FINAL)
+            print FINAL
             try:
                 shutil.move(os.path.join(self.AMGPrefix,"final.avi"),FINAL)
+                os.chdir(self.CWD)
+                try:
+                    if self.GUI != None:
+                        self.qobject.emit(SIGNAL("working"),"Creating video thumbnail")
+                    print "Creating video thumbnail"
+                    os.chdir(os.path.split(FINAL)[0])
+                    find_thumb(os.path.basename(FINAL), os.path.splitext(os.path.basename(FINAL))[0], 100, [], False, False, self.FFMPEG)
+                except Exception, e:
+                    print e
+                    raise e
+                    if self.GUI != None:
+                        self.qobject.emit(SIGNAL("Exception"),e)
+                os.chdir(self.CWD)
                 if self.GUI != None:
                     self.qobject.emit(SIGNAL("itemDone"),tempfiles[file])
                 os.remove(file)
                 os.remove(os.path.join(self.AMGPrefix,"fuze.amg"))
             except Exception, e:
                 print e
+                print  "Ooops not moving final video"
                 if self.GUI != None:
                     self.qobject.emit(SIGNAL("Exception"),e)
         if self.GUI != None:

@@ -28,7 +28,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.tableWidget_2.horizontalHeader().setResizeMode(3)
         except:
             print "Your version of PyQt4 seems a bit out of date. This may lead to problems. And may not :)"
-        self.output = unicode(self.settings.value("outputdir",QVariant(os.path.expanduser("~"))).toString(), "utf-8")
+        self.output = unicode(self.settings.value("outputdir",QVariant(os.path.expanduser("~"))).toString())
 
     def ErrorDiag(self, error = QT_TR_NOOP("Unknown error")):
             print error
@@ -210,7 +210,7 @@ Thanks to ewelot from the sansa forums for finding the way to convert the videos
             os.path.expanduser("~"),
             QFileDialog.Options(QFileDialog.ShowDirsOnly))
         if output != None:
-            self.output = unicode(output, "utf-8")
+            self.output = unicode(output)
             self.settings.setValue("outputdir",QVariant(self.output))
         row = 0
         while row < self.tableWidget.rowCount():

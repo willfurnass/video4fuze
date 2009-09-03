@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project video4fuze -->
-<!-- Saved: 2009-08-20, 16:50:10 -->
+<!-- Saved: 2009-09-03, 00:55:38 -->
 <!-- Copyright (C) 2009 ssorgatem, ssorgatem@esdebian.org -->
 <Project version="4.6">
   <Language>en</Language>
@@ -23,6 +23,7 @@
     <Source>GUI/Ui_Preferences.py</Source>
     <Source>GUI/v4fPreferences.py</Source>
     <Source>p2fuze.py</Source>
+    <Source>vthumb.py</Source>
   </Sources>
   <Forms>
     <Form>GUI/MainWindow.ui</Form>

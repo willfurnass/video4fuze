@@ -1,8 +1,16 @@
 ###CHANGELOG###
---v0.2.1
-*Bugfix: Now supports utf-8 paths
-*Bugfix: Now it refreshes correctly the output path.
-*Bugfix: Fixed whitespace basename error (you couldn't convert files with whitespace in their name)
+--v0.3--
+* Now it makes .thm thumbnails of videos while converting (which adds a dependency on ffmpeg)
+* Bugfix: working directory permissions, fix adapted from the one supplied by srtuct in the sansa forums. Only affects the .deb package (and converted packages).
+
+* Updated .deb depencies in order to make it installable with the relatively new "wine-unstable" sid package.
+
+* Some little changes in unicode string handling, hoping they would solve some problems, but without any effect so far.
+* This version won't load settings from previous versions.
+--v0.2.1--
+* Bugfix: Now supports utf-8 paths in *nix (not on windows for some weird reason)
+* Bugfix: Now it refreshes correctly the output path.
+* Bugfix: Fixed whitespace basename error (you couldn't convert files with whitespace in their name)
 --v0.2--
 * mencoder command line no more hard-coded: you can now set it in advanced>preferences
 * Major restructuration of code in fuze.py

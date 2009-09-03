@@ -15,6 +15,8 @@ If you are using the "universal" distribution of video4fuze, in order for it to 
 * Python >=2.5, < 3.0
 * PyQt4 >= 4.5 (debian package: python-qt4)
 * PIL (Python Imaging Library) (debian package: python-imaging)
+* Mencoder
+* FFMPEG
 
 To run video4fuze, just type:
 
