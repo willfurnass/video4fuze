@@ -1,5 +1,6 @@
 <RCC>
   <qresource>
+    <file>icons/silver.png</file>
     <file>icons/black.png</file>
     <file>icons/blue.png</file>
     <file>icons/red.png</file>
