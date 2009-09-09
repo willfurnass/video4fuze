@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>643</width>
-    <height>456</height>
+    <height>486</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -27,10 +27,10 @@
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>0</x>
+      <x>10</x>
       <y>0</y>
       <width>641</width>
-      <height>411</height>
+      <height>441</height>
      </rect>
     </property>
     <property name="currentIndex">
@@ -44,7 +44,7 @@
       <property name="geometry">
        <rect>
         <x>-50</x>
-        <y>50</y>
+        <y>80</y>
         <width>281</width>
         <height>271</height>
        </rect>
@@ -66,7 +66,7 @@
       <property name="geometry">
        <rect>
         <x>70</x>
-        <y>10</y>
+        <y>40</y>
         <width>131</width>
         <height>25</height>
        </rect>
@@ -85,7 +85,7 @@
       <property name="geometry">
        <rect>
         <x>420</x>
-        <y>9</y>
+        <y>39</y>
         <width>131</width>
         <height>25</height>
        </rect>
@@ -104,9 +104,9 @@
       <property name="geometry">
        <rect>
         <x>190</x>
-        <y>40</y>
+        <y>70</y>
         <width>431</width>
-        <height>281</height>
+        <height>341</height>
        </rect>
       </property>
       <property name="acceptDrops">
@@ -148,7 +148,7 @@
       <property name="geometry">
        <rect>
         <x>230</x>
-        <y>10</y>
+        <y>40</y>
         <width>161</width>
         <height>25</height>
        </rect>
@@ -166,8 +166,8 @@
      <widget class="QPushButton" name="ConvertButton">
       <property name="geometry">
        <rect>
-        <x>240</x>
-        <y>330</y>
+        <x>30</x>
+        <y>360</y>
         <width>131</width>
         <height>41</height>
        </rect>
@@ -182,6 +182,44 @@
        <string>Convert!</string>
       </property>
      </widget>
+     <widget class="Line" name="line">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>10</y>
+        <width>641</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>0</y>
+        <width>621</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <property name="text">
+       <string>Video converter</string>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="Image">
      <attribute name="title">
@@ -191,7 +229,7 @@
       <property name="geometry">
        <rect>
         <x>-50</x>
-        <y>50</y>
+        <y>80</y>
         <width>281</width>
         <height>271</height>
        </rect>
@@ -213,7 +251,7 @@
       <property name="geometry">
        <rect>
         <x>70</x>
-        <y>10</y>
+        <y>40</y>
         <width>131</width>
         <height>25</height>
        </rect>
@@ -232,7 +270,7 @@
       <property name="geometry">
        <rect>
         <x>420</x>
-        <y>9</y>
+        <y>39</y>
         <width>131</width>
         <height>25</height>
        </rect>
@@ -251,9 +289,9 @@
       <property name="geometry">
        <rect>
         <x>190</x>
-        <y>40</y>
+        <y>70</y>
         <width>431</width>
-        <height>281</height>
+        <height>341</height>
        </rect>
       </property>
       <property name="acceptDrops">
@@ -295,7 +333,7 @@
       <property name="geometry">
        <rect>
         <x>230</x>
-        <y>10</y>
+        <y>40</y>
         <width>161</width>
         <height>25</height>
        </rect>
@@ -313,8 +351,8 @@
      <widget class="QPushButton" name="ConvertButton_2">
       <property name="geometry">
        <rect>
-        <x>240</x>
-        <y>330</y>
+        <x>30</x>
+        <y>360</y>
         <width>131</width>
         <height>41</height>
        </rect>
@@ -327,6 +365,44 @@
       </property>
       <property name="text">
        <string>Convert!</string>
+      </property>
+     </widget>
+     <widget class="Line" name="line_2">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>10</y>
+        <width>641</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_5">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>0</y>
+        <width>621</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <property name="text">
+       <string>Image converter</string>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
       </property>
      </widget>
     </widget>
@@ -334,55 +410,11 @@
      <attribute name="title">
       <string>Playlists</string>
      </attribute>
-     <widget class="QTableWidget" name="tableWidget_3">
+     <widget class="QPushButton" name="SavePlaylist">
       <property name="geometry">
        <rect>
-        <x>190</x>
-        <y>40</y>
-        <width>431</width>
-        <height>281</height>
-       </rect>
-      </property>
-      <property name="acceptDrops">
-       <bool>true</bool>
-      </property>
-      <property name="editTriggers">
-       <set>QAbstractItemView::NoEditTriggers</set>
-      </property>
-      <property name="dragDropMode">
-       <enum>QAbstractItemView::NoDragDrop</enum>
-      </property>
-      <property name="alternatingRowColors">
-       <bool>true</bool>
-      </property>
-      <property name="selectionMode">
-       <enum>QAbstractItemView::MultiSelection</enum>
-      </property>
-      <property name="selectionBehavior">
-       <enum>QAbstractItemView::SelectRows</enum>
-      </property>
-      <property name="showGrid">
-       <bool>false</bool>
-      </property>
-      <attribute name="horizontalHeaderStretchLastSection">
-       <bool>true</bool>
-      </attribute>
-      <column>
-       <property name="text">
-        <string>Input files</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Output folder</string>
-       </property>
-      </column>
-     </widget>
-     <widget class="QPushButton" name="ConvertButton_3">
-      <property name="geometry">
-       <rect>
-        <x>240</x>
-        <y>330</y>
+        <x>30</x>
+        <y>360</y>
         <width>131</width>
         <height>41</height>
        </rect>
@@ -394,14 +426,14 @@
        </size>
       </property>
       <property name="text">
-       <string>Convert!</string>
+       <string>Save playlist</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="SelectOutputButton_3">
+     <widget class="QPushButton" name="SongsFromSD">
       <property name="geometry">
        <rect>
-        <x>230</x>
-        <y>10</y>
+        <x>240</x>
+        <y>60</y>
         <width>161</width>
         <height>25</height>
        </rect>
@@ -413,14 +445,14 @@
        </size>
       </property>
       <property name="text">
-       <string>Select output folder</string>
+       <string>Fuze's µSD slot</string>
       </property>
      </widget>
      <widget class="QPushButton" name="RemoveButton_3">
       <property name="geometry">
        <rect>
         <x>420</x>
-        <y>9</y>
+        <y>39</y>
         <width>131</width>
         <height>25</height>
        </rect>
@@ -432,15 +464,15 @@
        </size>
       </property>
       <property name="text">
-       <string>Remove files</string>
+       <string>Remove songs</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="AddButton_3">
+     <widget class="QPushButton" name="SongsFromFuze">
       <property name="geometry">
        <rect>
-        <x>70</x>
-        <y>10</y>
-        <width>131</width>
+        <x>210</x>
+        <y>30</y>
+        <width>211</width>
         <height>25</height>
        </rect>
       </property>
@@ -451,14 +483,14 @@
        </size>
       </property>
       <property name="text">
-       <string>Add images...</string>
+       <string>Fuze's internal storage</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_3">
       <property name="geometry">
        <rect>
         <x>-50</x>
-        <y>50</y>
+        <y>80</y>
         <width>281</width>
         <height>271</height>
        </rect>
@@ -474,6 +506,100 @@
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QListWidget" name="listWidget">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>91</y>
+        <width>431</width>
+        <height>321</height>
+       </rect>
+      </property>
+      <property name="dragEnabled">
+       <bool>true</bool>
+      </property>
+      <property name="dragDropMode">
+       <enum>QAbstractItemView::InternalMove</enum>
+      </property>
+      <property name="alternatingRowColors">
+       <bool>true</bool>
+      </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::MultiSelection</enum>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
+      </property>
+      <property name="movement">
+       <enum>QListView::Free</enum>
+      </property>
+      <property name="flow">
+       <enum>QListView::TopToBottom</enum>
+      </property>
+      <property name="uniformItemSizes">
+       <bool>true</bool>
+      </property>
+      <property name="selectionRectVisible">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_6">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>0</y>
+        <width>621</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <property name="text">
+       <string>Playlist editor: Add songs from:</string>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="Line" name="line_3">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>10</y>
+        <width>641</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="OpenPlaylist">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>40</y>
+        <width>131</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>131</width>
+        <height>25</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Open playlist</string>
       </property>
      </widget>
     </widget>

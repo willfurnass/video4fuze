@@ -225,6 +225,46 @@ Thanks to ewelot from the sansa forums for finding the way to convert the videos
     def on_actionPreferences_triggered(self):
         prefs = PreferencesDialog()
         prefs.exec_()
+    
+    @pyqtSignature("")
+    def on_SavePlaylist_clicked(self):
+        """
+        Slot documentation goes here.
+        """
+        # TODO: not implemented yet
+        raise NotImplementedError
+    
+    @pyqtSignature("")
+    def on_SongsFromSD_clicked(self):
+        """
+        Slot documentation goes here.
+        """
+        # TODO: not implemented yet
+        raise NotImplementedError
+    
+    @pyqtSignature("")
+    def on_RemoveButton_3_clicked(self):
+        """
+        Slot documentation goes here.
+        """
+        # TODO: not implemented yet
+        raise NotImplementedError
+    
+    @pyqtSignature("")
+    def on_SongsFromFuze_clicked(self):
+        """
+        Slot documentation goes here.
+        """
+        # TODO: not implemented yet
+        raise NotImplementedError
+    
+    @pyqtSignature("")
+    def on_OpenPlaylist_clicked(self):
+        """
+        Slot documentation goes here.
+        """
+        # TODO: not implemented yet
+        raise NotImplementedError
 
 class Converter(Thread):
     """
