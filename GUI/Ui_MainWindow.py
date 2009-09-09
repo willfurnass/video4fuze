@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file '/home/ssorgatem/Documents/python/video4fuze/GUI/MainWindow.ui'
 #
-# Created: Wed Sep  9 22:10:35 2009
-#      by: PyQt4 UI code generator 4.5.1
+# Created: Thu Sep 10 01:58:16 2009
+#      by: PyQt4 UI code generator 4.5.4
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -54,6 +54,7 @@ class Ui_MainWindow(object):
         self.tableWidget.setHorizontalHeaderItem(0, item)
         item = QtGui.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(1, item)
+        self.tableWidget.horizontalHeader().setStretchLastSection(True)
         self.SelectOutputButton = QtGui.QPushButton(self.Video)
         self.SelectOutputButton.setGeometry(QtCore.QRect(230, 40, 161, 25))
         self.SelectOutputButton.setMinimumSize(QtCore.QSize(131, 25))
@@ -107,6 +108,7 @@ class Ui_MainWindow(object):
         self.tableWidget_2.setHorizontalHeaderItem(0, item)
         item = QtGui.QTableWidgetItem()
         self.tableWidget_2.setHorizontalHeaderItem(1, item)
+        self.tableWidget_2.horizontalHeader().setStretchLastSection(True)
         self.SelectOutputButton_2 = QtGui.QPushButton(self.Image)
         self.SelectOutputButton_2.setGeometry(QtCore.QRect(230, 40, 161, 25))
         self.SelectOutputButton_2.setMinimumSize(QtCore.QSize(131, 25))
@@ -218,7 +220,7 @@ class Ui_MainWindow(object):
         self.menuBar.addAction(self.menuHelp.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(2)
+        self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):

@@ -30,6 +30,26 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             print "Your version of PyQt4 seems a bit out of date. This may lead to problems. And may not :)"
         self.output = unicode(self.settings.value("outputdir",QVariant(os.path.expanduser("~"))).toString())
 
+    def fuzePath(self,prefix):
+        mediaroot = ""
+        if os.name == 'nt':
+            prefix = prefix + "/"
+        else:
+            mediaroot = "/media"
+        Songs = QFileDialog.getOpenFileNames(\
+            None,
+            self.trUtf8("Select songs to add to the playlist"),
+            mediaroot,
+            self.trUtf8("*.ogg; *.OGG; *.mp3; *.MP3; *.wma; *.WMA; *.flac; *.FLAC"),
+            None)
+        for song in Songs:
+            song
+            tostrip = mountpoint(unicode(song, "utf-8"))
+            song.replace(tostrip, prefix)
+            song.replace("\\","/")
+            print song
+            #TODO: Populate QListWidget
+
     def ErrorDiag(self, error = QT_TR_NOOP("Unknown error")):
             print error
             QMessageBox.critical(None,
@@ -225,46 +245,45 @@ Thanks to ewelot from the sansa forums for finding the way to convert the videos
     def on_actionPreferences_triggered(self):
         prefs = PreferencesDialog()
         prefs.exec_()
-    
+
     @pyqtSignature("")
     def on_SavePlaylist_clicked(self):
         """
         Slot documentation goes here.
         """
-        # TODO: not implemented yet
+        # TODO: Save playlist
         raise NotImplementedError
-    
+
     @pyqtSignature("")
     def on_SongsFromSD_clicked(self):
         """
-        Slot documentation goes here.
+        Add µSD songs to playlist.
         """
-        # TODO: not implemented yet
-        raise NotImplementedError
-    
+        prefix = "/mmc:1"
+        self.fuzePath(prefix)
+
+    @pyqtSignature("")
+    def on_SongsFromFuze_clicked(self):
+        """
+        Get songs from the fuze
+        """
+        prefix = "/mmc:0/"
+        self.fuzePath(prefix)
+
     @pyqtSignature("")
     def on_RemoveButton_3_clicked(self):
         """
         Slot documentation goes here.
         """
-        # TODO: not implemented yet
+        # TODO: Removesongsfromplaylist
         raise NotImplementedError
-    
-    @pyqtSignature("")
-    def on_SongsFromFuze_clicked(self):
-        """
-        Slot documentation goes here.
-        """
-        # TODO: not implemented yet
-        raise NotImplementedError
-    
+
     @pyqtSignature("")
     def on_OpenPlaylist_clicked(self):
         """
         Slot documentation goes here.
         """
-        # TODO: not implemented yet
-        raise NotImplementedError
+        # TODO:OpenPlaylist
 
 class Converter(Thread):
     """
@@ -290,3 +309,9 @@ class Resizer(Thread):
         self.parent = parent
     def run(self):
         self.parent.resis.convert(self.args, self.FINALPREFIX)
+
+def mountpoint(s):
+    if (os.path.ismount(s) or len(s)==0):
+        return s
+    else:
+        return mountpoint(os.path.split(s)[0])

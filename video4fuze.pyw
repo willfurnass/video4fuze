@@ -5,6 +5,8 @@ from PyQt4.QtGui import QApplication
 from PyQt4.QtCore import QTranslator, QString, QLocale
 from GUI.MainWindow import MainWindow
 
+#FIXME: Win32 UTF-8 issue.
+
 if __name__ == "__main__":
     translator = QTranslator()
     translator.load(QString("translations/v4f_%1").arg(QLocale.system().name()))
