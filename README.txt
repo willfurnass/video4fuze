@@ -7,8 +7,8 @@ This applications uses mencoder, ffmpeg and avi-mux GUI (under wine where necess
 convert your video files to be seen in you sansa fuze. All of them are open-source but I only include
 their win32 binary for commodity reasons.
 
-Thanks to ewelot from the sansa forums for finding the way to convert the videos, without his findings
-this app wouldn't exist
+Thanks to ewelot  and Dunny from the sansa forums, one for finding the way to convert the videos,
+the lother for providing me with all necessary information about the .pla playlist format the fuze uses. Without their findings this app wouldn't exist. Thank you ;)
 
 For any feedback, suggestions, or if you want to contribute with translations (it's very easy!) or coding,
 feel free to email me at <ssorgatem@esdebian.og>
@@ -20,6 +20,7 @@ If you are using the "universal" distribution of video4fuze, in order for it to 
 * PIL (Python Imaging Library) (debian package: python-imaging)
 * Mencoder
 * FFMPEG
+* xterm (not needed, but recommended)
 
 To run video4fuze, just type:
 

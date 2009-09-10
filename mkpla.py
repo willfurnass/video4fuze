@@ -11,16 +11,12 @@
 
 #Line endings have to be DOS CR+LF
 
-import os
+#1 - get fuze's internal and µSD root directories: Let the user tell us them -DONE
 
-#TODO: playlist creator/editor.
+#2 - Open (create) a playlist, and load it's contents, if any. #SEMIDONE
 
-#1 - get fuze's internal and µSD root directories: Let the user tell us them
+#3 - Put there songs, converting paths (maybe path normalisation?) - DONE
 
-#2 - Open (create) a playlist, and load it's contents, if any.
+#4 - Allow reordering and so, this should be a GUI thingcommalist - DONE
 
-#3 - Put there songs, converting paths (maybe path normalisation?)
-
-#4 - Allow reordering and so, this should be a GUI thingcommalist
-
-#5 - Save the file.
+#5 - Save the file.# DONE

@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 
 """
-Module implementing MainWindow.
+Module implementing MainWindow. Playlist edition capabilities are inspired by Dunny's YAPL, and had been possible to write thanks to his help about the
+# .pla playlist format.
 """
 import os, fuze, p2fuze
-from PyQt4.QtGui import QMainWindow,QFileDialog,QMessageBox, QLabel, QTableWidgetItem
-from PyQt4.QtCore import pyqtSignature,QString,QT_TR_NOOP,SIGNAL,QObject,Qt,QSettings,QVariant
+from PyQt4.QtGui import QMainWindow,QFileDialog,QMessageBox, QLabel, QTableWidgetItem, QListWidgetItem, QIcon
+from PyQt4.QtCore import pyqtSignature,QString,QT_TR_NOOP,SIGNAL,QObject,Qt,QSettings,QVariant, QSize
 from threading import Thread
 from Ui_MainWindow import Ui_MainWindow
 from v4fPreferences import PreferencesDialog
@@ -23,6 +24,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.settings = QSettings()
         self.Fuze = fuze.Fuze(self)
         self.resis = p2fuze.TransFuze(self)
+        if os.name != 'nt':
+            self.mediaroot = "/media"
+        else:
+            self.mediaroot = os.path.join(os.path.expanduser("~"), "Desktop")
+        self.playlistname = self.mediaroot
         try:
             self.tableWidget.horizontalHeader().setResizeMode(3)
             self.tableWidget_2.horizontalHeader().setResizeMode(3)
@@ -31,24 +37,24 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.output = unicode(self.settings.value("outputdir",QVariant(os.path.expanduser("~"))).toString())
 
     def fuzePath(self,prefix):
-        mediaroot = ""
         if os.name == 'nt':
             prefix = prefix + "/"
-        else:
-            mediaroot = "/media"
         Songs = QFileDialog.getOpenFileNames(\
             None,
             self.trUtf8("Select songs to add to the playlist"),
-            mediaroot,
+            self.mediaroot,
             self.trUtf8("*.ogg; *.OGG; *.mp3; *.MP3; *.wma; *.WMA; *.flac; *.FLAC"),
             None)
         for song in Songs:
-            song
-            tostrip = mountpoint(unicode(song, "utf-8"))
+            unicodesong = unicode(song, "utf-8")
+            cover = os.path.join(os.path.split(unicodesong)[0], "folder.jpg")
+            tostrip = mountpoint(unicodesong)
             song.replace(tostrip, prefix)
             song.replace("\\","/")
-            print song
-            #TODO: Populate QListWidget
+            listItem = QListWidgetItem(song)
+            if os.path.isfile(cover):
+                listItem.setIcon(QIcon(cover))
+            self.listWidget.addItem(listItem)
 
     def ErrorDiag(self, error = QT_TR_NOOP("Unknown error")):
             print error
@@ -87,13 +93,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def WAIT(self, tab):
         tab.setEnabled(False)
-
-    @pyqtSignature("QPoint")
-    def on_tableWidget_customContextMenuRequested(self, pos):
-        """
-        Slot documentation goes here.
-        """
-        # TODO: on_tableWidget_customContextMenuRequested
 
     @pyqtSignature("")
     def on_RemoveButton_clicked(self):
@@ -175,6 +174,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.tableWidget_2.insertRow(currentrow)
                 filewidget = QTableWidgetItem()
                 filewidget.setText(file)
+                try:
+                    filewidget.setIcon(QIcon(file))
+                except:
+                    print "Could not load a thumbnail of the image"
                 outputitem = QTableWidgetItem()
                 outputitem.setText(self.output)
                 self.tableWidget_2.setItem(currentrow,0,filewidget)
@@ -187,13 +190,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         Slot documentation goes here.
         """
         QMessageBox.about(None,
-            self.trUtf8("About video4fuze 0.2"),
+            self.trUtf8("About video4fuze 0.4"),
             self.trUtf8("""This applications uses mencoder and avi-mux GUI (under wine where necessary) in order to convert your video files to be seen in you sansa fuze.
 
 Thanks to ewelot from the sansa forums for finding the way to convert the videos, without his findings this app wouldn't exist."""))
-
-        # TODO: on_actionAbout_video4fuze_triggered
-
 
     @pyqtSignature("")
     def on_actionAbout_Qt_triggered(self):
@@ -218,6 +218,9 @@ Thanks to ewelot from the sansa forums for finding the way to convert the videos
                     remlist.append(item)
             for item in remlist:
                 self.tableWidget_2.removeRow(self.tableWidget_2.row(item))
+        elif self.tabWidget.currentIndex() == 2:
+            for item in self.listWidget.selectedItems():
+                self.listWidget.takeItem(self.listWidget.row(item))
 
     @pyqtSignature("")
     def on_actionSelect_output_folder_triggered(self):
@@ -249,17 +252,39 @@ Thanks to ewelot from the sansa forums for finding the way to convert the videos
     @pyqtSignature("")
     def on_SavePlaylist_clicked(self):
         """
-        Slot documentation goes here.
+        Write the playlist to a file..
         """
-        # TODO: Save playlist
-        raise NotImplementedError
+        self.playlistname = QFileDialog.getSaveFileName(\
+            None,
+            self.trUtf8("Save your playlist"),
+            self.trUtf8(self.playlistname),
+            self.trUtf8("*.pla"),
+            None)
+
+        if self.playlistname != "":
+            if os.path.splitext(unicode(self.playlistname, "utf-8"))[1] != ".pla":
+                self.playlistname = self.playlistname + ".pla"
+            Playlist = QString("")
+            if os.name == 'nt':
+                newline = "\n"
+            else:
+                newline = "\r\n"
+            row = 0
+            while row < self.listWidget.count():
+                Playlist = Playlist + self.listWidget.item(row).text() + QString(newline)
+                row += 1
+            PLA = open(self.playlistname, "wb")
+            PLA.close()
+            REFS = open(self.playlistname + ".refs", "w")
+            REFS.write(Playlist)
+            REFS.close
 
     @pyqtSignature("")
     def on_SongsFromSD_clicked(self):
         """
         Add µSD songs to playlist.
         """
-        prefix = "/mmc:1"
+        prefix = "/mmc:1:"
         self.fuzePath(prefix)
 
     @pyqtSignature("")
@@ -267,23 +292,48 @@ Thanks to ewelot from the sansa forums for finding the way to convert the videos
         """
         Get songs from the fuze
         """
-        prefix = "/mmc:0/"
+        prefix = "/mmc:0:"
         self.fuzePath(prefix)
 
     @pyqtSignature("")
     def on_RemoveButton_3_clicked(self):
         """
-        Slot documentation goes here.
+        Remove selection from playlist
         """
-        # TODO: Removesongsfromplaylist
-        raise NotImplementedError
+        self. actionRemove_selected_files.emit(SIGNAL("triggered()"))
 
     @pyqtSignature("")
     def on_OpenPlaylist_clicked(self):
         """
-        Slot documentation goes here.
+        Load and parse a .pla.refs file
         """
-        # TODO:OpenPlaylist
+        self.playlistname = QFileDialog.getOpenFileName(\
+            None,
+            self.trUtf8("Select playlist to edit"),
+            self.playlistname,
+            self.trUtf8("*.pla"),
+            None)
+        if self.playlistname:
+            self.listWidget.clear()
+            prefix = os.path.split(unicode(self.playlistname, "utf-8"))[0]
+            PL = open(self.playlistname + ".refs", "r")
+            for song in PL.readlines():
+                song = unicode(song)
+                song = song.strip()
+                pcsong = prefix + song[7:]
+                cover = os.path.join(os.path.split(pcsong)[0], "folder.jpg")
+                listItem = QListWidgetItem(song)
+                if os.path.isfile(cover):
+                    listItem.setIcon(QIcon(cover))
+                self.listWidget.addItem(listItem)
+
+
+    @pyqtSignature("")
+    def on_ToggleSort_clicked(self):
+        """
+        Sort playlist
+        """
+        self.listWidget.sortItems()
 
 class Converter(Thread):
     """

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file '/home/ssorgatem/Documents/python/video4fuze/GUI/MainWindow.ui'
 #
-# Created: Thu Sep 10 01:58:16 2009
+# Created: Fri Sep 11 00:14:22 2009
 #      by: PyQt4 UI code generator 4.5.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -100,6 +100,7 @@ class Ui_MainWindow(object):
         self.tableWidget_2.setAlternatingRowColors(True)
         self.tableWidget_2.setSelectionMode(QtGui.QAbstractItemView.MultiSelection)
         self.tableWidget_2.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
+        self.tableWidget_2.setIconSize(QtCore.QSize(40, 40))
         self.tableWidget_2.setShowGrid(False)
         self.tableWidget_2.setObjectName("tableWidget_2")
         self.tableWidget_2.setColumnCount(2)
@@ -156,14 +157,20 @@ class Ui_MainWindow(object):
         self.label_3.setObjectName("label_3")
         self.listWidget = QtGui.QListWidget(self.Playlists)
         self.listWidget.setGeometry(QtCore.QRect(190, 91, 431, 321))
+        self.listWidget.setAutoFillBackground(True)
+        self.listWidget.setFrameShape(QtGui.QFrame.StyledPanel)
+        self.listWidget.setFrameShadow(QtGui.QFrame.Plain)
         self.listWidget.setDragEnabled(True)
         self.listWidget.setDragDropMode(QtGui.QAbstractItemView.InternalMove)
         self.listWidget.setAlternatingRowColors(True)
         self.listWidget.setSelectionMode(QtGui.QAbstractItemView.MultiSelection)
         self.listWidget.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
+        self.listWidget.setIconSize(QtCore.QSize(40, 40))
         self.listWidget.setMovement(QtGui.QListView.Free)
         self.listWidget.setFlow(QtGui.QListView.TopToBottom)
-        self.listWidget.setUniformItemSizes(True)
+        self.listWidget.setResizeMode(QtGui.QListView.Adjust)
+        self.listWidget.setSpacing(2)
+        self.listWidget.setUniformItemSizes(False)
         self.listWidget.setSelectionRectVisible(False)
         self.listWidget.setObjectName("listWidget")
         self.label_6 = QtGui.QLabel(self.Playlists)
@@ -182,6 +189,9 @@ class Ui_MainWindow(object):
         self.OpenPlaylist.setGeometry(QtCore.QRect(70, 40, 131, 25))
         self.OpenPlaylist.setMinimumSize(QtCore.QSize(131, 25))
         self.OpenPlaylist.setObjectName("OpenPlaylist")
+        self.ToggleSort = QtGui.QToolButton(self.Playlists)
+        self.ToggleSort.setGeometry(QtCore.QRect(480, 69, 141, 21))
+        self.ToggleSort.setObjectName("ToggleSort")
         self.tabWidget.addTab(self.Playlists, "")
         MainWindow.setCentralWidget(self.centralWidget)
         self.statusBar = QtGui.QStatusBar(MainWindow)
@@ -247,6 +257,7 @@ class Ui_MainWindow(object):
         self.SongsFromFuze.setText(QtGui.QApplication.translate("MainWindow", "Fuze\'s internal storage", None, QtGui.QApplication.UnicodeUTF8))
         self.label_6.setText(QtGui.QApplication.translate("MainWindow", "Playlist editor: Add songs from:", None, QtGui.QApplication.UnicodeUTF8))
         self.OpenPlaylist.setText(QtGui.QApplication.translate("MainWindow", "Open playlist", None, QtGui.QApplication.UnicodeUTF8))
+        self.ToggleSort.setText(QtGui.QApplication.translate("MainWindow", "Sort playlist", None, QtGui.QApplication.UnicodeUTF8))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.Playlists), QtGui.QApplication.translate("MainWindow", "Playlists", None, QtGui.QApplication.UnicodeUTF8))
         self.menuFile.setTitle(QtGui.QApplication.translate("MainWindow", "File", None, QtGui.QApplication.UnicodeUTF8))
         self.menuHelp.setTitle(QtGui.QApplication.translate("MainWindow", "Help", None, QtGui.QApplication.UnicodeUTF8))

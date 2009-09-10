@@ -1,4 +1,7 @@
 ###CHANGELOG###
+--v0.4--
+* Added playlist creation and edition capibilities. The playlists creted with v4f can have files from both internal memory and µSD card. Only tested in MSC.
+* Some UI redesign.
 --v0.3--
 * Now it makes .thm thumbnails of videos while converting (which adds a dependency on ffmpeg)
 * Bugfix: working directory permissions, fix adapted from the one supplied by srtuct in the sansa forums. Only affects the .deb package (and converted packages).

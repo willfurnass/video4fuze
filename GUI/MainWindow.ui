@@ -312,6 +312,12 @@
       <property name="selectionBehavior">
        <enum>QAbstractItemView::SelectRows</enum>
       </property>
+      <property name="iconSize">
+       <size>
+        <width>40</width>
+        <height>40</height>
+       </size>
+      </property>
       <property name="showGrid">
        <bool>false</bool>
       </property>
@@ -517,6 +523,15 @@
         <height>321</height>
        </rect>
       </property>
+      <property name="autoFillBackground">
+       <bool>true</bool>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Plain</enum>
+      </property>
       <property name="dragEnabled">
        <bool>true</bool>
       </property>
@@ -532,14 +547,26 @@
       <property name="selectionBehavior">
        <enum>QAbstractItemView::SelectRows</enum>
       </property>
+      <property name="iconSize">
+       <size>
+        <width>40</width>
+        <height>40</height>
+       </size>
+      </property>
       <property name="movement">
        <enum>QListView::Free</enum>
       </property>
       <property name="flow">
        <enum>QListView::TopToBottom</enum>
       </property>
+      <property name="resizeMode">
+       <enum>QListView::Adjust</enum>
+      </property>
+      <property name="spacing">
+       <number>2</number>
+      </property>
       <property name="uniformItemSizes">
-       <bool>true</bool>
+       <bool>false</bool>
       </property>
       <property name="selectionRectVisible">
        <bool>false</bool>
@@ -600,6 +627,19 @@
       </property>
       <property name="text">
        <string>Open playlist</string>
+      </property>
+     </widget>
+     <widget class="QToolButton" name="ToggleSort">
+      <property name="geometry">
+       <rect>
+        <x>480</x>
+        <y>69</y>
+        <width>141</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Sort playlist</string>
       </property>
      </widget>
     </widget>
