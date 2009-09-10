@@ -316,6 +316,8 @@ Thanks to ewelot from the sansa forums for finding the way to convert the videos
         if self.playlistname:
             self.listWidget.clear()
             prefix = os.path.split(unicode(self.playlistname, "utf-8"))[0]
+            if os.name == 'nt':
+                prefix = prefix + "\\"
             PL = open(self.playlistname + ".refs", "r")
             for song in PL.readlines():
                 song = unicode(song)
