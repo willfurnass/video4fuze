@@ -34,7 +34,7 @@
 import Image
 import sys, os, time, math, shutil, string, tempfile
 import getopt
-#from subprocess import check_call
+from subprocess import check_call
 
 NFRAMES=100
 #FFMPEG="ffmpeg"
@@ -103,6 +103,7 @@ def copy_thumb(src, dst, thumb):
 
 def find_thumb(infile, outfile, nframes, alsosave, verbose, thumb, FFMPEG = "ffmpeg"):
     if verbose:
+        infile = '\"' + infile + '\"'
         print "Processing %s" % infile
         print "Extracting frames"
     framemask = "frame" + str(time.time()) + ".%d.jpg"
@@ -112,6 +113,15 @@ def find_thumb(infile, outfile, nframes, alsosave, verbose, thumb, FFMPEG = "ffm
     if os.system(cmd) != 0:
         print "Error invoking ffmpeg"
         return 10
+
+#    cmd = [FFMPEG,"-y","-vframes",nframes,"-i",infile,framemask]
+#    try:
+#        print "calling " +  FFMPEG + "..."
+#        print cmd
+#        check_call(cmd)
+#    except:
+#        print "Error invoking ffmpeg"
+#        return 10
     if verbose:
         print "Analyzing frames"
     hist=[]

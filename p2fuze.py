@@ -40,7 +40,6 @@ class TransFuze():
                 print e
                 self.qobject.emit(SIGNAL("Exception"),e)
         self.qobject.emit(SIGNAL("finished"),self.tab)
-    #def mkThumbnail(self,video):
 
 
 if __name__ == "__main__":

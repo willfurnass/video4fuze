@@ -7,7 +7,7 @@ OVERLAPPED 1
 ADD_IMMED 0
 AVI FORCE MP3VBR 0
 END WITH
-LOAD C:\hijodeputamas.temp.avi
+LOAD c:\windows\temp\üni côde.temp.avi
 WITH SET OPTION
 FILEORDER 1 0
 ADD_IMMED 1

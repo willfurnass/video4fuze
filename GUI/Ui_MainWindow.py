@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file '/home/ssorgatem/Documents/python/video4fuze/GUI/MainWindow.ui'
 #
-# Created: Fri Sep 11 00:14:22 2009
+# Created: Tue Sep 15 04:00:45 2009
 #      by: PyQt4 UI code generator 4.5.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -163,7 +163,7 @@ class Ui_MainWindow(object):
         self.listWidget.setDragEnabled(True)
         self.listWidget.setDragDropMode(QtGui.QAbstractItemView.InternalMove)
         self.listWidget.setAlternatingRowColors(True)
-        self.listWidget.setSelectionMode(QtGui.QAbstractItemView.MultiSelection)
+        self.listWidget.setSelectionMode(QtGui.QAbstractItemView.ContiguousSelection)
         self.listWidget.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
         self.listWidget.setIconSize(QtCore.QSize(40, 40))
         self.listWidget.setMovement(QtGui.QListView.Free)
@@ -198,7 +198,7 @@ class Ui_MainWindow(object):
         self.statusBar.setObjectName("statusBar")
         MainWindow.setStatusBar(self.statusBar)
         self.menuBar = QtGui.QMenuBar(MainWindow)
-        self.menuBar.setGeometry(QtCore.QRect(0, 0, 643, 22))
+        self.menuBar.setGeometry(QtCore.QRect(0, 0, 643, 23))
         self.menuBar.setObjectName("menuBar")
         self.menuFile = QtGui.QMenu(self.menuBar)
         self.menuFile.setObjectName("menuFile")

@@ -8,7 +8,7 @@ from subprocess import check_call, call
 from PyQt4.QtCore import QT_TR_NOOP,SIGNAL,QObject,QString,QVariant
 from vthumb import *
 
-class Fuze():
+class Fuze( ):
     def __init__(self, GUI = None):
         self.GUI = GUI
         self.CWD = os.getcwd()
@@ -40,6 +40,7 @@ class Fuze():
                 self.AMGPrefix = os.path.join(wineprefix,"drive_c")
             else:
                 self.AMGPrefix = os.path.join(os.environ.get('HOME'),".wine/drive_c")
+            call(["mkdir","-p",self.AMGPrefix])
             if os.name == 'posix' and self.GUI != None:
                 termloc = commands.getstatusoutput("which xterm")
                 if termloc[0] == 0:
@@ -186,7 +187,10 @@ START """ + output + """
             self.qobject.emit(SIGNAL("stop"),self.GUI.Video)
         for argument in args:
             if os.path.isfile(argument):
-                OUTPUT = os.path.join(self.AMGPrefix,os.path.splitext(os.path.basename(argument))[0] + ".temp.avi").encode("ascii", "ignore")
+                if os.name == 'nt':
+                    OUTPUT = os.path.join(self.AMGPrefix,os.path.splitext(os.path.basename(argument))[0] + ".temp.avi")#.encode("ascii", "ignore")
+                else:
+                    OUTPUT = unicodedata.normalize('NFKD',os.path.join(self.AMGPrefix,os.path.splitext(os.path.basename(argument))[0] + ".temp.avi")).encode("ascii", "ignore")
                 try:
                     print "Calling mencoder #1"
                     mencoderpass1 = str(self.mencoderpass1)
@@ -239,7 +243,7 @@ START """ + output + """
                     self.qobject.emit(SIGNAL("working"),"Calling avi-mux GUI...")
                 if self.WINE:
                     print "using wine"
-                    OUTPUT =  """C:\\""" + os.path.basename(file).encode("ascii", "replace")
+                    OUTPUT =  """C:\\""" + os.path.basename(file)#.encode("ascii", "ignore")
                     print "Opening file: " + OUTPUT
                     self.AmgConf(OUTPUT,"C:\\final.avi")
                     wineprefix = os.environ.get('WINEPREFIX')
@@ -252,7 +256,7 @@ START """ + output + """
                     else:
                         call(["wine",os.path.join(self.CWD,"avimuxgui","AVIMux_GUI.exe"),"C:\\fuze.amg"])
                 else:
-                    OUTPUT = file.encode("ascii", "ignore")
+                    OUTPUT = file#.encode("ascii", "ignore")
                     self.AmgConf(OUTPUT,os.path.join(self.AMGPrefix,"final.avi"))
                     call([os.path.join(self.CWD,"avimuxgui","AVIMux_GUI.exe"),os.path.join(self.AMGPrefix,"fuze.amg")])
             except Exception, e:
@@ -262,22 +266,21 @@ START """ + output + """
                 os.remove(os.path.join(self.AMGPrefix,"final.avi"))
                 continue
             print "Moving " + os.path.join(self.AMGPrefix,"final.avi") + " to " + FINAL + " and cleaning temporary files"
-            print type(FINAL)
             print FINAL
             try:
-                shutil.move(os.path.join(self.AMGPrefix,"final.avi"),FINAL)
-                os.chdir(self.CWD)
                 try:
                     if self.GUI != None:
                         self.qobject.emit(SIGNAL("working"),"Creating video thumbnail")
                     print "Creating video thumbnail"
                     os.chdir(os.path.split(FINAL)[0])
-                    find_thumb(os.path.basename(FINAL), os.path.splitext(os.path.basename(FINAL))[0], 100, [], False, False, self.FFMPEG)
+                    find_thumb(os.path.join(self.AMGPrefix,"final.avi"), os.path.splitext(os.path.basename(FINAL))[0], 100, [], True, False, self.FFMPEG)
                 except Exception, e:
                     print e
                     raise e
                     if self.GUI != None:
                         self.qobject.emit(SIGNAL("Exception"),e)
+                shutil.move(os.path.join(self.AMGPrefix,"final.avi"),FINAL)
+                os.chdir(self.CWD)
                 os.chdir(self.CWD)
                 if self.GUI != None:
                     self.qobject.emit(SIGNAL("itemDone"),tempfiles[file])

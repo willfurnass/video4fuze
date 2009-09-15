@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>video4fuze 0.4</string>
+   <string>video4fuze 0.4.1</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../video4fuze.qrc">
@@ -542,7 +542,7 @@
        <bool>true</bool>
       </property>
       <property name="selectionMode">
-       <enum>QAbstractItemView::MultiSelection</enum>
+       <enum>QAbstractItemView::ContiguousSelection</enum>
       </property>
       <property name="selectionBehavior">
        <enum>QAbstractItemView::SelectRows</enum>

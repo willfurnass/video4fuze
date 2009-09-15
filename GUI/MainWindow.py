@@ -34,7 +34,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.tableWidget_2.horizontalHeader().setResizeMode(3)
         except:
             print "Your version of PyQt4 seems a bit out of date. This may lead to problems. And may not :)"
-        self.output = unicode(self.settings.value("outputdir",QVariant(os.path.expanduser("~"))).toString())
+        self.output = toPython(self.settings.value("outputdir",QVariant(os.path.expanduser("~"))).toString())
 
     def fuzePath(self,prefix):
         if os.name == 'nt':
@@ -46,7 +46,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.trUtf8("*.ogg; *.OGG; *.mp3; *.MP3; *.wma; *.WMA; *.flac; *.FLAC"),
             None)
         for song in Songs:
-            unicodesong = unicode(song, "utf-8")
+            unicodesong = toPython(song)
             cover = os.path.join(os.path.split(unicodesong)[0], "folder.jpg")
             tostrip = mountpoint(unicodesong)
             song.replace(tostrip, prefix)
@@ -54,6 +54,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             listItem = QListWidgetItem(song)
             if os.path.isfile(cover):
                 listItem.setIcon(QIcon(cover))
+            else:
+                print cover + " not found"
             self.listWidget.addItem(listItem)
 
     def ErrorDiag(self, error = QT_TR_NOOP("Unknown error")):
@@ -76,14 +78,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if image:
             row = 0
             while row < self.tableWidget_2.rowCount():
-                if itemText == unicode(self.tableWidget_2.item(row,0).text(), "utf-8"):
+                if itemText == toPython(self.tableWidget_2.item(row,0).text()):
                     self.tableWidget_2.removeRow(row)
                     break
                 row += 1
         else:
             row = 0
             while row < self.tableWidget.rowCount():
-                if itemText == unicode(self.tableWidget.item(row,0).text(), "utf-8"):
+                if itemText == toPython(self.tableWidget.item(row,0).text()):
                     self.tableWidget.removeRow(row)
                     break
                 row += 1
@@ -110,7 +112,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         args = []
         row = 0
         while row < self.tableWidget.rowCount():
-            args.append(str(self.tableWidget.item(row,0).text().toUtf8()))
+            args.append(toPython(self.tableWidget.item(row,0).text()))
             row += 1
         Conversion = Converter(args, self, self.output)
         Conversion.start()
@@ -123,7 +125,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         args = []
         row = 0
         while row < self.tableWidget_2.rowCount():
-            args.append(unicode(self.tableWidget_2.item(row,0).text().toUtf8()))
+            args.append(toPython(self.tableWidget_2.item(row,0).text()))
             row += 1
         Resize = Resizer(args, self, self.output)
         Resize.start()
@@ -190,7 +192,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         Slot documentation goes here.
         """
         QMessageBox.about(None,
-            self.trUtf8("About video4fuze 0.4"),
+            self.trUtf8("About video4fuze 0.4.1"),
             self.trUtf8("""This applications uses mencoder and avi-mux GUI (under wine where necessary) in order to convert your video files to be seen in you sansa fuze.
 
 Thanks to ewelot from the sansa forums for finding the way to convert the videos, without his findings this app wouldn't exist."""))
@@ -233,7 +235,7 @@ Thanks to ewelot from the sansa forums for finding the way to convert the videos
             os.path.expanduser("~"),
             QFileDialog.Options(QFileDialog.ShowDirsOnly))
         if output != None:
-            self.output = unicode(output)
+            self.output = toPython(output)
             self.settings.setValue("outputdir",QVariant(self.output))
         row = 0
         while row < self.tableWidget.rowCount():
@@ -254,15 +256,15 @@ Thanks to ewelot from the sansa forums for finding the way to convert the videos
         """
         Write the playlist to a file..
         """
-        self.playlistname = QFileDialog.getSaveFileName(\
+        self.playlistname = toPython(QFileDialog.getSaveFileName(\
             None,
             self.trUtf8("Save your playlist"),
             self.trUtf8(self.playlistname),
             self.trUtf8("*.pla"),
-            None)
+            None))
 
         if self.playlistname != "":
-            if os.path.splitext(unicode(self.playlistname, "utf-8"))[1] != ".pla":
+            if os.path.splitext(toPython(self.playlistname))[1] != ".pla":
                 self.playlistname = self.playlistname + ".pla"
             Playlist = QString("")
             if os.name == 'nt':
@@ -307,20 +309,20 @@ Thanks to ewelot from the sansa forums for finding the way to convert the videos
         """
         Load and parse a .pla.refs file
         """
-        self.playlistname = QFileDialog.getOpenFileName(\
+        self.playlistname = toPython(QFileDialog.getOpenFileName(\
             None,
             self.trUtf8("Select playlist to edit"),
             self.playlistname,
             self.trUtf8("*.pla"),
-            None)
+            None))
         if self.playlistname:
             self.listWidget.clear()
-            prefix = os.path.split(unicode(self.playlistname, "utf-8"))[0]
+            prefix = os.path.split(toPython(self.playlistname))[0]
             if os.name == 'nt':
                 prefix = prefix + "\\"
             PL = open(self.playlistname + ".refs", "r")
             for song in PL.readlines():
-                song = unicode(song)
+                song = toPython(QString(song))
                 song = song.strip()
                 pcsong = prefix + song[7:]
                 cover = os.path.join(os.path.split(pcsong)[0], "folder.jpg")
@@ -367,3 +369,10 @@ def mountpoint(s):
         return s
     else:
         return mountpoint(os.path.split(s)[0])
+
+def toPython(qstring):
+    qstring = QString(qstring)
+    if os.name == 'nt':
+        return str(qstring.toAscii())
+    else:
+        return unicode(qstring)#, "utf-8")
