@@ -1,5 +1,7 @@
 ###CHANGELOG###
 --0.4.1--
+* Updated copyright and license information in main script
+* Bugfix: mencoder changing path work-arounded by creating a windows installer (Yes! I finally did it)
 * Bugfix: Now unicode paths work on all platforms!
 * Bugfix: Video thumbnails are now generatod for files with whitespace in its name
 * Bugfix: Strange selection behaviour in playlist mode
