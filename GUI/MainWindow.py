@@ -11,6 +11,7 @@ from threading import Thread
 from Ui_MainWindow import Ui_MainWindow
 from v4fPreferences import PreferencesDialog
 
+# A shortcut for playlist editor QTablewidget column indices, so I can easily rearrange them
 Cover = 0
 Title = 1
 Artist = 2
