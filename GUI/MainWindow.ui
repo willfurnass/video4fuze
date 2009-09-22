@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>643</width>
-    <height>486</height>
+    <width>722</width>
+    <height>630</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>video4fuze 0.4.1</string>
+   <string>video4fuze 0.5</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../video4fuze.qrc">
@@ -29,8 +29,8 @@
      <rect>
       <x>10</x>
       <y>0</y>
-      <width>641</width>
-      <height>441</height>
+      <width>711</width>
+      <height>581</height>
      </rect>
     </property>
     <property name="currentIndex">
@@ -44,7 +44,7 @@
       <property name="geometry">
        <rect>
         <x>-50</x>
-        <y>80</y>
+        <y>180</y>
         <width>281</width>
         <height>271</height>
        </rect>
@@ -65,8 +65,8 @@
      <widget class="QPushButton" name="AddButton">
       <property name="geometry">
        <rect>
-        <x>70</x>
-        <y>40</y>
+        <x>30</x>
+        <y>30</y>
         <width>131</width>
         <height>25</height>
        </rect>
@@ -84,8 +84,8 @@
      <widget class="QPushButton" name="RemoveButton">
       <property name="geometry">
        <rect>
-        <x>420</x>
-        <y>39</y>
+        <x>30</x>
+        <y>130</y>
         <width>131</width>
         <height>25</height>
        </rect>
@@ -104,9 +104,9 @@
       <property name="geometry">
        <rect>
         <x>190</x>
-        <y>70</y>
-        <width>431</width>
-        <height>341</height>
+        <y>40</y>
+        <width>511</width>
+        <height>511</height>
        </rect>
       </property>
       <property name="acceptDrops">
@@ -147,9 +147,9 @@
      <widget class="QPushButton" name="SelectOutputButton">
       <property name="geometry">
        <rect>
-        <x>230</x>
-        <y>40</y>
-        <width>161</width>
+        <x>20</x>
+        <y>80</y>
+        <width>151</width>
         <height>25</height>
        </rect>
       </property>
@@ -167,7 +167,7 @@
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>360</y>
+        <y>480</y>
         <width>131</width>
         <height>41</height>
        </rect>
@@ -229,7 +229,7 @@
       <property name="geometry">
        <rect>
         <x>-50</x>
-        <y>80</y>
+        <y>180</y>
         <width>281</width>
         <height>271</height>
        </rect>
@@ -250,8 +250,8 @@
      <widget class="QPushButton" name="AddButton_2">
       <property name="geometry">
        <rect>
-        <x>70</x>
-        <y>40</y>
+        <x>30</x>
+        <y>30</y>
         <width>131</width>
         <height>25</height>
        </rect>
@@ -269,8 +269,8 @@
      <widget class="QPushButton" name="RemoveButton_2">
       <property name="geometry">
        <rect>
-        <x>420</x>
-        <y>39</y>
+        <x>30</x>
+        <y>130</y>
         <width>131</width>
         <height>25</height>
        </rect>
@@ -289,9 +289,9 @@
       <property name="geometry">
        <rect>
         <x>190</x>
-        <y>70</y>
-        <width>431</width>
-        <height>341</height>
+        <y>40</y>
+        <width>511</width>
+        <height>511</height>
        </rect>
       </property>
       <property name="acceptDrops">
@@ -338,9 +338,9 @@
      <widget class="QPushButton" name="SelectOutputButton_2">
       <property name="geometry">
        <rect>
-        <x>230</x>
-        <y>40</y>
-        <width>161</width>
+        <x>20</x>
+        <y>80</y>
+        <width>151</width>
         <height>25</height>
        </rect>
       </property>
@@ -358,7 +358,7 @@
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>360</y>
+        <y>480</y>
         <width>131</width>
         <height>41</height>
        </rect>
@@ -420,7 +420,7 @@
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>360</y>
+        <y>480</y>
         <width>131</width>
         <height>41</height>
        </rect>
@@ -438,10 +438,10 @@
      <widget class="QPushButton" name="SongsFromSD">
       <property name="geometry">
        <rect>
-        <x>240</x>
-        <y>60</y>
-        <width>161</width>
-        <height>25</height>
+        <x>10</x>
+        <y>100</y>
+        <width>171</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="minimumSize">
@@ -457,8 +457,8 @@
      <widget class="QPushButton" name="RemoveButton_3">
       <property name="geometry">
        <rect>
-        <x>420</x>
-        <y>39</y>
+        <x>30</x>
+        <y>140</y>
         <width>131</width>
         <height>25</height>
        </rect>
@@ -476,10 +476,10 @@
      <widget class="QPushButton" name="SongsFromFuze">
       <property name="geometry">
        <rect>
-        <x>210</x>
-        <y>30</y>
-        <width>211</width>
-        <height>25</height>
+        <x>10</x>
+        <y>60</y>
+        <width>171</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="minimumSize">
@@ -496,7 +496,7 @@
       <property name="geometry">
        <rect>
         <x>-50</x>
-        <y>80</y>
+        <y>180</y>
         <width>281</width>
         <height>271</height>
        </rect>
@@ -514,13 +514,13 @@
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
-     <widget class="QListWidget" name="listWidget">
+     <widget class="QTableWidget" name="playlistWidget">
       <property name="geometry">
        <rect>
         <x>190</x>
-        <y>91</y>
-        <width>431</width>
-        <height>321</height>
+        <y>41</y>
+        <width>511</width>
+        <height>511</height>
        </rect>
       </property>
       <property name="autoFillBackground">
@@ -531,6 +531,12 @@
       </property>
       <property name="frameShadow">
        <enum>QFrame::Plain</enum>
+      </property>
+      <property name="verticalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOn</enum>
+      </property>
+      <property name="horizontalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOn</enum>
       </property>
       <property name="dragEnabled">
        <bool>true</bool>
@@ -553,24 +559,64 @@
         <height>40</height>
        </size>
       </property>
-      <property name="movement">
-       <enum>QListView::Free</enum>
+      <property name="sortingEnabled">
+       <bool>true</bool>
       </property>
-      <property name="flow">
-       <enum>QListView::TopToBottom</enum>
-      </property>
-      <property name="resizeMode">
-       <enum>QListView::Adjust</enum>
-      </property>
-      <property name="spacing">
-       <number>2</number>
-      </property>
-      <property name="uniformItemSizes">
-       <bool>false</bool>
-      </property>
-      <property name="selectionRectVisible">
-       <bool>false</bool>
-      </property>
+      <column>
+       <property name="text">
+        <string>Cover</string>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Title</string>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Artist</string>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Album</string>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Filename</string>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+      </column>
      </widget>
      <widget class="QLabel" name="label_6">
       <property name="geometry">
@@ -613,8 +659,8 @@
      <widget class="QPushButton" name="OpenPlaylist">
       <property name="geometry">
        <rect>
-        <x>70</x>
-        <y>40</y>
+        <x>30</x>
+        <y>30</y>
         <width>131</width>
         <height>25</height>
        </rect>
@@ -629,19 +675,6 @@
        <string>Open playlist</string>
       </property>
      </widget>
-     <widget class="QToolButton" name="ToggleSort">
-      <property name="geometry">
-       <rect>
-        <x>480</x>
-        <y>69</y>
-        <width>141</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Sort playlist</string>
-      </property>
-     </widget>
     </widget>
    </widget>
   </widget>
@@ -651,7 +684,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>643</width>
+     <width>722</width>
      <height>22</height>
     </rect>
    </property>
@@ -698,6 +731,9 @@
   <action name="actionRemove_selected_files">
    <property name="text">
     <string>Remove selected files</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Del</string>
    </property>
   </action>
   <action name="actionSelect_output_folder">

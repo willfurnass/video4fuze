@@ -2,6 +2,7 @@
 <!DOCTYPE GUI SYSTEM "avimuxguiconfig.dtd">
 <gui>
 <file_information>
+<window_position></window_position>
 <window_size>
 <width>800</width>
 <height>600</height>

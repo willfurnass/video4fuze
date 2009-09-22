@@ -30,8 +30,6 @@ class Fuze( ):
             self.FFMPEG = os.path.join(self.CWD, "ffmpeg.exe")
             self.AMGPrefix = tempfile.gettempdir()
             self.WINE = False
-            self.mencoderpass1 = self.mencoderpass1.replace("mencoder",os.path.join(self.CWD, "mencoder.exe"))
-            self.mencoderpass2 = self.mencoderpass2.replace("mencoder",os.path.join(self.CWD, "mencoder.exe"))
         else:
             self.FFMPEG = "ffmpeg"
             self.WINE = True
@@ -180,6 +178,18 @@ START """ + output + """
         amgfile.write(AMG)
         amgfile.close()
 
+    def runmencoder(self, mencoderpassn, argument, OUTPUT):
+        mencoderpass = str(mencoderpassn)
+        mencoderpass = mencoderpass.split()
+        if os.name == 'nt':
+            mencoderpass[0] = os.path.join(self.CWD, "mencoder.exe")
+        if self.GUI != None:
+            self.qobject.emit(SIGNAL("working"),"Using mencoder on " + argument + "...")
+            if self.xterm != None:
+                mencoderpass = [self.xterm,"-e "] + mencoderpass
+        mencoderpass = mencoderpass + [argument,"-o",OUTPUT]
+        check_call(mencoderpass)
+
     def convert(self,args, FINALPREFIX =  None):
         os.chdir(self.AMGPrefix)
         tempfiles = {}
@@ -193,16 +203,7 @@ START """ + output + """
                     OUTPUT = unicodedata.normalize('NFKD',os.path.join(self.AMGPrefix,os.path.splitext(os.path.basename(argument))[0] + ".temp.avi")).encode("ascii", "ignore")
                 try:
                     print "Calling mencoder #1"
-                    mencoderpass1 = str(self.mencoderpass1)
-                    if self.GUI != None:
-                        self.qobject.emit(SIGNAL("working"),"Using mencoder on " + argument + "...")
-                        if self.xterm != None:
-                            mencoderpass1 = self.xterm + " -e " + mencoderpass1
-                    mencoderpass1 = mencoderpass1.split()
-                    mencoderpass1.append(argument)
-                    mencoderpass1.append("-o")
-                    mencoderpass1.append(OUTPUT)
-                    check_call(mencoderpass1)
+                    self.runmencoder(self.mencoderpass1, argument, OUTPUT)
                 except Exception, e:
                     print e
                     if self.GUI != None:
@@ -210,16 +211,7 @@ START """ + output + """
                     continue
                 try:
                     print "Calling mencoder #2"
-                    mencoderpass2 = str(self.mencoderpass2)
-                    if self.GUI != None:
-                        self.qobject.emit(SIGNAL("working"),"Using mencoder on " + argument + " (pass 2)...")
-                        if self.xterm != None:
-                            mencoderpass2 = self.xterm + " -e " + mencoderpass2
-                    mencoderpass2 = mencoderpass2.split()
-                    mencoderpass2.append(argument)
-                    mencoderpass2.append("-o")
-                    mencoderpass2.append(OUTPUT)
-                    check_call(mencoderpass2)
+                    self.runmencoder(self.mencoderpass2, argument, OUTPUT)
                     tempfiles[OUTPUT] = argument
                 except Exception, e:
                     print e

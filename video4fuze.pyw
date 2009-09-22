@@ -18,6 +18,11 @@
 #       Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 #       MA 02110-1301, USA.
 
+#TODO: Fix songs drag'n'dropping
+#FIXME: mencoder default settings suck
+
+settingsVERSION = "0.5"
+
 import sys
 from PyQt4.QtGui import QApplication
 from PyQt4.QtCore import QTranslator, QString, QLocale
@@ -30,7 +35,7 @@ def main():
     qttranslator.load(QString("qt_%1").arg(QLocale.system().name()))
     Vapp = QApplication(sys.argv)
     Vapp.setOrganizationName("ssorgatem productions")
-    Vapp.setApplicationName("video4fuze 0.4.1")
+    Vapp.setApplicationName("video4fuze " + settingsVERSION)
     Vapp.installTranslator(translator)
     Vapp.installTranslator(qttranslator)
     VentanaP = MainWindow()
