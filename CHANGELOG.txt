@@ -1,5 +1,6 @@
 ###CHANGELOG###
 --0.5--
+* Fixed start of v4f in Darwin
 * UI enhancements
 * Added "Del" key shortcut to remove files from lists.
 * Mencoder invoquing code almost rewritten: now it should load just fine mencoder binaries in paths containing whitespace. (Me and my personal war against whitespaces in windows...)

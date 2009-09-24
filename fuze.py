@@ -38,7 +38,12 @@ class Fuze( ):
                 self.AMGPrefix = os.path.join(wineprefix,"drive_c")
             else:
                 self.AMGPrefix = os.path.join(os.environ.get('HOME'),".wine/drive_c")
-            call(["mkdir","-p",self.AMGPrefix])
+            try:
+                call(["mkdir","-p",self.AMGPrefix])
+            except Exception, e:
+                print "Could not create wine C drive because of:"
+                print e
+                print "It may already exist"
             if os.name == 'posix' and self.GUI != None:
                 termloc = commands.getstatusoutput("which xterm")
                 if termloc[0] == 0:
