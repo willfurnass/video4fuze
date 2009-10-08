@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file '/home/ssorgatem/Documents/python/video4fuze/GUI/MainWindow.ui'
 #
-# Created: Tue Sep 22 03:24:12 2009
+# Created: Thu Oct  8 16:29:05 2009
 #      by: PyQt4 UI code generator 4.5.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -156,13 +156,12 @@ class Ui_MainWindow(object):
         self.label_3.setAlignment(QtCore.Qt.AlignCenter)
         self.label_3.setObjectName("label_3")
         self.playlistWidget = QtGui.QTableWidget(self.Playlists)
-        self.playlistWidget.setGeometry(QtCore.QRect(190, 41, 511, 511))
+        self.playlistWidget.setGeometry(QtCore.QRect(190, 61, 511, 491))
         self.playlistWidget.setAutoFillBackground(True)
         self.playlistWidget.setFrameShape(QtGui.QFrame.StyledPanel)
         self.playlistWidget.setFrameShadow(QtGui.QFrame.Plain)
         self.playlistWidget.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
         self.playlistWidget.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
-        self.playlistWidget.setDragEnabled(True)
         self.playlistWidget.setDragDropMode(QtGui.QAbstractItemView.InternalMove)
         self.playlistWidget.setAlternatingRowColors(True)
         self.playlistWidget.setSelectionMode(QtGui.QAbstractItemView.ContiguousSelection)
@@ -197,13 +196,25 @@ class Ui_MainWindow(object):
         self.OpenPlaylist.setGeometry(QtCore.QRect(30, 30, 131, 25))
         self.OpenPlaylist.setMinimumSize(QtCore.QSize(131, 25))
         self.OpenPlaylist.setObjectName("OpenPlaylist")
+        self.UpButton = QtGui.QToolButton(self.Playlists)
+        self.UpButton.setGeometry(QtCore.QRect(330, 30, 81, 31))
+        self.UpButton.setToolButtonStyle(QtCore.Qt.ToolButtonTextBesideIcon)
+        self.UpButton.setAutoRaise(False)
+        self.UpButton.setArrowType(QtCore.Qt.UpArrow)
+        self.UpButton.setObjectName("UpButton")
+        self.DownButton = QtGui.QToolButton(self.Playlists)
+        self.DownButton.setGeometry(QtCore.QRect(470, 30, 91, 31))
+        self.DownButton.setToolButtonStyle(QtCore.Qt.ToolButtonTextBesideIcon)
+        self.DownButton.setAutoRaise(False)
+        self.DownButton.setArrowType(QtCore.Qt.DownArrow)
+        self.DownButton.setObjectName("DownButton")
         self.tabWidget.addTab(self.Playlists, "")
         MainWindow.setCentralWidget(self.centralWidget)
         self.statusBar = QtGui.QStatusBar(MainWindow)
         self.statusBar.setObjectName("statusBar")
         MainWindow.setStatusBar(self.statusBar)
         self.menuBar = QtGui.QMenuBar(MainWindow)
-        self.menuBar.setGeometry(QtCore.QRect(0, 0, 722, 22))
+        self.menuBar.setGeometry(QtCore.QRect(0, 0, 722, 23))
         self.menuBar.setObjectName("menuBar")
         self.menuFile = QtGui.QMenu(self.menuBar)
         self.menuFile.setObjectName("menuFile")
@@ -236,7 +247,7 @@ class Ui_MainWindow(object):
         self.menuBar.addAction(self.menuHelp.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(2)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -269,6 +280,8 @@ class Ui_MainWindow(object):
         self.playlistWidget.horizontalHeaderItem(4).setText(QtGui.QApplication.translate("MainWindow", "Filename", None, QtGui.QApplication.UnicodeUTF8))
         self.label_6.setText(QtGui.QApplication.translate("MainWindow", "Playlist editor: Add songs from:", None, QtGui.QApplication.UnicodeUTF8))
         self.OpenPlaylist.setText(QtGui.QApplication.translate("MainWindow", "Open playlist", None, QtGui.QApplication.UnicodeUTF8))
+        self.UpButton.setText(QtGui.QApplication.translate("MainWindow", "Up", None, QtGui.QApplication.UnicodeUTF8))
+        self.DownButton.setText(QtGui.QApplication.translate("MainWindow", "Down", None, QtGui.QApplication.UnicodeUTF8))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.Playlists), QtGui.QApplication.translate("MainWindow", "Playlists", None, QtGui.QApplication.UnicodeUTF8))
         self.menuFile.setTitle(QtGui.QApplication.translate("MainWindow", "File", None, QtGui.QApplication.UnicodeUTF8))
         self.menuHelp.setTitle(QtGui.QApplication.translate("MainWindow", "Help", None, QtGui.QApplication.UnicodeUTF8))

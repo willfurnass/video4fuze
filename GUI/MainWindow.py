@@ -367,6 +367,22 @@ Thanks to ewelot from the sansa forums for finding the way to convert the videos
                     listItem.setIcon(QIcon(cover))
                 self.playlistWidget.addItem(listItem)
 
+    @pyqtSignature("")
+    def on_UpButton_clicked(self):
+        """
+        Slot documentation goes here.
+        """
+        # TODO: Up Button
+        raise NotImplementedError
+
+    @pyqtSignature("")
+    def on_DownButton_clicked(self):
+        """
+        Slot documentation goes here.
+        """
+        # TODO: Down Button
+        raise NotImplementedError
+
 class Converter(Thread):
     """
     Doing the job in a different thread is always good.

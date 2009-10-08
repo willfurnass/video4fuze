@@ -34,7 +34,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="Video">
      <attribute name="title">
@@ -518,9 +518,9 @@
       <property name="geometry">
        <rect>
         <x>190</x>
-        <y>41</y>
+        <y>61</y>
         <width>511</width>
-        <height>511</height>
+        <height>491</height>
        </rect>
       </property>
       <property name="autoFillBackground">
@@ -537,9 +537,6 @@
       </property>
       <property name="horizontalScrollBarPolicy">
        <enum>Qt::ScrollBarAlwaysOn</enum>
-      </property>
-      <property name="dragEnabled">
-       <bool>true</bool>
       </property>
       <property name="dragDropMode">
        <enum>QAbstractItemView::InternalMove</enum>
@@ -675,6 +672,50 @@
        <string>Open playlist</string>
       </property>
      </widget>
+     <widget class="QToolButton" name="UpButton">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>30</y>
+        <width>81</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Up</string>
+      </property>
+      <property name="toolButtonStyle">
+       <enum>Qt::ToolButtonTextBesideIcon</enum>
+      </property>
+      <property name="autoRaise">
+       <bool>false</bool>
+      </property>
+      <property name="arrowType">
+       <enum>Qt::UpArrow</enum>
+      </property>
+     </widget>
+     <widget class="QToolButton" name="DownButton">
+      <property name="geometry">
+       <rect>
+        <x>470</x>
+        <y>30</y>
+        <width>91</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Down</string>
+      </property>
+      <property name="toolButtonStyle">
+       <enum>Qt::ToolButtonTextBesideIcon</enum>
+      </property>
+      <property name="autoRaise">
+       <bool>false</bool>
+      </property>
+      <property name="arrowType">
+       <enum>Qt::DownArrow</enum>
+      </property>
+     </widget>
     </widget>
    </widget>
   </widget>
@@ -685,7 +726,7 @@
      <x>0</x>
      <y>0</y>
      <width>722</width>
-     <height>22</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

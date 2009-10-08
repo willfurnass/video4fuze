@@ -20,6 +20,7 @@
 
 #TODO: Fix songs drag'n'dropping
 #FIXME: mencoder default settings suck
+#FIXME: mencoder calling algorithm
 
 settingsVERSION = "0.5"
 
