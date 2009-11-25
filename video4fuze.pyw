@@ -19,8 +19,6 @@
 #       MA 02110-1301, USA.
 
 #TODO: Fix songs drag'n'dropping
-#FIXME: mencoder default settings suck
-#FIXME: mencoder calling algorithm
 
 settingsVERSION = "0.5"
 
@@ -39,9 +37,10 @@ def main():
     Vapp.setApplicationName("video4fuze " + settingsVERSION)
     Vapp.installTranslator(translator)
     Vapp.installTranslator(qttranslator)
-    VentanaP = MainWindow()
+    VentanaP = MainWindow(sys.path[1])
     VentanaP.show()
     sys.exit(Vapp.exec_())
 
 if __name__ == "__main__":
+    print sys.path[1]
     main()

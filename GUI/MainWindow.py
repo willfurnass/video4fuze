@@ -22,12 +22,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     """
     video4fuze's main window, implementing too playlist management logic
     """
-    def __init__(self, parent = None):
+    def __init__(self, v4fhome, parent = None):
         """
         Constructor
         """
         QMainWindow.__init__(self, parent)
         self.setupUi(self)
+        self.v4fhome = v4fhome
         self.settings = QSettings()
         self.Fuze = fuze.Fuze(self)
         self.resis = p2fuze.TransFuze(self)

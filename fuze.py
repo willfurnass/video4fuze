@@ -11,7 +11,7 @@ from vthumb import *
 class Fuze( ):
     def __init__(self, GUI = None):
         self.GUI = GUI
-        self.CWD = os.getcwd()
+        self.CWD = GUI.v4fhome
 ####################################################################
         self.mencoderpass1 = "mencoder -ffourcc DX50 -ofps 20 -vf pp=li,expand=:::::224/176,scale=224:176,harddup     -ovc lavc -lavcopts vcodec=mpeg4:vbitrate=683:vmax_b_frames=0:keyint=15:turbo:vpass=1 -srate 44100 -af resample=44100:0:1,format=s16le -oac mp3lame -lameopts cbr:br=128"
 
@@ -240,7 +240,7 @@ START """ + output + """
                     self.qobject.emit(SIGNAL("working"),"Calling avi-mux GUI...")
                 if self.WINE:
                     print "using wine"
-                    OUTPUT =  """C:\\""" + os.path.basename(file)#.encode("ascii", "ignore")
+                    OUTPUT =  """C:\\""" + os.path.basename(file)
                     print "Opening file: " + OUTPUT
                     self.AmgConf(OUTPUT,"C:\\final.avi")
                     wineprefix = os.environ.get('WINEPREFIX')
@@ -253,7 +253,7 @@ START """ + output + """
                     else:
                         call(["wine",os.path.join(self.CWD,"avimuxgui","AVIMux_GUI.exe"),"C:\\fuze.amg"])
                 else:
-                    OUTPUT = file#.encode("ascii", "ignore")
+                    OUTPUT = file
                     self.AmgConf(OUTPUT,os.path.join(self.AMGPrefix,"final.avi"))
                     call([os.path.join(self.CWD,"avimuxgui","AVIMux_GUI.exe"),os.path.join(self.AMGPrefix,"fuze.amg")])
             except Exception, e:
@@ -266,6 +266,7 @@ START """ + output + """
             print FINAL
             try:
                 try:
+
                     if self.GUI != None:
                         self.qobject.emit(SIGNAL("working"),"Creating video thumbnail")
                     print "Creating video thumbnail"
@@ -276,11 +277,15 @@ START """ + output + """
                     raise e
                     if self.GUI != None:
                         self.qobject.emit(SIGNAL("Exception"),e)
+                print "Moving final video"
                 shutil.move(os.path.join(self.AMGPrefix,"final.avi"),FINAL)
+                print "Back to " + self.CWD
                 os.chdir(self.CWD)
-                os.chdir(self.CWD)
+                #file = str(file)
                 if self.GUI != None:
+                    print "sending signal for "+ file + " removal"
                     self.qobject.emit(SIGNAL("itemDone"),tempfiles[file])
+                print "Removing " + file
                 os.remove(file)
                 os.remove(os.path.join(self.AMGPrefix,"fuze.amg"))
             except Exception, e:
@@ -290,6 +295,8 @@ START """ + output + """
                     self.qobject.emit(SIGNAL("Exception"),e)
         if self.GUI != None:
             self.qobject.emit(SIGNAL("finished"),self.GUI.Video)
+
+
 
 if __name__ == "__main__":
     if sys.argv[1:] == [] :

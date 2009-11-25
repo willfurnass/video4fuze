@@ -2,7 +2,7 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "video4fuze"
-!define PRODUCT_VERSION "0.4.1"
+!define PRODUCT_VERSION "0.5"
 !define PRODUCT_PUBLISHER "ssorgatem productions"
 !define PRODUCT_WEB_SITE "http://code.google.com/p/video4fuze/"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\video4fuze.exe"
@@ -63,21 +63,21 @@ var ICONS_GROUP
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
 OutFile "${PRODUCT_NAME}-${PRODUCT_VERSION}_installer.exe"
-InstallDir "$PROGRAMFILES\video4fuze"
+InstallDir "$PROGRAMFILES\${PRODUCT_NAME}-${PRODUCT_VERSION}"
 InstallDirRegKey HKLM "${PRODUCT_DIR_REGKEY}" ""
 ShowInstDetails show
 ShowUnInstDetails show
 
 Function .onInit
   !insertmacro MUI_LANGDLL_DISPLAY
-  
-  ${Unless} ${FileExists} $TEMP\VS2008_SP1_vcredist_x86.exe         
-    DetailPrint "Installing VC++ 2008 runtime"  
-    SetoutPath "$TEMP"       
-    File ..\vcredist_x86.exe  
-    ExecWait "$TEMP\vcredist_x86.exe /q"         
-    DetailPrint "Cleaning up"         
-    Delete $TEMP\vcredist_x86.exe     
+
+  ${Unless} ${FileExists} $TEMP\VS2008_SP1_vcredist_x86.exe
+    DetailPrint "Installing VC++ 2008 runtime"
+    SetoutPath "$TEMP"
+    File ..\vcredist_x86.exe
+    ExecWait "$TEMP\vcredist_x86.exe /q"
+    DetailPrint "Cleaning up"
+    Delete $TEMP\vcredist_x86.exe
   ${EndUnless}
 FunctionEnd
 
