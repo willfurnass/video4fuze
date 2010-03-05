@@ -34,7 +34,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="Video">
      <attribute name="title">
@@ -450,6 +450,9 @@
         <height>25</height>
        </size>
       </property>
+      <property name="toolTip">
+       <string>Choose songs from µSD card</string>
+      </property>
       <property name="text">
        <string>Fuze's µSD slot</string>
       </property>
@@ -488,6 +491,9 @@
         <height>25</height>
        </size>
       </property>
+      <property name="toolTip">
+       <string>Choose songs from the fuze's internal memory</string>
+      </property>
       <property name="text">
        <string>Fuze's internal storage</string>
       </property>
@@ -514,7 +520,7 @@
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
-     <widget class="QTableWidget" name="playlistWidget">
+     <widget class="QListWidget" name="playlistWidget">
       <property name="geometry">
        <rect>
         <x>190</x>
@@ -556,64 +562,6 @@
         <height>40</height>
        </size>
       </property>
-      <property name="sortingEnabled">
-       <bool>true</bool>
-      </property>
-      <column>
-       <property name="text">
-        <string>Cover</string>
-       </property>
-       <property name="font">
-        <font>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Title</string>
-       </property>
-       <property name="font">
-        <font>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Artist</string>
-       </property>
-       <property name="font">
-        <font>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Album</string>
-       </property>
-       <property name="font">
-        <font>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Filename</string>
-       </property>
-       <property name="font">
-        <font>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-      </column>
      </widget>
      <widget class="QLabel" name="label_6">
       <property name="geometry">
@@ -628,7 +576,7 @@
        <enum>QFrame::Raised</enum>
       </property>
       <property name="text">
-       <string>Playlist editor: Add songs from:</string>
+       <string>Playlist editor: Add songs from µSD or internal flash</string>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
@@ -668,52 +616,33 @@
         <height>25</height>
        </size>
       </property>
+      <property name="toolTip">
+       <string>Load an existing playlist</string>
+      </property>
       <property name="text">
        <string>Open playlist</string>
       </property>
      </widget>
-     <widget class="QToolButton" name="UpButton">
+     <widget class="QPushButton" name="ToggleSort">
       <property name="geometry">
        <rect>
-        <x>330</x>
+        <x>360</x>
         <y>30</y>
-        <width>81</width>
-        <height>31</height>
+        <width>161</width>
+        <height>25</height>
        </rect>
       </property>
-      <property name="text">
-       <string>Up</string>
+      <property name="minimumSize">
+       <size>
+        <width>131</width>
+        <height>25</height>
+       </size>
       </property>
-      <property name="toolButtonStyle">
-       <enum>Qt::ToolButtonTextBesideIcon</enum>
-      </property>
-      <property name="autoRaise">
-       <bool>false</bool>
-      </property>
-      <property name="arrowType">
-       <enum>Qt::UpArrow</enum>
-      </property>
-     </widget>
-     <widget class="QToolButton" name="DownButton">
-      <property name="geometry">
-       <rect>
-        <x>470</x>
-        <y>30</y>
-        <width>91</width>
-        <height>31</height>
-       </rect>
+      <property name="toolTip">
+       <string>Load an existing playlist</string>
       </property>
       <property name="text">
-       <string>Down</string>
-      </property>
-      <property name="toolButtonStyle">
-       <enum>Qt::ToolButtonTextBesideIcon</enum>
-      </property>
-      <property name="autoRaise">
-       <bool>false</bool>
-      </property>
-      <property name="arrowType">
-       <enum>Qt::DownArrow</enum>
+       <string>Sort alphabetically</string>
       </property>
      </widget>
     </widget>
@@ -726,17 +655,9 @@
      <x>0</x>
      <y>0</y>
      <width>722</width>
-     <height>23</height>
+     <height>22</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuFile">
-    <property name="title">
-     <string>File</string>
-    </property>
-    <addaction name="actionAdd_file"/>
-    <addaction name="actionRemove_selected_files"/>
-    <addaction name="actionSelect_output_folder"/>
-   </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
      <string>Help</string>
@@ -750,7 +671,6 @@
     </property>
     <addaction name="actionPreferences"/>
    </widget>
-   <addaction name="menuFile"/>
    <addaction name="menuAdvanced"/>
    <addaction name="menuHelp"/>
   </widget>

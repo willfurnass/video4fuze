@@ -3,12 +3,12 @@ video4fuze is free software, distributed under the GPLv3.
 Icons were created by Ben Brooks <benbrooks.co.uk>, and are under a
 Creative Commons Attribution-Noncommercial-Share Alike 3.0 License.
 
-This applications uses mencoder, ffmpeg and avi-mux GUI (under wine where necessary) in order to
+This applications uses mencoder, ffmpeg and fuzemux in order to
 convert your video files to be seen in you sansa fuze. All of them are open-source but I only include
 their win32 binary for commodity reasons.
 
-Thanks to ewelot  and Dunny from the sansa forums, one for finding the way to convert the videos,
-the lother for providing me with all necessary information about the .pla playlist format the fuze uses. Without their findings this app wouldn't exist. Thank you ;)
+Thanks to ewelot, Dunny and  earthcrosser  from the sansa forums, for finding the way to convert the videos,
+providing me with all necessary information about the .pla playlist format the fuze uses and writing a great crossplatform remuxer for the fuze. Without their findings this app wouldn't exist. Thank you ;)
 
 For any feedback, suggestions, or if you want to contribute with translations (it's very easy!) or coding,
 feel free to email me at <ssorgatem@esdebian.og>
@@ -34,8 +34,7 @@ If you prefer the commandline version, just type:
     python fuze.py INPUTFILE1 INPUTFILE2 ...
 
     and it will conver every video you throw at it, and put the result in the same folder as the original,
-    with postfix "_fuze" and extension ".avi".
+    with suffix "_fuze" and extension ".avi".
 
 
-Make sure "mencoder" and "ffmpeg" are in your path (or, in win32, the same folder as the main script),
-and that avi-mux GUI executable is in the root of the folder "avimuxgui" included in the package.
+Make sure "mencoder", "ffmpeg" and "fuzemux" are in your path (or, in win32, the same folder as the main script)

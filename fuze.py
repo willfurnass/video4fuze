@@ -26,13 +26,15 @@ class Fuze( ):
             self.qobject.connect(self.qobject, SIGNAL("finished"),GUI.getReady)
             self.LoadSettings()
         self.xterm = None
-	self.AMGPrefix = tempfile.gettempdir()
+        self.AMGPrefix = tempfile.gettempdir()
         if os.name == 'nt':
             self.FFMPEG = os.path.join(self.CWD, "ffmpeg.exe")
             self.mencoderpass1 = self.mencoderpass1.replace("mencoder",os.path.join(self.CWD, "mencoder.exe"))
             self.mencoderpass2 = self.mencoderpass2.replace("mencoder",os.path.join(self.CWD, "mencoder.exe"))
+            self.fuzemux = os.path.join(self.CWD, "fuzemux.exe")
         else:
             self.FFMPEG = "ffmpeg"
+            self.fuzemux = "fuzemux"
             if os.name == 'posix' and self.GUI != None:
                 termloc = commands.getstatusoutput("which xterm")
                 if termloc[0] == 0:
@@ -48,10 +50,8 @@ class Fuze( ):
         self.mencoderpass1 = str(self.GUI.settings.value("mencoderpass1", QVariant(self.mencoderpass1)).toString())
         self.mencoderpass2 = str(self.GUI.settings.value("mencoderpass2", QVariant(self.mencoderpass2)).toString())
 
-
     def convert(self,args, FINALPREFIX =  None):
         os.chdir(self.AMGPrefix)
-        tempfiles = {}
         if self.GUI != None:
             self.qobject.emit(SIGNAL("stop"),self.GUI.Video)
         for argument in args:
@@ -89,7 +89,6 @@ class Fuze( ):
                     mencoderpass2.append("-o")
                     mencoderpass2.append(OUTPUT)
                     check_call(mencoderpass2)
-                    tempfiles[OUTPUT] = argument
                 except Exception, e:
                     print e
                     if self.GUI != None:
@@ -97,33 +96,30 @@ class Fuze( ):
                     continue
             else:
                 print "\'" + argument + "\'" + ": file not found"
-
-        print "temporary files are: "
-        print tempfiles
-    
-        for file in tempfiles.keys():
+            file = OUTPUT #Legacy reasons
             if FINALPREFIX == None:
-                FINAL = os.path.splitext(tempfiles[file])[0] + "_fuze.avi"
+                FINAL = os.path.splitext(argument)[0] + "_fuze.avi"
             else:
-                FINAL = os.path.join(FINALPREFIX,os.path.splitext(os.path.basename(tempfiles[file]))[0]) + "_fuze.avi"
+                FINAL = os.path.join(FINALPREFIX,os.path.splitext(os.path.basename(argument))[0]) + "_fuze.avi"
             try:
-                    fuzemux = "fuzemux"
-                    if self.GUI != None:
-                        self.qobject.emit(SIGNAL("working"),"Using command:" + fuzemux)
-                        if self.xterm != None:
-                            fuzemux = self.xterm + " -e " + fuzemux
-	            fuzemux=fuzemux.split() 
-                    fuzemux.append(file)
-                    fuzemux.append(os.path.join(self.AMGPrefix,"final.avi"))
-                    print "Calling fuzemux"
-                    check_call(fuzemux)
+                fuzemux = self.fuzemux
+                fuzemux_temp = os.path.splitext(OUTPUT)[0] + "_fuzemuxed.avi"
+                if self.GUI != None:
+                    self.qobject.emit(SIGNAL("working"),"Using " + fuzemux)
+                    if self.xterm != None:
+                        fuzemux = self.xterm + " -e " + fuzemux
+	            fuzemux=fuzemux.split()
+                fuzemux.append(file)
+                fuzemux.append(fuzemux_temp)
+                print "Calling fuzemux"
+                check_call(fuzemux)
             except Exception, e:
                 print e
                 if self.GUI != None:
                     self.qobject.emit(SIGNAL("Exception"),e)
-                os.remove(os.path.join(self.AMGPrefix,"final.avi"))
+                os.remove(fuzemux_temp)
                 continue
-            print "Moving " + os.path.join(self.AMGPrefix,"final.avi") + " to " + FINAL + " and cleaning temporary files"
+            print "Moving " + fuzemux_temp+ " to " + FINAL + " and cleaning temporary files"
             print FINAL
             try:
                 try:
@@ -131,17 +127,17 @@ class Fuze( ):
                         self.qobject.emit(SIGNAL("working"),"Creating video thumbnail")
                     print "Creating video thumbnail"
                     os.chdir(os.path.split(FINAL)[0])
-                    find_thumb(os.path.join(self.AMGPrefix,"final.avi"), os.path.splitext(os.path.basename(FINAL))[0], 100, [], True, False, self.FFMPEG)
+                    find_thumb(fuzemux_temp, os.path.splitext(os.path.basename(FINAL))[0], 100, [], True, False, self.FFMPEG)
                 except Exception, e:
                     print e
                     raise e
                     if self.GUI != None:
                         self.qobject.emit(SIGNAL("Exception"),e)
-                shutil.move(os.path.join(self.AMGPrefix,"final.avi"),FINAL)
+                shutil.move(fuzemux_temp,FINAL)
                 os.chdir(self.CWD)
                 os.chdir(self.CWD)
                 if self.GUI != None:
-                    self.qobject.emit(SIGNAL("itemDone"),tempfiles[file])
+                    self.qobject.emit(SIGNAL("itemDone"),argument)
                 os.remove(file)
             except Exception, e:
                 print e
@@ -157,4 +153,3 @@ if __name__ == "__main__":
         python fuze.py INPUTVIDEO1 INPUTVIDEO2 ..."""
         exit(1)
     Fuze().convert(sys.argv[1:])
-

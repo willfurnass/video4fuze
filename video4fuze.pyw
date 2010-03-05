@@ -18,7 +18,7 @@
 #       Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 #       MA 02110-1301, USA.
 
-#TODO: Fix songs drag'n'dropping
+VERSION = "0.5"
 
 settingsVERSION = "0.5"
 
@@ -35,6 +35,7 @@ def main():
     Vapp = QApplication(sys.argv) #Creating the app
     Vapp.setOrganizationName("ssorgatem productions") #Setting organization and application's
     Vapp.setApplicationName("video4fuze " + settingsVERSION)#name. It's only useful for QSettings
+    Vapp.setApplicationVersion(VERSION)
     Vapp.installTranslator(translator)#Install translators into the application.
     Vapp.installTranslator(qttranslator)
     VentanaP = MainWindow(sys.path[1]) #Now it's time to instantiate the main window
@@ -42,5 +43,4 @@ def main():
     sys.exit(Vapp.exec_()) #When the app finishes, exit.
 
 if __name__ == "__main__":
-    print sys.path[1]
     main()

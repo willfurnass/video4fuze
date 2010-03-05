@@ -1,11 +1,11 @@
 ###CHANGELOG###
 --0.5--
-* Fixed start of v4f in Darwin
+* Fixed launch of v4f in OSX
 * UI enhancements
-* Added "Del" key shortcut to remove files from lists.
 * Mencoder invoquing code almost rewritten: now it should load just fine mencoder binaries in paths containing whitespace. (Me and my personal war against whitespaces in windows...)
 * Now v4f remembers last used paths for videos, songs and images
-* Updated version of avi-mux GUI, kindy provided by it's creator, which fixes amg's issues on vista and windows 7, amongst others.
+* AMG backend dropped in favour of fuzemux. Code for this based on Struct's fuze.py modification
+* LOTS of code cleanup.
 --0.4.1--
 * Updated copyright and license information in main script
 * Bugfix: mencoder changing path work-arounded by creating a windows installer (Yes! I finally did it)

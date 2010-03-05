@@ -99,39 +99,11 @@ Section "Principal" SEC01
   File "README.txt"
   File "LICENSE.txt"
   File "CHANGELOG.txt"
-  File "dist\win32\w9xpopen.exe"
   SetOutPath "$INSTDIR\translations"
   SetOverwrite try
   File "translations\v4f_es.qm"
   File "translations\v4f_en.qm"
   File "translations\v4f_ca.qm"
-  SetOutPath "$INSTDIR\avimuxgui\silence files"
-  File "avimuxgui\silence files\FILL-6ch-768kbps.dts"
-  File "avimuxgui\silence files\FILL-6ch-1509kbps.dts"
-  File "avimuxgui\silence files\FILL-2ch-192kbps.ac3"
-  File "avimuxgui\silence files\FILL-6ch-384kbps.ac3"
-  File "avimuxgui\silence files\FILL-6ch-448kbps.ac3"
-  SetOutPath "$INSTDIR\avimuxgui"
-  File "avimuxgui\gui.amg.xml"
-  File "avimuxgui\AVIMux_GUI.exe.manifest"
-  File "avimuxgui\config.ini.amg"
-  File "avimuxgui\languages.amg"
-  File "avimuxgui\AVIMux_GUI.exe"
-  File "avimuxgui\last-job.amg"
-  File "avimuxgui\language_codes.txt"
-  SetOutPath "$INSTDIR\avimuxgui\Language Files"
-  File "avimuxgui\Language Files\Hungarian.lang"
-  File "avimuxgui\Language Files\Leeme-esp.txt"
-  File "avimuxgui\Language Files\Polish.lang"
-  File "avimuxgui\Language Files\Deutsch.lang"
-  File "avimuxgui\Language Files\English.lang"
-  File "avimuxgui\Language Files\chinese.lang"
-  File "avimuxgui\Language Files\Italian.lang"
-  File "avimuxgui\Language Files\Czech.lang"
-  File "avimuxgui\Language Files\readme.fr.txt"
-  File "avimuxgui\Language Files\Spanish.lang"
-  File "avimuxgui\Language Files\French.lang"
-  File "avimuxgui\Language Files\changes.txt"
   SetOutPath "$INSTDIR"
 
 
@@ -155,6 +127,10 @@ SectionEnd
 Section "ffmpeg" SEC03
   SetOutPath "$INSTDIR"
   File "ffmpeg.exe"
+
+Section "ffmpeg" SEC04
+  SetOutPath "$INSTDIR"
+  File "fuzemux.exe"
 
 ; Shortcuts
   !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
@@ -190,12 +166,12 @@ SectionEnd
 
 Function un.onUninstSuccess
   HideWindow
-  MessageBox MB_ICONINFORMATION|MB_OK "La desinstalación de $(^Name) finalizó satisfactoriamente."
+  MessageBox MB_ICONINFORMATION|MB_OK "La desinstalaciÃ³n de $(^Name) finalizÃ³ satisfactoriamente."
 FunctionEnd
 
 Function un.onInit
 !insertmacro MUI_UNGETLANGUAGE
-  MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 "¿Está completamente seguro que desea desinstalar $(^Name) junto con todos sus componentes?" IDYES +2
+  MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 "Å¼EstÃ¡ completamente seguro que desea desinstalar $(^Name) junto con todos sus componentes?" IDYES +2
   Abort
 FunctionEnd
 
@@ -204,6 +180,7 @@ Section Uninstall
   Delete "$INSTDIR\${PRODUCT_NAME}.url"
   Delete "$INSTDIR\uninst.exe"
   Delete "$INSTDIR\ffmpeg.exe"
+  Delete "$INSTDIR\fuzemux.exe"
   Delete "$INSTDIR\mencoder.exe"
   Delete "$INSTDIR\w9xpopen.exe"
   Delete "$INSTDIR\LICENSE.txt"
@@ -220,29 +197,6 @@ Section Uninstall
   Delete "$INSTDIR\_imaging.pyd"
   Delete "$INSTDIR\video4fuze.exe"
   Delete "$INSTDIR\language_codes.txt"
-  Delete "$INSTDIR\avimuxgui\last-job.amg"
-  Delete "$INSTDIR\avimuxgui\Language Files\changes.txt"
-  Delete "$INSTDIR\avimuxgui\Language Files\French.lang"
-  Delete "$INSTDIR\avimuxgui\Language Files\Spanish.lang"
-  Delete "$INSTDIR\avimuxgui\Language Files\readme.fr.txt"
-  Delete "$INSTDIR\avimuxgui\Language Files\Czech.lang"
-  Delete "$INSTDIR\avimuxgui\Language Files\Italian.lang"
-  Delete "$INSTDIR\avimuxgui\Language Files\chinese.lang"
-  Delete "$INSTDIR\avimuxgui\Language Files\English.lang"
-  Delete "$INSTDIR\avimuxgui\Language Files\Deutsch.lang"
-  Delete "$INSTDIR\avimuxgui\Language Files\Polish.lang"
-  Delete "$INSTDIR\avimuxgui\Language Files\Leeme-esp.txt"
-  Delete "$INSTDIR\avimuxgui\Language Files\Hungarian.lang"
-  Delete "$INSTDIR\avimuxgui\AVIMux_GUI.exe"
-  Delete "$INSTDIR\avimuxgui\languages.amg"
-  Delete "$INSTDIR\avimuxgui\config.ini.amg"
-  Delete "$INSTDIR\avimuxgui\AVIMux_GUI.exe.manifest"
-  Delete "$INSTDIR\avimuxgui\gui.amg.xml"
-  Delete "$INSTDIR\avimuxgui\silence files\FILL-6ch-448kbps.ac3"
-  Delete "$INSTDIR\avimuxgui\silence files\FILL-6ch-384kbps.ac3"
-  Delete "$INSTDIR\avimuxgui\silence files\FILL-2ch-192kbps.ac3"
-  Delete "$INSTDIR\avimuxgui\silence files\FILL-6ch-1509kbps.dts"
-  Delete "$INSTDIR\avimuxgui\silence files\FILL-6ch-768kbps.dts"
   Delete "$INSTDIR\translations\v4f_ca.qm"
   Delete "$INSTDIR\translations\v4f_en.qm"
   Delete "$INSTDIR\translations\v4f_es.qm"
