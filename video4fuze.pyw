@@ -28,18 +28,18 @@ from PyQt4.QtCore import QTranslator, QString, QLocale
 from GUI.MainWindow import MainWindow
 
 def main():
-    translator = QTranslator()
-    translator.load(QString("translations/v4f_%1").arg(QLocale.system().name()))
-    qttranslator = QTranslator()
+    translator = QTranslator() #Build the translator
+    translator.load(QString("translations/v4f_%1").arg(QLocale.system().name())) #Path to v4f's translation files
+    qttranslator = QTranslator()#A translator for Qt standard strings
     qttranslator.load(QString("qt_%1").arg(QLocale.system().name()))
-    Vapp = QApplication(sys.argv)
-    Vapp.setOrganizationName("ssorgatem productions")
-    Vapp.setApplicationName("video4fuze " + settingsVERSION)
-    Vapp.installTranslator(translator)
+    Vapp = QApplication(sys.argv) #Creating the app
+    Vapp.setOrganizationName("ssorgatem productions") #Setting organization and application's
+    Vapp.setApplicationName("video4fuze " + settingsVERSION)#name. It's only useful for QSettings
+    Vapp.installTranslator(translator)#Install translators into the application.
     Vapp.installTranslator(qttranslator)
-    VentanaP = MainWindow(sys.path[1])
-    VentanaP.show()
-    sys.exit(Vapp.exec_())
+    VentanaP = MainWindow(sys.path[1]) #Now it's time to instantiate the main window
+    VentanaP.show() #And show it
+    sys.exit(Vapp.exec_()) #When the app finishes, exit.
 
 if __name__ == "__main__":
     print sys.path[1]

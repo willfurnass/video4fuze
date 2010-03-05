@@ -26,43 +26,44 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         """
         Constructor
         """
-        QMainWindow.__init__(self, parent)
-        self.setupUi(self)
-        self.v4fhome = v4fhome
-        self.settings = QSettings()
-        self.Fuze = fuze.Fuze(self)
-        self.resis = p2fuze.TransFuze(self)
-        if os.name != 'nt':
-            self.mediaroot = "/media"
+        #TODO: Fix songs drag'n'dropping
+        QMainWindow.__init__(self, parent) #Use QMainWindow.__init___
+        self.setupUi(self) #setuo the ui...
+        self.v4fhome = v4fhome #Where are we?
+        self.settings = QSettings() #Instantiate QSettings
+        self.Fuze = fuze.Fuze(self) #Instantiate the Fuze class.
+        self.resis = p2fuze.TransFuze(self) #AnotherTestPlugin her useful class.
+        if os.name != 'nt': #If you are lucky and don't run that OS...
+            self.mediaroot = "/media" #this is a very probable directory to start from to look for the fuze.
         else:
-            self.mediaroot = os.path.join(os.path.expanduser("~"), "Desktop")
-        self.playlistname = self.mediaroot
+            self.mediaroot = os.path.join(os.path.expanduser("~"), "Desktop") #Otherwise, here we have the classical desktop...
+        self.playlistname = self.mediaroot #Apply that for playlists too
         try:
-            self.tableWidget.horizontalHeader().setResizeMode(3)
+            self.tableWidget.horizontalHeader().setResizeMode(3) #Try to fix size of tableWidget's
             self.tableWidget_2.horizontalHeader().setResizeMode(3)
         except:
-            print "Your version of PyQt4 seems a bit out of date. This may lead to problems. But may not :)"
-        self.output = toPython(self.settings.value("outputdir",QVariant(os.path.expanduser("~"))).toString())
+            print "Your version of PyQt4 seems a bit out of date. This may lead to problems. But may not :)" #Well, in fact, it could be too a too old Qt4 version, even if you have an enough new PyQt4t... but then, having a PyQt4 version designed to work with a Qt4 version other than the one you have installed, can be problematic anyways.
+        self.output = toPython(self.settings.value("outputdir",QVariant(os.path.expanduser("~"))).toString()) #Where to output things.
 
     def fuzePath(self,prefix): #TODO: Tags display & sorting
         """
         Translates paths to fuze's .pla format, and loads them in the UI
         """
         if os.name == 'nt':
-            prefix = prefix + "/"
+            prefix = prefix + "/"#Add this prefix in case of redmon's semi-operating system....
         Songs = QFileDialog.getOpenFileNames(\
             None,
             self.trUtf8("Select songs to add to the playlist"),
             self.settings.value("lastsongdir",QVariant(self.mediaroot)).toString(),
             self.trUtf8("*.ogg; *.OGG; *.mp3; *.MP3; *.wma; *.WMA; *.flac; *.FLAC"),
-            None)
-        if not Songs.isEmpty():
+            None) # A QFileDialog for picking songs
+        if not Songs.isEmpty(): #Do nothing if nothing was picked
             try:
-                self.settings.setValue("lastsongdir", QVariant(os.path.split(toPython(Songs[0]))[0]))
+                self.settings.setValue("lastsongdir", QVariant(os.path.split(toPython(Songs[0]))[0]))#Store the last dir from where songs were picked. Thats for commodity.
             except Exception, e:
                 print e
                 print Songs
-        for song in Songs:
+        for song in Songs: #Iterate selected songs and render them.
             currentrow = self.playlistWidget.rowCount()
             self.playlistWidget.insertRow(currentrow)
             unicodesong = toPython(song)
@@ -87,7 +88,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             PathItem.setText(song)
         self.playlistWidget.resizeColumnsToContents()
 
+#############################################################
+#Slot functions which should only be called by SIGNALs and not directly:
+
     def ErrorDiag(self, error = QT_TR_NOOP("Unknown error")):
+            """
+            A useful function to add easy error reporting to any other place of the code.
+            """
             print error
             QMessageBox.critical(None,
                 self.trUtf8("Error"),
@@ -97,12 +104,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 QMessageBox.Ok)
 
     def getReady(self, tab):
+        """
+        Set the UI ready again. We are done of the hard work ;). Or we failed miserably at it. Well, not so miserably, since we've recovered.
+        """
         tab.setEnabled(True)
         self.statusBar.showMessage(self.trUtf8("Done"))
 
     def DelItem(self, itemText, image = False):
         """
-        Clean the ui
+        Clean items and/or objects from the different tabs. This function is intented to be a slot to connect with signals on other threads.
         """
         if image:
             row = 0
@@ -120,17 +130,31 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 row += 1
 
     def Status(self,status):
+        """
+        Report what are we currently doing in the statusbar. This function is also intended to be a slot, so it shouldn't be called directly.
+        """
         self.statusBar.showMessage(status)
 
     def WAIT(self, tab):
+        """
+        Disable working tab. We don't want the user to mess up with useless buttons there.
+        """
         tab.setEnabled(False)
+
+#Now, slots written with PyQt's short-circuit and connect-slots-by-signal-name
 
     @pyqtSignature("")
     def on_RemoveButton_clicked(self):
+        """
+        Pass to actionRemove_selected_files_triggered
+        """
         self. actionRemove_selected_files.emit(SIGNAL("triggered()"))
 
     @pyqtSignature("")
     def on_RemoveButton_2_clicked(self):
+        """
+        Pass to actionRemove_selected_files_triggered
+        """
         self. actionRemove_selected_files.emit(SIGNAL("triggered()"))
 
     @pyqtSignature("")
@@ -138,7 +162,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         """
         Starts conversion
         """
-        args = []
+        args = [] #Initialization of some variables, just in case.
         row = 0
         while row < self.tableWidget.rowCount():
             args.append(toPython(self.tableWidget.item(row,0).text()))
@@ -161,37 +185,50 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     @pyqtSignature("")
     def on_AddButton_clicked(self):
+        """
+        Pass to actionAdd_file_triggered
+        """
         self. actionAdd_file.emit(SIGNAL("triggered()"))
 
     @pyqtSignature("")
     def on_AddButton_2_clicked(self):
+        """
+        Pass to actionAdd_file_triggered
+        """
         self. actionAdd_file.emit(SIGNAL("triggered()"))
 
     @pyqtSignature("")
     def on_SelectOutputButton_clicked(self):
+        """
+        Pass to actionSelect_output_folder_triggered
+        """
         self. actionSelect_output_folder.emit(SIGNAL("triggered()"))
 
     @pyqtSignature("")
     def on_SelectOutputButton_2_clicked(self):
+        """
+        Pass to actionSelect_output_folder_triggered
+        """
         self. actionSelect_output_folder.emit(SIGNAL("triggered()"))
 
 
     @pyqtSignature("")
     def on_actionAdd_file_triggered(self):
         """
-        Adding files.
+        Now it's time to add those files we were avoiding to emiting extra signals, right? xD
         """
         files = QFileDialog.getOpenFileNames(\
             None,
             self.trUtf8("Select files to add to the convert queue"),
             self.settings.value("lastdir",QVariant(os.path.expanduser("~"))).toString(),
             QString(),
-            None)
-        if not files.isEmpty():
+            None) # A cute QFileDialog asks the user for the files to convert, for both videos and images.
+        if not files.isEmpty(): #If nothing, do nothing.
             try:
                 self.settings.setValue("lastdir", QVariant(os.path.split(toPython(files[0]))[0]))
+                #Remembering last used dir comes always in handy.
             except:
-                print files
+                print files #Debugging stuff...
         if self.tabWidget.currentIndex() == 0:
             for file in files:
                 currentrow = self.tableWidget.rowCount()
@@ -223,13 +260,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     @pyqtSignature("")
     def on_actionAbout_video4fuze_triggered(self):
         """
-        Slot documentation goes here.
+        Show a popup with info about video4fuze. I should really improve it...
         """
         QMessageBox.about(None,
             self.trUtf8("About video4fuze 0.5"),
             self.trUtf8("""This applications uses mencoder and avi-mux GUI (under wine where necessary) in order to convert your video files to be seen in you sansa fuze.
 
 Thanks to ewelot from the sansa forums for finding the way to convert the videos, without his findings this app wouldn't exist."""))
+    #Maybe with a text widget loading the README.txt it could be more practical and mainteinable.
 
     @pyqtSignature("")
     def on_actionAbout_Qt_triggered(self):
