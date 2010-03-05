@@ -96,7 +96,6 @@ class Fuze( ):
                     continue
             else:
                 print "\'" + argument + "\'" + ": file not found"
-            file = OUTPUT #Legacy reasons
             if FINALPREFIX == None:
                 FINAL = os.path.splitext(argument)[0] + "_fuze.avi"
             else:
@@ -108,8 +107,8 @@ class Fuze( ):
                     self.qobject.emit(SIGNAL("working"),"Using " + fuzemux)
                     if self.xterm != None:
                         fuzemux = self.xterm + " -e " + fuzemux
-	            fuzemux=fuzemux.split()
-                fuzemux.append(file)
+                fuzemux=fuzemux.split()
+                fuzemux.append(OUTPUT)
                 fuzemux.append(fuzemux_temp)
                 print "Calling fuzemux"
                 check_call(fuzemux)
@@ -138,7 +137,7 @@ class Fuze( ):
                 os.chdir(self.CWD)
                 if self.GUI != None:
                     self.qobject.emit(SIGNAL("itemDone"),argument)
-                os.remove(file)
+                os.remove(OUTPUT)
             except Exception, e:
                 print e
                 print  "Ooops not moving final video"

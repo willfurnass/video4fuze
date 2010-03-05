@@ -38,7 +38,7 @@ def main():
     Vapp.setApplicationVersion(VERSION)
     Vapp.installTranslator(translator)#Install translators into the application.
     Vapp.installTranslator(qttranslator)
-    VentanaP = MainWindow(sys.path[1]) #Now it's time to instantiate the main window
+    VentanaP = MainWindow(sys.argv[1:]) #Now it's time to instantiate the main window
     VentanaP.show() #And show it
     sys.exit(Vapp.exec_()) #When the app finishes, exit.
 

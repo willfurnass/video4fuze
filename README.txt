@@ -1,3 +1,20 @@
+       Copyright 2009 Adrián Cereto Massagué <ssorgatem@esdebian.org>
+
+       This program is free software; you can redistribute it and/or modify
+       it under the terms of the GNU General Public License as published by
+       the Free Software Foundation; either version 3 of the License, or
+       (at your option) any later version.
+
+       This program is distributed in the hope that it will be useful,
+       but WITHOUT ANY WARRANTY; without even the implied warranty of
+       MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+       GNU General Public License for more details.
+
+       You should have received a copy of the GNU General Public License
+       along with this program; if not, write to the Free Software
+       Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+       MA 02110-1301, USA.
+
 video4fuze is free software, distributed under the GPLv3.
 
 Icons were created by Ben Brooks <benbrooks.co.uk>, and are under a
@@ -37,4 +54,6 @@ If you prefer the commandline version, just type:
     with suffix "_fuze" and extension ".avi".
 
 
-Make sure "mencoder", "ffmpeg" and "fuzemux" are in your path (or, in win32, the same folder as the main script)
+Make sure "mencoder", "ffmpeg" and "fuzemux" are in your path (or, in win32, the same folder as the main script).
+
+If you downloaded the source package, fuzemux source is included in it. Just cd to its source directory and type "make" to get it compiled for your system.

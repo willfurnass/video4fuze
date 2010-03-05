@@ -6,6 +6,7 @@
 * Now v4f remembers last used paths for videos, songs and images
 * AMG backend dropped in favour of fuzemux. Code for this based on Struct's fuze.py modification
 * LOTS of code cleanup.
+* Settings in INI files in windows and OSX too
 --0.4.1--
 * Updated copyright and license information in main script
 * Bugfix: mencoder changing path work-arounded by creating a windows installer (Yes! I finally did it)

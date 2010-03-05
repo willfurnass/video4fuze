@@ -128,7 +128,12 @@ Section "ffmpeg" SEC03
   SetOutPath "$INSTDIR"
   File "ffmpeg.exe"
 
-Section "ffmpeg" SEC04
+; Shortcuts
+  !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
+  !insertmacro MUI_STARTMENU_WRITE_END
+SectionEnd
+
+Section "fuzemux" SEC04
   SetOutPath "$INSTDIR"
   File "fuzemux.exe"
 
@@ -161,17 +166,18 @@ SectionEnd
   !insertmacro MUI_DESCRIPTION_TEXT ${SEC01} "Video4fuze"
   !insertmacro MUI_DESCRIPTION_TEXT ${SEC02} "Unselect this only if you know what are you doing. If selected, it will install mencoder, which video4fuze needs"
   !insertmacro MUI_DESCRIPTION_TEXT ${SEC03} "Needed for thumbnail generation. If you choose not to install it, you will have to manually place a copy of ffmpeg.exe into vide4fuze-s installation directory"
+    !insertmacro MUI_DESCRIPTION_TEXT ${SEC04} "Needed in order to output avi files playable in the fuze"
 !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
 
 Function un.onUninstSuccess
   HideWindow
-  MessageBox MB_ICONINFORMATION|MB_OK "La desinstalación de $(^Name) finalizó satisfactoriamente."
+  MessageBox MB_ICONINFORMATION|MB_OK "La desinstalaci贸n de $(^Name) finaliz贸 satisfactoriamente."
 FunctionEnd
 
 Function un.onInit
 !insertmacro MUI_UNGETLANGUAGE
-  MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 "żEstá completamente seguro que desea desinstalar $(^Name) junto con todos sus componentes?" IDYES +2
+  MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 "偶Est谩 completamente seguro que desea desinstalar $(^Name) junto con todos sus componentes?" IDYES +2
   Abort
 FunctionEnd
 
