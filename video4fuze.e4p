@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project video4fuze -->
-<!-- Saved: 2010-03-05, 21:50:43 -->
+<!-- Saved: 2010-03-06, 01:26:29 -->
 <!-- Copyright (C) 2010 ssorgatem, ssorgatem@esdebian.org -->
 <Project version="4.6">
   <Language>en</Language>
@@ -54,7 +54,6 @@
     <Other>ffmpeg.exe</Other>
     <Other>LICENSE.txt</Other>
     <Other>win32installer.nsi</Other>
-    <Other>fuzemux-0.1.0/compile.sh</Other>
     <Other>fuzemux-0.1.0/COPYING</Other>
     <Other>fuzemux-0.1.0/fuzemux.c</Other>
     <Other>fuzemux-0.1.0/riff.c</Other>
