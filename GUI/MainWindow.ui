@@ -10,9 +10,6 @@
     <height>630</height>
    </rect>
   </property>
-  <property name="windowTitle">
-   <string>video4fuze 0.5</string>
-  </property>
   <property name="windowIcon">
    <iconset resource="../video4fuze.qrc">
     <normaloff>:/icons/blue.png</normaloff>:/icons/blue.png</iconset>

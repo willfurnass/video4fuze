@@ -6,7 +6,8 @@ Module implementing MainWindow. Playlist edition capabilities are inspired by Du
 """
 import os, fuze, p2fuze
 from PyQt4.QtGui import QMainWindow,QFileDialog,QMessageBox, QLabel, QTableWidgetItem, QListWidgetItem, QIcon
-from PyQt4.QtCore import pyqtSignature,QString,QT_TR_NOOP,SIGNAL,QObject,Qt,QSettings,QVariant, QSize, QCoreApplication
+#from PyQt4.QtCore import pyqtSignature,QString,QT_TR_NOOP,SIGNAL,QObject,Qt,QSettings,QVariant, QSize, QCoreApplication
+from PyQt4.QtCore import QString,QT_TR_NOOP,SIGNAL,QObject,Qt,QSettings,QVariant, QSize, QCoreApplication#, QMetaObject
 from threading import Thread
 from Ui_MainWindow import Ui_MainWindow
 from v4fPreferences import PreferencesDialog
@@ -28,7 +29,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         """
         #TODO: Fix songs drag'n'dropping
         QMainWindow.__init__(self, parent) #Use QMainWindow.__init___
-        self.setupUi(self) #setuo the ui...
+        self.setupUi(self) #setup the ui...
+        #QMetaObject.connectSlotsByName(self)
         self.v4fhome = v4fhome #Where are we?
         self.settings = QSettings(QSettings.IniFormat, QSettings.UserScope, QCoreApplication.organizationName(), QCoreApplication.applicationName()) #Instantiate QSettings, using ini format always
         self.Fuze = fuze.Fuze(self) #Instantiate the Fuze class.
@@ -44,49 +46,30 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         except:
             print "Your version of PyQt4 seems a bit out of date. This may lead to problems. But may not :)" #Well, in fact, it could be too a too old Qt4 version, even if you have an enough new PyQt4t... but then, having a PyQt4 version designed to work with a Qt4 version other than the one you have installed, can be problematic anyways.
         self.output = toPython(self.settings.value("outputdir",QVariant(os.path.expanduser("~"))).toString()) #Where to output things.
+        self.setWindowTitle(QCoreApplication.applicationName()+" "+QCoreApplication.applicationVersion())
+        self.connect(self.actionAbout_Qt, SIGNAL("triggered()"),self.on_actionAbout_Qt_triggered)
+        self.connect(self.RemoveButton, SIGNAL("clicked()"),self.on_RemoveButton_clicked)
+        self.connect(self.RemoveButton_2, SIGNAL("clicked()"),self.on_RemoveButton_2_clicked)
+        self.connect(self.RemoveButton_3, SIGNAL("clicked()"),self.on_RemoveButton_3_clicked)
+        self.connect(self.ConvertButton, SIGNAL("clicked()"),self.on_ConvertButton_clicked)
+        self.connect(self.ConvertButton_2, SIGNAL("clicked()"),self.on_ConvertButton_2_clicked)
+        self.connect(self.actionPreferences, SIGNAL("triggered()"),self.on_actionPreferences_triggered)
+        self.connect(self.actionAbout_video4fuze, SIGNAL("triggered()"),self.on_actionAbout_video4fuze_triggered)
+        self.connect(self.AddButton, SIGNAL("clicked()"),self.on_AddButton_clicked)
+        self.connect(self.AddButton_2, SIGNAL("clicked()"),self.on_AddButton_2_clicked)
+        self.connect(self.SelectOutputButton, SIGNAL("clicked()"),self.on_SelectOutputButton_clicked)
+        self.connect(self.SelectOutputButton_2, SIGNAL("clicked()"),self.on_SelectOutputButton_2_clicked)
+        self.connect(self.SavePlaylist, SIGNAL("clicked()"),self.on_SavePlaylist_clicked)
+        self.connect(self.SongsFromSD, SIGNAL("clicked()"),self.on_SongsFromSD_clicked)
+        self.connect(self.SongsFromFuze, SIGNAL("clicked()"),self.on_SongsFromFuze_clicked)
+        self.connect(self.OpenPlaylist, SIGNAL("clicked()"),self.on_OpenPlaylist_clicked)
+        self.connect(self.ToggleSort, SIGNAL("clicked()"),self.on_ToggleSort_clicked)
+
 
     def fuzePath(self,prefix): #TODO: Tags display & sorting
         """
         Translates paths to fuze's .pla format, and loads them in the UI
         """
-#        if os.name == 'nt':
-#            prefix = prefix + "/"#Add this prefix in case of redmond's semi-operating system....
-#        Songs = QFileDialog.getOpenFileNames(\
-#            None,
-#            self.trUtf8("Select songs to add to the playlist"),
-#            self.settings.value("lastsongdir",QVariant(self.mediaroot)).toString(),
-#            self.trUtf8("*.ogg; *.OGG; *.mp3; *.MP3; *.wma; *.WMA; *.flac; *.FLAC"),
-#            None) # A QFileDialog for picking songs
-#        if not Songs.isEmpty(): #Do nothing if nothing was picked
-#            try:
-#                self.settings.setValue("lastsongdir", QVariant(os.path.split(toPython(Songs[0]))[0]))#Store the last dir from where songs were picked. Thats for commodity.
-#            except Exception, e:
-#                print e
-#                print Songs
-#        for song in Songs: #Iterate selected songs and render them.
-#            currentrow = self.playlistWidget.rowCount()
-#            self.playlistWidget.insertRow(currentrow)
-#            unicodesong = toPython(song)
-#            cover = os.path.join(os.path.split(unicodesong)[0], "folder.jpg")
-#            tostrip = mountpoint(unicodesong)
-#            song.replace(tostrip, prefix)
-#            song.replace("\\","/")
-#            PathItem = QTableWidgetItem()
-#            TitleItem = QTableWidgetItem()
-#            CoverItem = QTableWidgetItem()
-#            ArtistItem = QTableWidgetItem()
-#            AlbumItem = QTableWidgetItem()
-#            if os.path.isfile(cover):
-#                CoverItem.setIcon(QIcon(cover))
-#            else:
-#                print cover + " not found"
-#            self.playlistWidget.setItem(currentrow, Title, TitleItem)
-#            self.playlistWidget.setItem(currentrow, Artist, ArtistItem)
-#            self.playlistWidget.setItem(currentrow, Path, PathItem)
-#            self.playlistWidget.setItem(currentrow, Album, AlbumItem)
-#            self.playlistWidget.setItem(currentrow, Cover, CoverItem)
-#            PathItem.setText(song)
-#        self.playlistWidget.resizeColumnsToContents()
         if os.name == 'nt':
             prefix = prefix + "/"#Add this prefix in case of redmond's semi-operating system....
         Songs = QFileDialog.getOpenFileNames(\
@@ -141,7 +124,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def DelItem(self, itemText, image = False):
         """
-        Clean items and/or objects from the different tabs. This function is intented to be a slot to connect with signals on other threads.
+        Clean items and/or objects from the different tabs. This function is intended to be a slot to connect with signals on other threads.
         """
         if image:
             row = 0
@@ -190,38 +173,31 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         while row < self.tableWidget_2.rowCount():
             self.tableWidget_2.item(row,1).setText(self.output)
             row += 1
-###############################################################
-#Now, slots written with PyQt's short-circuit and connect-slots-by-signal-name
 
-    @pyqtSignature("")
     def on_RemoveButton_clicked(self):
         """
         Removes files to convert
         """
         remlist = []
         for item in self.tableWidget.selectedItems():
-            if item.column() == 0:
-                self.tableWidget.removeRow(self.tableWidget.row(item))
-#        """
-#        Pass to actionRemove_selected_files_triggered
-#        """
-#        self. actionRemove_selected_files.emit(SIGNAL("triggered()"))
+            try:
+                if item.column() == 0:
+                    self.tableWidget.removeRow(self.tableWidget.row(item))
+            except:
+                print "Weird things happening between python and c++"
 
-    @pyqtSignature("")
     def on_RemoveButton_2_clicked(self):
         """
         Removes files to convert
         """
         remlist = []
         for item in self.tableWidget_2.selectedItems():
-            if item.column() == 0:
-                self.tableWidget_2.removeRow(self.tableWidget_2.row(item))
-#        """
-#        Pass to actionRemove_selected_files_triggered
-#        """
-#        self. actionRemove_selected_files.emit(SIGNAL("triggered()"))
+            try:
+                if item.column() == 0:
+                    self.tableWidget_2.removeRow(self.tableWidget_2.row(item))
+            except:
+                print "Weird things happening between python and c++"
 
-    @pyqtSignature("")
     def on_ConvertButton_clicked(self):
         """
         Starts conversion
@@ -234,7 +210,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         Conversion = Converter(args, self, self.output)
         Conversion.start()
 
-    @pyqtSignature("")
     def on_ConvertButton_2_clicked(self):
         """
         Starts image conversion & resizing
@@ -247,7 +222,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         Resize = Resizer(args, self, self.output)
         Resize.start()
 
-    @pyqtSignature("")
     def on_AddButton_clicked(self):
         """
         Now it's time to add those files we were avoiding to emiting extra signals, right? xD
@@ -274,12 +248,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.tableWidget.setItem(currentrow,0,filewidget)
             self.tableWidget.setItem(currentrow,1,outputitem)
             self.tableWidget.resizeColumnsToContents()
-#        """
-#        Pass to actionAdd_file_triggered
-#        """
-#        self. actionAdd_file.emit(SIGNAL("triggered()"))
 
-    @pyqtSignature("")
     def on_AddButton_2_clicked(self):
         """
         Now it's time to add those files we were avoiding to emiting extra signals, right? xD
@@ -310,48 +279,41 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.tableWidget_2.setItem(currentrow,0,filewidget)
             self.tableWidget_2.setItem(currentrow,1,outputitem)
             self.tableWidget_2.resizeColumnsToContents()
-#        """
-#        Pass to actionAdd_file_triggered
-#        """
-#        self. actionAdd_file.emit(SIGNAL("triggered()"))
 
-    @pyqtSignature("")
     def on_SelectOutputButton_clicked(self):
         """
         Pass to actionSelect_output_folder_triggered
         """
         self.SelectOutput()
 
-    @pyqtSignature("")
     def on_SelectOutputButton_2_clicked(self):
         """
         Pass to actionSelect_output_folder_triggered
         """
         self.SelectOutput()
 
-    @pyqtSignature("")
     def on_actionAbout_video4fuze_triggered(self):
         """
         Show a popup with info about video4fuze. I should really improve it...
         """
         QMessageBox.about(None,
-            self.trUtf8("About video4fuze 0.5"),
+            self.trUtf8("About")+" "+QCoreApplication.applicationName()+" "+QCoreApplication.applicationVersion(),
             self.trUtf8("""This applications uses mencoder and fuzemux in order to convert your video files to be seen in you sansa fuze.
 
 Thanks to ewelot and  earthcrosser  from the sansa forums for finding the way to convert the videos, without their findings this app wouldn't exist."""))
     #Maybe with a text widget loading the README.txt it could be more practical and mainteinable.
 
-    @pyqtSignature("")
+    #@pyqtSignature("")
     def on_actionAbout_Qt_triggered(self):
         QMessageBox.aboutQt(None,
             self.trUtf8(""))
 
-    @pyqtSignature("")
+    #@pyqtSignature("")
     def on_actionPreferences_triggered(self):
         prefs = PreferencesDialog()
         prefs.exec_()
 
-    @pyqtSignature("")
+    #@pyqtSignature("")
     def on_SavePlaylist_clicked(self):
         """
         Write the playlist to a file..
@@ -359,7 +321,7 @@ Thanks to ewelot and  earthcrosser  from the sansa forums for finding the way to
         self.playlistname = toPython(QFileDialog.getSaveFileName(\
             None,
             self.trUtf8("Save your playlist"),
-            self.trUtf8(self.playlistname),
+            self.playlistname,
             self.trUtf8("*.pla"),
             None))
 
@@ -381,21 +343,21 @@ Thanks to ewelot and  earthcrosser  from the sansa forums for finding the way to
             REFS.write(Playlist)
             REFS.close
 
-    @pyqtSignature("")
+    #@pyqtSignature("")
     def on_SongsFromSD_clicked(self):
         """
         Add µSD songs to playlist.
         """
         self.fuzePath("/mmc:1:")
 
-    @pyqtSignature("")
+    #@pyqtSignature("")
     def on_SongsFromFuze_clicked(self):
         """
         Get songs from the fuze
         """
         self.fuzePath("/mmc:0:")
 
-    @pyqtSignature("")
+    #@pyqtSignature("")
     def on_RemoveButton_3_clicked(self):
         """
         Removes files to convert
@@ -404,7 +366,7 @@ Thanks to ewelot and  earthcrosser  from the sansa forums for finding the way to
         for item in self.playlistWidget.selectedItems():
             self.playlistWidget.takeItem(self.playlistWidget.row(item))
 
-    @pyqtSignature("")
+    #@pyqtSignature("")
     def on_OpenPlaylist_clicked(self):
         """
         Load and parse a .pla.refs file
@@ -437,7 +399,7 @@ Thanks to ewelot and  earthcrosser  from the sansa forums for finding the way to
             PL.close()
 
 
-    @pyqtSignature("")
+    #@pyqtSignature("")
     def on_ToggleSort_clicked(self):
         """
         Sort playlist

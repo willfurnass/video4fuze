@@ -5,7 +5,7 @@ Module implementing PreferencesDialog.
 """
 
 from PyQt4.QtGui import QDialog
-from PyQt4.QtCore import pyqtSignature, QSettings, QVariant
+from PyQt4.QtCore import QSettings, QVariant,SIGNAL
 import fuze
 
 from Ui_Preferences import Ui_PreferencesDialog
@@ -23,8 +23,9 @@ class PreferencesDialog(QDialog, Ui_PreferencesDialog):
         self.default = fuze.Fuze()
         self.mencoderpass1Edit.setPlainText(QSettings().value("mencoderpass1",QVariant(self.default.mencoderpass1)).toString())
         self.mencoderpass2Edit.setPlainText(QSettings().value("mencoderpass2",QVariant(self.default.mencoderpass2)).toString())
+        self.connect(self.DefaultsButton, SIGNAL("clicked()"),self.on_DefaultsButton_clicked)
+        self.connect(self.okButton, SIGNAL("clicked()"),self.on_okButton_clicked)
 
-    @pyqtSignature("")
     def on_DefaultsButton_clicked(self):
         """
         Restore defaults from fuze.py
@@ -32,7 +33,6 @@ class PreferencesDialog(QDialog, Ui_PreferencesDialog):
         self.mencoderpass1Edit.setPlainText(self.default.mencoderpass1)
         self.mencoderpass2Edit.setPlainText(self.default.mencoderpass2)
 
-    @pyqtSignature("")
     def on_okButton_clicked(self):
         """
         Apply the changes
