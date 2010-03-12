@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project video4fuze -->
-<!-- Saved: 2010-03-06, 01:26:29 -->
+<!-- Saved: 2010-03-11, 22:45:26 -->
 <!-- Copyright (C) 2010 ssorgatem, ssorgatem@esdebian.org -->
 <Project version="4.6">
   <Language>en</Language>
@@ -24,10 +24,16 @@
     <Source>GUI/v4fPreferences.py</Source>
     <Source>p2fuze.py</Source>
     <Source>vthumb.py</Source>
+    <Source>PyQt4/__init__.py</Source>
+    <Source>PyQt4/QtCore.py</Source>
+    <Source>PyQt4/QtGui.py</Source>
+    <Source>GUI/Ui_AboutDiag.py</Source>
+    <Source>GUI/AboutDiag.py</Source>
   </Sources>
   <Forms>
     <Form>GUI/MainWindow.ui</Form>
     <Form>GUI/Preferences.ui</Form>
+    <Form>GUI/AboutDiag.ui</Form>
   </Forms>
   <Translations>
     <Translation>translations/v4f_es.ts</Translation>

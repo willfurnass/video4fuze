@@ -1,23 +1,14 @@
 # -*- coding: utf-8 -*-
-
 """
 Module implementing MainWindow. Playlist edition capabilities are inspired by Dunny's YAPL, and had been possible to write thanks to his help about the
 # .pla playlist format.
 """
 import os, fuze, p2fuze
 from PyQt4.QtGui import QMainWindow,QFileDialog,QMessageBox, QLabel, QTableWidgetItem, QListWidgetItem, QIcon
-#from PyQt4.QtCore import pyqtSignature,QString,QT_TR_NOOP,SIGNAL,QObject,Qt,QSettings,QVariant, QSize, QCoreApplication
-from PyQt4.QtCore import QString,QT_TR_NOOP,SIGNAL,QObject,Qt,QSettings,QVariant, QSize, QCoreApplication#, QMetaObject
+from PyQt4.QtCore import QString,QT_TR_NOOP,SIGNAL,QObject,Qt,QSettings,QVariant, QSize, QCoreApplication
 from threading import Thread
 from Ui_MainWindow import Ui_MainWindow
 from v4fPreferences import PreferencesDialog
-
-# A shortcut for playlist editor QTablewidget column indices, so I can easily rearrange them
-Cover = 0
-Title = 1
-Artist = 2
-Album = 3
-Path = 4
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     """
@@ -27,10 +18,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         """
         Constructor
         """
-        #TODO: Fix songs drag'n'dropping
         QMainWindow.__init__(self, parent) #Use QMainWindow.__init___
         self.setupUi(self) #setup the ui...
-        #QMetaObject.connectSlotsByName(self)
+        #IMPORTANT: the line "QtCore.QMetaObject.connectSlotsByName(MainWindow)" in UI_MainWindow.py MUST be commented.
         self.v4fhome = v4fhome #Where are we?
         self.settings = QSettings(QSettings.IniFormat, QSettings.UserScope, QCoreApplication.organizationName(), QCoreApplication.applicationName()) #Instantiate QSettings, using ini format always
         self.Fuze = fuze.Fuze(self) #Instantiate the Fuze class.
@@ -41,10 +31,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.mediaroot = os.path.join(os.path.expanduser("~"), "Desktop") #Otherwise, here we have the classical desktop...
         self.playlistname = self.mediaroot #Apply that for playlists too
         try:
-            self.tableWidget.horizontalHeader().setResizeMode(3) #Try to fix size of tableWidget's
+            self.tableWidget.horizontalHeader().setResizeMode(3) #Try to fix size of tableWidgets
             self.tableWidget_2.horizontalHeader().setResizeMode(3)
         except:
-            print "Your version of PyQt4 seems a bit out of date. This may lead to problems. But may not :)" #Well, in fact, it could be too a too old Qt4 version, even if you have an enough new PyQt4t... but then, having a PyQt4 version designed to work with a Qt4 version other than the one you have installed, can be problematic anyways.
+            print "Your version of PyQt4 seems a bit out of date. This may lead to problems. But may not :)" #Most probable. The fact is that it doesn't work in PySide and older PyQt4.
         self.output = toPython(self.settings.value("outputdir",QVariant(os.path.expanduser("~"))).toString()) #Where to output things.
         self.setWindowTitle(QCoreApplication.applicationName()+" "+QCoreApplication.applicationVersion())
         self.connect(self.actionAbout_Qt, SIGNAL("triggered()"),self.on_actionAbout_Qt_triggered)
@@ -301,19 +291,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.trUtf8("""This applications uses mencoder and fuzemux in order to convert your video files to be seen in you sansa fuze.
 
 Thanks to ewelot and  earthcrosser  from the sansa forums for finding the way to convert the videos, without their findings this app wouldn't exist."""))
-    #Maybe with a text widget loading the README.txt it could be more practical and mainteinable.
+    #TODO: Maybe with a text widget loading the README.txt it could be more practical and mainteinable.
 
-    #@pyqtSignature("")
     def on_actionAbout_Qt_triggered(self):
         QMessageBox.aboutQt(None,
             self.trUtf8(""))
 
-    #@pyqtSignature("")
     def on_actionPreferences_triggered(self):
         prefs = PreferencesDialog()
         prefs.exec_()
 
-    #@pyqtSignature("")
     def on_SavePlaylist_clicked(self):
         """
         Write the playlist to a file..
@@ -343,21 +330,18 @@ Thanks to ewelot and  earthcrosser  from the sansa forums for finding the way to
             REFS.write(Playlist)
             REFS.close
 
-    #@pyqtSignature("")
     def on_SongsFromSD_clicked(self):
         """
         Add µSD songs to playlist.
         """
         self.fuzePath("/mmc:1:")
 
-    #@pyqtSignature("")
     def on_SongsFromFuze_clicked(self):
         """
         Get songs from the fuze
         """
         self.fuzePath("/mmc:0:")
 
-    #@pyqtSignature("")
     def on_RemoveButton_3_clicked(self):
         """
         Removes files to convert
@@ -366,7 +350,6 @@ Thanks to ewelot and  earthcrosser  from the sansa forums for finding the way to
         for item in self.playlistWidget.selectedItems():
             self.playlistWidget.takeItem(self.playlistWidget.row(item))
 
-    #@pyqtSignature("")
     def on_OpenPlaylist_clicked(self):
         """
         Load and parse a .pla.refs file
@@ -398,14 +381,13 @@ Thanks to ewelot and  earthcrosser  from the sansa forums for finding the way to
                 self.playlistWidget.addItem(listItem)
             PL.close()
 
-
-    #@pyqtSignature("")
     def on_ToggleSort_clicked(self):
         """
         Sort playlist
         """
         self.playlistWidget.sortItems()
 
+#Here come two _very_ ugly threaded worker classes
 class Converter(Thread):
     """
     Doing the job in a different thread is always good.
@@ -431,15 +413,21 @@ class Resizer(Thread):
     def run(self):
         self.parent.resis.convert(self.args, self.FINALPREFIX)
 
-def mountpoint(s):
-    if (os.path.ismount(s) or len(s)==0):
-        return s
+def mountpoint(dir):
+    """
+    Function to determine the mountpoint of a given dir
+    """
+    if (os.path.ismount(dir) or len(dir) == 0):
+        return dir
     else:
-        return mountpoint(os.path.split(s)[0])
+        return mountpoint(os.path.split(dir)[0])
 
-def toPython(qstring):
-    qstring = QString(qstring)
+def toPython(string):
+    """
+    Little helper function to workaround MS Windows unicode support
+    """
+    qstring = QString(string)
     if os.name == 'nt':
         return str(qstring.toAscii())
     else:
-        return unicode(qstring)#, "utf-8")
+        return unicode(qstring)

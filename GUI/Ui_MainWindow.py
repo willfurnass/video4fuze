@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file '/home/ssorgatem/Documents/python/video4fuze/GUI/MainWindow.ui'
 #
-# Created: Wed Mar 10 18:44:52 2010
+# Created: Fri Mar 12 00:17:28 2010
 #      by: PyQt4 UI code generator 4.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -222,7 +222,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         self.tabWidget.setCurrentIndex(0)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        #QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
         self.AddButton.setText(QtGui.QApplication.translate("MainWindow", "Add files...", None, QtGui.QApplication.UnicodeUTF8))
