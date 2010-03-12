@@ -5,26 +5,28 @@ Class and methods to convert video for the fuze
 """
 import os, tempfile, shutil, sys, commands, unicodedata
 from subprocess import check_call, call
-from PyQt4.QtCore import QT_TR_NOOP,SIGNAL,QObject,QString,QVariant
+from PyQt4.QtCore import QT_TR_NOOP,SIGNAL,QObject,QString,QVariant, QSettings
 from vthumb import *
+####################################################################
+mencoderpass1 = "mencoder -msglevel all=0:statusline=5 -ffourcc DX50 -ofps 20 -vf pp=li,expand=:::::224/176,scale=224:176,harddup     -ovc lavc -lavcopts vcodec=mpeg4:vbitrate=683:vmax_b_frames=0:keyint=15:turbo:vpass=1 -srate 44100 -af resample=44100:0:1,format=s16le -oac mp3lame -lameopts cbr:br=128"
 
-class Fuze( ):
+mencoderpass2 = "mencoder -msglevel all=0:statusline=5 -ffourcc DX50 -ofps 20 -vf pp=li,expand=:::::224/176,scale=224:176,harddup     -ovc lavc -lavcopts vcodec=mpeg4:vbitrate=683:vmax_b_frames=0:keyint=15:vpass=2 -srate 44100 -af resample=44100:0:1,format=s16le -oac mp3lame -lameopts cbr:br=128"
+
+mencodersinglepass = "mencoder  -msglevel all=0:statusline=5 -ofps 20 -ovc lavc -lavcopts vcodec=mpeg4:vqscale=3:keyint=15  -vf field,expand=:::::224/176,scale=224:176,harddup -srate 44100 -af resample=44100:0:1,format=s16le -oac mp3lame -lameopts cbr:br=128"
+pass2 = True
+####################################################################
+class Fuze():
     def __init__(self, GUI = None):
         self.GUI = GUI
         self.CWD = os.getcwd()
-####################################################################
-        self.mencoderpass1 = "mencoder -ffourcc DX50 -ofps 20 -vf pp=li,expand=:::::224/176,scale=224:176,harddup     -ovc lavc -lavcopts vcodec=mpeg4:vbitrate=683:vmax_b_frames=0:keyint=15:turbo:vpass=1 -srate 44100 -af resample=44100:0:1,format=s16le -oac mp3lame -lameopts cbr:br=128"
-
-        self.mencoderpass2 = "mencoder -ffourcc DX50 -ofps 20 -vf pp=li,expand=:::::224/176,scale=224:176,harddup     -ovc lavc -lavcopts vcodec=mpeg4:vbitrate=683:vmax_b_frames=0:keyint=15:vpass=2 -srate 44100 -af resample=44100:0:1,format=s16le -oac mp3lame -lameopts cbr:br=128"
-####################################################################
+        self.qobject = QObject()
         if self.GUI != None:
-            self.qobject = QObject()
             self.qobject.connect(self.qobject, SIGNAL("stop"),GUI.WAIT)
             self.qobject.connect(self.qobject, SIGNAL("working"),GUI.Status)
             self.qobject.connect(self.qobject, SIGNAL("Exception"),GUI.ErrorDiag)
             self.qobject.connect(self.qobject, SIGNAL("itemDone"),GUI.DelItem)
             self.qobject.connect(self.qobject, SIGNAL("finished"),GUI.getReady)
-            self.LoadSettings()
+        self.LoadSettings()
         self.xterm = None
         self.AMGPrefix = tempfile.gettempdir()
         if os.name == 'nt':
@@ -41,32 +43,39 @@ class Fuze( ):
                     self.xterm = termloc[1]
                 else:
                     print "xterm not found"
-                print self.xterm
             else:
                 if self.GUI != None:
                     print "No terminal emulator available"
 
     def LoadSettings(self):
-        self.mencoderpass1 = str(self.GUI.settings.value("mencoderpass1", QVariant(self.mencoderpass1)).toString())
-        self.mencoderpass2 = str(self.GUI.settings.value("mencoderpass2", QVariant(self.mencoderpass2)).toString())
+        self.mencoderpass1 = unicode(QSettings().value("mencoderpass1", QVariant(mencoderpass1)).toString())
+        self.mencoderpass2 = unicode(QSettings().value("mencoderpass2", QVariant(mencoderpass2)).toString())
+        self.mencodersinglepass = unicode(QSettings().value("mencodersinglepass",QVariant(mencodersinglepass)).toString())
+        self.pass2 = QSettings().value("2pass",QVariant(pass2)).toBool()
+
 
     def convert(self,args, FINALPREFIX =  None):
         os.chdir(self.AMGPrefix)
-        if self.GUI != None:
-            self.qobject.emit(SIGNAL("stop"),self.GUI.Video)
+        self.qobject.emit(SIGNAL("stop"),self.GUI.Video)
         for argument in args:
+#################################mencoder pass 1###################
             if os.path.isfile(argument):
                 if os.name == 'nt':
-                    OUTPUT = os.path.join(self.AMGPrefix,os.path.splitext(os.path.basename(argument))[0] + ".temp.avi")#.encode("ascii", "ignore")
+                    OUTPUT = os.path.join(self.AMGPrefix,os.path.splitext(os.path.basename(argument))[0] + ".temp.avi")
                 else:
                     OUTPUT = unicodedata.normalize('NFKD',os.path.join(self.AMGPrefix,os.path.splitext(os.path.basename(argument))[0] + ".temp.avi")).encode("ascii", "ignore")
                 try:
-                    print "Calling mencoder #1"
-                    mencoderpass1 = str(self.mencoderpass1)
-                    if self.GUI != None:
-                        self.qobject.emit(SIGNAL("working"),"Using mencoder on " + argument + "...")
-                        if self.xterm != None:
-                            mencoderpass1 = self.xterm + " -e " + mencoderpass1
+                    if self.pass2:
+                        print "Calling mencoder #1"
+                    else:
+                        print "Calling a single pass of mencoder"
+                    if self.pass2:
+                        mencoderpass1 = unicode(self.mencoderpass1)
+                    else:
+                        mencoderpass1 = self.mencodersinglepass
+                    self.qobject.emit(SIGNAL("working"),"Using mencoder on " + argument + "...")
+                    if self.xterm != None:
+                        mencoderpass1 = self.xterm + " -e " + mencoderpass1
                     mencoderpass1 = mencoderpass1.split()
                     mencoderpass1.append(argument)
                     mencoderpass1.append("-o")
@@ -74,26 +83,26 @@ class Fuze( ):
                     check_call(mencoderpass1)
                 except Exception, e:
                     print e
-                    if self.GUI != None:
-                        self.qobject.emit(SIGNAL("Exception"),e)
+                    self.qobject.emit(SIGNAL("Exception"),e)
                     continue
-                try:
-                    print "Calling mencoder #2"
-                    mencoderpass2 = str(self.mencoderpass2)
-                    if self.GUI != None:
+#####################mencoder pass 2#############################
+                if self.pass2:
+                    try:
+                        print "Calling mencoder #2"
+                        mencoderpass2 = str(self.mencoderpass2)
                         self.qobject.emit(SIGNAL("working"),"Using mencoder on " + argument + " (pass 2)...")
                         if self.xterm != None:
                             mencoderpass2 = self.xterm + " -e " + mencoderpass2
-                    mencoderpass2 = mencoderpass2.split()
-                    mencoderpass2.append(argument)
-                    mencoderpass2.append("-o")
-                    mencoderpass2.append(OUTPUT)
-                    check_call(mencoderpass2)
-                except Exception, e:
-                    print e
-                    if self.GUI != None:
+                        mencoderpass2 = mencoderpass2.split()
+                        mencoderpass2.append(argument)
+                        mencoderpass2.append("-o")
+                        mencoderpass2.append(OUTPUT)
+                        check_call(mencoderpass2)
+                    except Exception, e:
+                        print e
                         self.qobject.emit(SIGNAL("Exception"),e)
-                    continue
+                        continue
+########################################################
             else:
                 print "\'" + argument + "\'" + ": file not found"
             if FINALPREFIX == None:
@@ -103,10 +112,9 @@ class Fuze( ):
             try:
                 fuzemux = self.fuzemux
                 fuzemux_temp = os.path.splitext(OUTPUT)[0] + "_fuzemuxed.avi"
-                if self.GUI != None:
-                    self.qobject.emit(SIGNAL("working"),"Using " + fuzemux)
-                    if self.xterm != None:
-                        fuzemux = self.xterm + " -e " + fuzemux
+                self.qobject.emit(SIGNAL("working"),"Using " + fuzemux)
+                if self.xterm != None:
+                    fuzemux = self.xterm + " -e " + fuzemux
                 fuzemux=fuzemux.split()
                 fuzemux.append(OUTPUT)
                 fuzemux.append(fuzemux_temp)
@@ -114,37 +122,31 @@ class Fuze( ):
                 check_call(fuzemux)
             except Exception, e:
                 print e
-                if self.GUI != None:
-                    self.qobject.emit(SIGNAL("Exception"),e)
+                self.qobject.emit(SIGNAL("Exception"),e)
                 os.remove(fuzemux_temp)
                 continue
             print "Moving " + fuzemux_temp+ " to " + FINAL + " and cleaning temporary files"
             print FINAL
             try:
                 try:
-                    if self.GUI != None:
-                        self.qobject.emit(SIGNAL("working"),"Creating video thumbnail")
+                    self.qobject.emit(SIGNAL("working"),"Creating video thumbnail")
                     print "Creating video thumbnail"
                     os.chdir(os.path.split(FINAL)[0])
                     find_thumb(fuzemux_temp, os.path.splitext(os.path.basename(FINAL))[0], 100, [], True, False, self.FFMPEG)
                 except Exception, e:
                     print e
                     raise e
-                    if self.GUI != None:
-                        self.qobject.emit(SIGNAL("Exception"),e)
+                    self.qobject.emit(SIGNAL("Exception"),e)
                 shutil.move(fuzemux_temp,FINAL)
                 os.chdir(self.CWD)
                 os.chdir(self.CWD)
-                if self.GUI != None:
-                    self.qobject.emit(SIGNAL("itemDone"),argument)
+                self.qobject.emit(SIGNAL("itemDone"),argument)
                 os.remove(OUTPUT)
             except Exception, e:
                 print e
                 print  "Ooops not moving final video"
-                if self.GUI != None:
-                    self.qobject.emit(SIGNAL("Exception"),e)
-        if self.GUI != None:
-            self.qobject.emit(SIGNAL("finished"),self.GUI.Video)
+                self.qobject.emit(SIGNAL("Exception"),e)
+        self.qobject.emit(SIGNAL("finished"),self.GUI.Video)
 
 if __name__ == "__main__":
     if sys.argv[1:] == [] :

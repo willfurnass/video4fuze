@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file '/home/ssorgatem/Documents/python/video4fuze/GUI/MainWindow.ui'
 #
-# Created: Fri Mar 12 00:17:28 2010
+# Created: Fri Mar 12 20:59:36 2010
 #      by: PyQt4 UI code generator 4.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -13,6 +13,11 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(722, 630)
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
+        MainWindow.setSizePolicy(sizePolicy)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(":/icons/blue.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
@@ -201,17 +206,10 @@ class Ui_MainWindow(object):
         self.menuAdvanced = QtGui.QMenu(self.menuBar)
         self.menuAdvanced.setObjectName("menuAdvanced")
         MainWindow.setMenuBar(self.menuBar)
-        self.actionAdd_file = QtGui.QAction(MainWindow)
-        self.actionAdd_file.setObjectName("actionAdd_file")
         self.actionAbout_video4fuze = QtGui.QAction(MainWindow)
         self.actionAbout_video4fuze.setObjectName("actionAbout_video4fuze")
         self.actionAbout_Qt = QtGui.QAction(MainWindow)
         self.actionAbout_Qt.setObjectName("actionAbout_Qt")
-        self.actionRemove_selected_files = QtGui.QAction(MainWindow)
-        self.actionRemove_selected_files.setShortcut("Del")
-        self.actionRemove_selected_files.setObjectName("actionRemove_selected_files")
-        self.actionSelect_output_folder = QtGui.QAction(MainWindow)
-        self.actionSelect_output_folder.setObjectName("actionSelect_output_folder")
         self.actionPreferences = QtGui.QAction(MainWindow)
         self.actionPreferences.setObjectName("actionPreferences")
         self.menuHelp.addAction(self.actionAbout_video4fuze)
@@ -255,11 +253,8 @@ class Ui_MainWindow(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.Playlists), QtGui.QApplication.translate("MainWindow", "Playlists", None, QtGui.QApplication.UnicodeUTF8))
         self.menuHelp.setTitle(QtGui.QApplication.translate("MainWindow", "Help", None, QtGui.QApplication.UnicodeUTF8))
         self.menuAdvanced.setTitle(QtGui.QApplication.translate("MainWindow", "Advanced", None, QtGui.QApplication.UnicodeUTF8))
-        self.actionAdd_file.setText(QtGui.QApplication.translate("MainWindow", "Add files...", None, QtGui.QApplication.UnicodeUTF8))
         self.actionAbout_video4fuze.setText(QtGui.QApplication.translate("MainWindow", "About video4fuze", None, QtGui.QApplication.UnicodeUTF8))
         self.actionAbout_Qt.setText(QtGui.QApplication.translate("MainWindow", "About Qt", None, QtGui.QApplication.UnicodeUTF8))
-        self.actionRemove_selected_files.setText(QtGui.QApplication.translate("MainWindow", "Remove selected files", None, QtGui.QApplication.UnicodeUTF8))
-        self.actionSelect_output_folder.setText(QtGui.QApplication.translate("MainWindow", "Select output folder", None, QtGui.QApplication.UnicodeUTF8))
         self.actionPreferences.setText(QtGui.QApplication.translate("MainWindow", "Preferences", None, QtGui.QApplication.UnicodeUTF8))
 
 import video4fuze_rc

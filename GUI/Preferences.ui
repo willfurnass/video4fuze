@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>493</width>
-    <height>415</height>
+    <height>529</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,8 +20,8 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>120</x>
-     <y>370</y>
+     <x>130</x>
+     <y>490</y>
      <width>351</width>
      <height>33</height>
     </rect>
@@ -78,70 +78,17 @@
     </item>
    </layout>
   </widget>
-  <widget class="QPlainTextEdit" name="mencoderpass1Edit">
-   <property name="geometry">
-    <rect>
-     <x>50</x>
-     <y>150</y>
-     <width>401</width>
-     <height>71</height>
-    </rect>
-   </property>
-   <property name="plainText">
-    <string/>
-   </property>
-  </widget>
-  <widget class="QPlainTextEdit" name="mencoderpass2Edit">
-   <property name="geometry">
-    <rect>
-     <x>50</x>
-     <y>270</y>
-     <width>401</width>
-     <height>71</height>
-    </rect>
-   </property>
-   <property name="plainText">
-    <string/>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>50</x>
-     <y>130</y>
-     <width>401</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Mencoder pass 1 command line:</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>50</x>
-     <y>250</y>
-     <width>401</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Mencoder pass 2 command line:</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
      <x>50</x>
-     <y>30</y>
+     <y>20</y>
      <width>391</width>
-     <height>81</height>
+     <height>41</height>
     </rect>
    </property>
    <property name="text">
-    <string>Warning: invalid command line arguments for mencoder may cause video4fuze to crash.
-These settings will be remembered, so if you only want them for just this conversion, remember to revert them to defaults or setting them as you wish.</string>
+    <string>Caution: Modify these settings only if you really know what you do. You have been warned</string>
    </property>
    <property name="scaledContents">
     <bool>false</bool>
@@ -151,6 +98,161 @@ These settings will be remembered, so if you only want them for just this conver
    </property>
    <property name="wordWrap">
     <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="Pass2Check">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>230</y>
+     <width>111</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Two passes</string>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QFrame" name="frame">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>250</y>
+     <width>471</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>10</y>
+      <width>401</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Mencoder pass 2 command line:</string>
+    </property>
+   </widget>
+   <widget class="QPlainTextEdit" name="mencoderpass2Edit">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>451</width>
+      <height>131</height>
+     </rect>
+    </property>
+    <property name="plainText">
+     <string/>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QFrame" name="frame_2">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>60</y>
+     <width>471</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QPlainTextEdit" name="mencoderpass1Edit">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>451</width>
+      <height>131</height>
+     </rect>
+    </property>
+    <property name="plainText">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>10</y>
+      <width>401</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Mencoder pass 1 command line:</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>430</y>
+     <width>261</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Converted image size:</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="Wiline">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>440</y>
+     <width>71</width>
+     <height>25</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="Heline">
+   <property name="geometry">
+    <rect>
+     <x>412</x>
+     <y>440</y>
+     <width>71</width>
+     <height>25</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>436</y>
+     <width>41</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>x</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
    </property>
   </widget>
  </widget>
@@ -165,8 +267,8 @@ These settings will be remembered, so if you only want them for just this conver
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>278</x>
-     <y>253</y>
+     <x>393</x>
+     <y>424</y>
     </hint>
     <hint type="destinationlabel">
      <x>96</x>
@@ -181,12 +283,28 @@ These settings will be remembered, so if you only want them for just this conver
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>369</x>
-     <y>253</y>
+     <x>479</x>
+     <y>424</y>
     </hint>
     <hint type="destinationlabel">
      <x>179</x>
      <y>282</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Pass2Check</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>frame</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>64</x>
+     <y>235</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>28</x>
+     <y>265</y>
     </hint>
    </hints>
   </connection>

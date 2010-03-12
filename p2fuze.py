@@ -4,7 +4,9 @@
 This module implements image export features for video4fuze
 """
 import os, sys, Image
-from PyQt4.QtCore import QT_TR_NOOP,SIGNAL,QObject
+from PyQt4.QtCore import QT_TR_NOOP,SIGNAL,QObject, QSettings, QVariant
+
+defaultsize = 224, 176
 
 class TransFuze():
     """
@@ -12,8 +14,9 @@ class TransFuze():
     """
     #Do something useful
     def __init__(self, GUI = None):
-        self.extlist = (".bmp",".cur",".dcx",".eps", ".fli", ".flc", ".fpx", ".gbr",".gd",".gif", ".ico",".im",".imt",".iptc",".naa",".jpg",".jpeg",".mcidas",".mic",".msp",".pcd",".pcx",".pixar",".png",".ppm",".pgm",".pbm",".psd",".sgi", ".tga",".tiff",".tif",".wal",".xbm",".xpm",".xv")
-        self.size = 224, 176
+        self.size = [int(QSettings().value("imagew",QVariant(defaultsize[0])).toInt()[0]),
+int(QSettings().value("imageh",QVariant(defaultsize[1])).toInt()[0])]
+        self.size = defaultsize
         self.GUI = GUI
         self.tab = GUI.Image
         if self.GUI != None:

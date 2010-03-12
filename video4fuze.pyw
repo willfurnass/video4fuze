@@ -20,8 +20,6 @@
 
 VERSION = "0.5.1"
 
-settingsVERSION = "0.5"
-
 import sys
 from PyQt4.QtGui import QApplication
 from PyQt4.QtCore import QTranslator, QString, QLocale

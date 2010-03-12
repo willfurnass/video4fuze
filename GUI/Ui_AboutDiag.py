@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file '/home/ssorgatem/Documents/python/video4fuze/GUI/AboutDiag.ui'
 #
-# Created: Thu Mar 11 22:40:39 2010
+# Created: Fri Mar 12 19:46:52 2010
 #      by: PyQt4 UI code generator 4.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -44,7 +44,7 @@ class Ui_Dialog(object):
         self.okButton.setCursor(QtCore.Qt.PointingHandCursor)
         self.okButton.setObjectName("okButton")
         self.logo = QtGui.QLabel(Dialog)
-        self.logo.setGeometry(QtCore.QRect(70, 0, 61, 61))
+        self.logo.setGeometry(QtCore.QRect(290, 10, 61, 61))
         self.logo.setCursor(QtCore.Qt.WhatsThisCursor)
         self.logo.setAutoFillBackground(False)
         self.logo.setPixmap(QtGui.QPixmap(":/icons/black.png"))
@@ -53,7 +53,7 @@ class Ui_Dialog(object):
         self.logo.setWordWrap(False)
         self.logo.setObjectName("logo")
         self.Appinfo = QtGui.QLabel(Dialog)
-        self.Appinfo.setGeometry(QtCore.QRect(150, 10, 221, 51))
+        self.Appinfo.setGeometry(QtCore.QRect(30, 10, 221, 41))
         self.Appinfo.setCursor(QtCore.Qt.WhatsThisCursor)
         self.Appinfo.setText("TextLabel")
         self.Appinfo.setAlignment(QtCore.Qt.AlignCenter)
@@ -65,7 +65,7 @@ class Ui_Dialog(object):
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
     def retranslateUi(self, Dialog):
-        Dialog.setWindowTitle(QtGui.QApplication.translate("Dialog", "Dialog", None, QtGui.QApplication.UnicodeUTF8))
+        Dialog.setWindowTitle(QtGui.QApplication.translate("Dialog", "About", None, QtGui.QApplication.UnicodeUTF8))
         self.AboutTabs.setTabText(self.AboutTabs.indexOf(self.ReadmeTab), QtGui.QApplication.translate("Dialog", "Readme", None, QtGui.QApplication.UnicodeUTF8))
         self.AboutTabs.setTabText(self.AboutTabs.indexOf(self.LicenseTab), QtGui.QApplication.translate("Dialog", "License", None, QtGui.QApplication.UnicodeUTF8))
         self.okButton.setText(QtGui.QApplication.translate("Dialog", "Ok", None, QtGui.QApplication.UnicodeUTF8))

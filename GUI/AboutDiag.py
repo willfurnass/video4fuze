@@ -5,13 +5,13 @@ Module implementing About Dialog.
 """
 
 from PyQt4.QtGui import QDialog
-from PyQt4.QtCore import QCoreApplication
+from PyQt4.QtCore import QCoreApplication, SIGNAL, QString
 
 from Ui_AboutDiag import Ui_Dialog
 
-class Dialog(QDialog, Ui_Dialog):
+class AboutV4F(QDialog, Ui_Dialog):
     """
-    Class documentation goes here.
+    V4F about dialog
     """
     def __init__(self, parent = None):
         """
@@ -19,10 +19,19 @@ class Dialog(QDialog, Ui_Dialog):
         """
         QDialog.__init__(self, parent)
         self.setupUi(self)
-        self.Appinfo.setText(QCoreApplication.applicationName())
-        self.connect(self.okButton, SIGNAL("clicked()"),self.on_okButton_clicked)
-
-    def on_okButton_clicked(self):
-        # TODO: not implemented yet
-        #raise NotImplementedError
-        print "it works!"
+        self.Appinfo.setText(QCoreApplication.applicationName()+" "+QCoreApplication.applicationVersion())
+        try:
+            READMEfile = open("README.txt","rb")
+            README = unicode(READMEfile.read())
+            READMEfile.close()
+        except e:
+            README = unicode(e)
+        try:
+            LICENSEfile = open("LICENSE.html","rb")
+            LICENSE= LICENSEfile.read()
+            LICENSEfile.close()
+        except e:
+            LICENSE = unicode(e)
+        self.ReadmeText.setText(README)
+        self.LicenseText.setText(LICENSE)
+        self.connect(self.okButton, SIGNAL("clicked()"), self.accept)

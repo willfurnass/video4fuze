@@ -9,6 +9,7 @@ from PyQt4.QtCore import QString,QT_TR_NOOP,SIGNAL,QObject,Qt,QSettings,QVariant
 from threading import Thread
 from Ui_MainWindow import Ui_MainWindow
 from v4fPreferences import PreferencesDialog
+from AboutDiag import AboutV4F
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     """
@@ -152,7 +153,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.trUtf8("Select output directory"),
             os.path.expanduser("~"),
             QFileDialog.Options(QFileDialog.ShowDirsOnly))
-        if output != None:
+        if output != None and output != QString():
             self.output = toPython(output)
             self.settings.setValue("outputdir",QVariant(self.output))
         row = 0
@@ -286,12 +287,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         """
         Show a popup with info about video4fuze. I should really improve it...
         """
-        QMessageBox.about(None,
-            self.trUtf8("About")+" "+QCoreApplication.applicationName()+" "+QCoreApplication.applicationVersion(),
-            self.trUtf8("""This applications uses mencoder and fuzemux in order to convert your video files to be seen in you sansa fuze.
-
-Thanks to ewelot and  earthcrosser  from the sansa forums for finding the way to convert the videos, without their findings this app wouldn't exist."""))
-    #TODO: Maybe with a text widget loading the README.txt it could be more practical and mainteinable.
+        aboutv4f = AboutV4F()
+        aboutv4f.exec_()
 
     def on_actionAbout_Qt_triggered(self):
         QMessageBox.aboutQt(None,

@@ -10,6 +10,12 @@
     <height>630</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="windowIcon">
    <iconset resource="../video4fuze.qrc">
     <normaloff>:/icons/blue.png</normaloff>:/icons/blue.png</iconset>
@@ -671,11 +677,6 @@
    <addaction name="menuAdvanced"/>
    <addaction name="menuHelp"/>
   </widget>
-  <action name="actionAdd_file">
-   <property name="text">
-    <string>Add files...</string>
-   </property>
-  </action>
   <action name="actionAbout_video4fuze">
    <property name="text">
     <string>About video4fuze</string>
@@ -684,19 +685,6 @@
   <action name="actionAbout_Qt">
    <property name="text">
     <string>About Qt</string>
-   </property>
-  </action>
-  <action name="actionRemove_selected_files">
-   <property name="text">
-    <string>Remove selected files</string>
-   </property>
-   <property name="shortcut">
-    <string notr="true">Del</string>
-   </property>
-  </action>
-  <action name="actionSelect_output_folder">
-   <property name="text">
-    <string>Select output folder</string>
    </property>
   </action>
   <action name="actionPreferences">
