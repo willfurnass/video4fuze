@@ -16,6 +16,9 @@ mencodersinglepass = "mencoder  -msglevel all=0:statusline=5 -ofps 20 -ovc lavc 
 pass2 = True
 ####################################################################
 class Fuze():
+    """
+    This class implements a convert() method used to convert video files for the fuze.
+    """
     def __init__(self, GUI = None):
         self.GUI = GUI
         self.CWD = os.getcwd()
@@ -48,6 +51,9 @@ class Fuze():
                     print "No terminal emulator available"
 
     def LoadSettings(self):
+        """
+        Loads video4fuze's settings for this instance
+        """
         self.mencoderpass1 = unicode(QSettings().value("mencoderpass1", QVariant(mencoderpass1)).toString())
         self.mencoderpass2 = unicode(QSettings().value("mencoderpass2", QVariant(mencoderpass2)).toString())
         self.mencodersinglepass = unicode(QSettings().value("mencodersinglepass",QVariant(mencodersinglepass)).toString())
@@ -55,6 +61,9 @@ class Fuze():
 
 
     def convert(self,args, FINALPREFIX =  None):
+        """
+        This method converts any video file passed as argument to a file suitable for the sansa fuze.
+        """
         os.chdir(self.AMGPrefix)
         self.qobject.emit(SIGNAL("stop"),self.GUI.Video)
         for argument in args:

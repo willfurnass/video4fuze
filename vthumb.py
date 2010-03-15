@@ -30,6 +30,9 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
+"""
+This module implements video thumbnail creation using ffmpeg
+"""
 
 import Image
 import sys, os, time, math, shutil, string, tempfile
@@ -40,47 +43,6 @@ NFRAMES=100
 #FFMPEG="ffmpeg"
 TMPDIR=tempfile.gettempdir()
 THUMB_SIZE = 224, 176
-
-def main():
-    alsosave = []
-    nframes  = NFRAMES
-    verbose  = False
-    thumb    = False
-    infile   = None
-    outfile  = None
-    try:
-        opts, args = getopt.getopt(sys.argv[1:], "vs:f:n:o:t", ["verbose","save","file","nframes","ofile","thumbnail"])
-    except getopt.GetoptError:
-        usage()
-        sys.exit(2)
-    for o, a in opts:
-        if o in ("-f", "file"):
-            infile=a
-        if o in ("-o", "ofile"):
-            outfile=a
-        if o in ("-n", "nframes"):
-            nframes=int(a)
-        if o in ("-s", "save"):
-            alsosave = map(int,string.split(a,","))
-        if o in ("-v", "verbose"):
-            verbose=True
-        if o in ("-t", "thumbnail"):
-            thumb=True
-
-    if len(args) !=0 or not infile or not outfile or nframes<1:
-        usage()
-        sys.exit(2)
-
-    sys.exit(find_thumb(infile, outfile, nframes, alsosave, verbose, thumb))
-
-def usage():
-    print "Usage vthumb [-t] [-v] [-s N,N,N...] -f <infile> -o <outfile> [-n nframes]"
-    print "\t-f Input video file"
-    print "\t-o Output base file name for thumbnails (w/o extension)"
-    print "\t-v Be verbose"
-    print "\t-t Scale extracted frame into smaller 224x176 thumbnail"
-    print "\t-s Specify frame numbers which to save additionally"
-    print "\t-n Number of frames to examine"
 
 def frame_rmse(hist, median):
     res = 0.0
@@ -114,14 +76,6 @@ def find_thumb(infile, outfile, nframes, alsosave, verbose, thumb, FFMPEG = "ffm
         print "Error invoking ffmpeg"
         return 10
 
-#    cmd = [FFMPEG,"-y","-vframes",nframes,"-i",infile,framemask]
-#    try:
-#        print "calling " +  FFMPEG + "..."
-#        print cmd
-#        check_call(cmd)
-#    except:
-#        print "Error invoking ffmpeg"
-#        return 10
     if verbose:
         print "Analyzing frames"
     hist=[]
@@ -178,8 +132,4 @@ def find_thumb(infile, outfile, nframes, alsosave, verbose, thumb, FFMPEG = "ffm
     for i in range(1,n+1):
         fname = framemask % i
         os.unlink(fname)
-
     return rc
-
-if __name__ == '__main__':
-    main()

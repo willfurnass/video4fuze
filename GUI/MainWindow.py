@@ -48,13 +48,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.connect(self.actionAbout_video4fuze, SIGNAL("triggered()"),self.on_actionAbout_video4fuze_triggered)
         self.connect(self.AddButton, SIGNAL("clicked()"),self.on_AddButton_clicked)
         self.connect(self.AddButton_2, SIGNAL("clicked()"),self.on_AddButton_2_clicked)
-        self.connect(self.SelectOutputButton, SIGNAL("clicked()"),self.on_SelectOutputButton_clicked)
-        self.connect(self.SelectOutputButton_2, SIGNAL("clicked()"),self.on_SelectOutputButton_2_clicked)
+        self.connect(self.SelectOutputButton, SIGNAL("clicked()"),self.SelectOutput)
+        self.connect(self.SelectOutputButton_2, SIGNAL("clicked()"),self.SelectOutput)
         self.connect(self.SavePlaylist, SIGNAL("clicked()"),self.on_SavePlaylist_clicked)
         self.connect(self.SongsFromSD, SIGNAL("clicked()"),self.on_SongsFromSD_clicked)
         self.connect(self.SongsFromFuze, SIGNAL("clicked()"),self.on_SongsFromFuze_clicked)
         self.connect(self.OpenPlaylist, SIGNAL("clicked()"),self.on_OpenPlaylist_clicked)
-        self.connect(self.ToggleSort, SIGNAL("clicked()"),self.on_ToggleSort_clicked)
+        self.connect(self.ToggleSort, SIGNAL("clicked()"),self.playlistWidget.sortItems)
 
 
     def fuzePath(self,prefix): #TODO: Tags display & sorting
@@ -271,18 +271,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.tableWidget_2.setItem(currentrow,1,outputitem)
             self.tableWidget_2.resizeColumnsToContents()
 
-    def on_SelectOutputButton_clicked(self):
-        """
-        Pass to actionSelect_output_folder_triggered
-        """
-        self.SelectOutput()
-
-    def on_SelectOutputButton_2_clicked(self):
-        """
-        Pass to actionSelect_output_folder_triggered
-        """
-        self.SelectOutput()
-
     def on_actionAbout_video4fuze_triggered(self):
         """
         Show a popup with info about video4fuze. I should really improve it...
@@ -378,12 +366,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.playlistWidget.addItem(listItem)
             PL.close()
 
-    def on_ToggleSort_clicked(self):
-        """
-        Sort playlist
-        """
-        self.playlistWidget.sortItems()
-
 #Here come two _very_ ugly threaded worker classes
 class Converter(Thread):
     """
@@ -410,6 +392,7 @@ class Resizer(Thread):
     def run(self):
         self.parent.resis.convert(self.args, self.FINALPREFIX)
 
+###And now two global hacky functions###
 def mountpoint(dir):
     """
     Function to determine the mountpoint of a given dir

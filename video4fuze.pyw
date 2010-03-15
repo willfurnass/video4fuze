@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-#       Copyright 2009 Adrián Cereto Massagué <ssorgatem@esdebian.org>
+#       Copyright 2009-2010 Adrián Cereto Massagué <ssorgatem@esdebian.org>
 #
 #       This program is free software; you can redistribute it and/or modify
 #       it under the terms of the GNU General Public License as published by
@@ -26,6 +26,9 @@ from PyQt4.QtCore import QTranslator, QString, QLocale
 from GUI.MainWindow import MainWindow
 
 def main():
+    """
+    Main function: starts video4fuze
+    """
     translator = QTranslator() #Build the translator
     translator.load(QString("translations/v4f_%1").arg(QLocale.system().name())) #Path to v4f's translation files
     qttranslator = QTranslator()#A translator for Qt standard strings

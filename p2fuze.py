@@ -10,12 +10,11 @@ defaultsize = 224, 176
 
 class TransFuze():
     """
-    Convert input image to a fuze suitable image
+    Convert input image to a fuze-suitable image
     """
     #Do something useful
     def __init__(self, GUI = None):
-        self.size = [int(QSettings().value("imagew",QVariant(defaultsize[0])).toInt()[0]),
-int(QSettings().value("imageh",QVariant(defaultsize[1])).toInt()[0])]
+        self.size = [int(QSettings().value("imagew",QVariant(defaultsize[0])).toInt()[0]), int(QSettings().value("imageh",QVariant(defaultsize[1])).toInt()[0])]
         self.size = defaultsize
         self.GUI = GUI
         self.tab = GUI.Image
@@ -28,6 +27,9 @@ int(QSettings().value("imageh",QVariant(defaultsize[1])).toInt()[0])]
             self.qobject.connect(self.qobject, SIGNAL("finished"),GUI.getReady)
 
     def convert(self,args, FINALPREFIX =  None):
+        """
+        This method converts the passed files to jpg viewable in the fuze.
+        """
         self.qobject.emit(SIGNAL("stop"),self.tab)
         for argument in args:
             try:
