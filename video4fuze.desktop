@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=video4fuze
+Comment=Convert videos and images for visualization in your sansa fuze
+Comment[es]=Convierte imágenes y vídeos para verlos en tu sansa fuze
+Comment[ca]=Converrteix imatges i vídeos per veure'ls al teu sansa fuze
+Exec=/usr/bin/video4fuze
+Terminal=false
+Type=Application
+Icon=/usr/share/pixmaps/blackfuze.png
+Categories=Application;Multimedia
+StartupNotify=true
