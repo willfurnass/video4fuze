@@ -4,6 +4,7 @@
 Module implementing About Dialog.
 """
 
+import codecs
 from PyQt4.QtGui import QDialog
 from PyQt4.QtCore import QCoreApplication, SIGNAL, QString
 
@@ -21,8 +22,8 @@ class AboutV4F(QDialog, Ui_Dialog):
         self.setupUi(self)
         self.Appinfo.setText(QCoreApplication.applicationName()+" "+QCoreApplication.applicationVersion())
         try:
-            READMEfile = open("README.txt","rb")
-            README = QString(READMEfile.read())
+            READMEfile = codecs.open("README.txt","rb", "utf-8")
+            README = READMEfile.read()
             READMEfile.close()
         except Exception, e:
             README = unicode(e)
