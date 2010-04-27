@@ -18,13 +18,8 @@
 #       Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 #       MA 02110-1301, USA.
 
-AUTHORS = 'Adrián Cereto Massagué <ssorgatem@esdebian.org>'
-NAME = "video4fuze"
-VERSION = "0.5.0.9x+svn"
-URL = 'http://code.google.com/p/video4fuze'
-SHORT_DES = 'A tool to make videos compatible with the San Disk Sana Fuze media player'
-
 import sys
+import info
 from PyQt4.QtGui import QApplication
 from PyQt4.QtCore import QTranslator, QString, QLocale
 from GUI.MainWindow import MainWindow
@@ -38,14 +33,20 @@ def main():
     qttranslator = QTranslator()#A translator for Qt standard strings
     qttranslator.load(QString("qt_%1").arg(QLocale.system().name()))
     Vapp = QApplication(sys.argv[1:]) #Creating the app
-    Vapp.setOrganizationName("ssorgatem productions") #Setting organization and application's
-    Vapp.setApplicationName(NAME)#name. It's only useful for QSettings
-    Vapp.setApplicationVersion(VERSION)
+    Vapp.setOrganizationName(info.ORGNAME) #Setting organization and application's
+    Vapp.setApplicationName(info.NAME)#name. It's only useful for QSettings
+    Vapp.setApplicationVersion(info.VERSION)
     Vapp.installTranslator(translator)#Install translators into the application.
     Vapp.installTranslator(qttranslator)
     VentanaP = MainWindow(sys.argv[1:]) #Now it's time to instantiate the main window
     VentanaP.show() #And show it
     sys.exit(Vapp.exec_()) #When the app finishes, exit.
+
+#def Setup():
+#    """
+#    Setup the Qapplication, translators and properties used to load settings
+#    """
+
 
 if __name__ == "__main__":
     main()

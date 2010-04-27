@@ -4,6 +4,7 @@
 Class and methods to convert video for the fuze
 """
 import os, tempfile, shutil, sys, commands, unicodedata
+import info
 from subprocess import check_call, call
 from PyQt4.QtCore import QT_TR_NOOP,SIGNAL,QObject,QString,QVariant, QSettings
 from vthumb import *
@@ -54,11 +55,21 @@ class Fuze():
         """
         Loads video4fuze's settings for this instance
         """
-        self.mencoderpass1 = unicode(QSettings().value("mencoderpass1", QVariant(mencoderpass1)).toString())
-        self.mencoderpass2 = unicode(QSettings().value("mencoderpass2", QVariant(mencoderpass2)).toString())
-        self.mencodersinglepass = unicode(QSettings().value("mencodersinglepass",QVariant(mencodersinglepass)).toString())
-        self.pass2 = QSettings().value("2pass",QVariant(pass2)).toBool()
-
+        self.Settings = QSettings(info.ORGNAME, info.NAME)
+        self.mencoderpass1 = unicode(self.Settings.value("mencoderpass1", QVariant(mencoderpass1)).toString())
+        self.mencoderpass2 = unicode(self.Settings.value("mencoderpass2", QVariant(mencoderpass2)).toString())
+        self.mencodersinglepass = unicode(self.Settings.value("mencodersinglepass",QVariant(mencodersinglepass)).toString())
+        self.pass2 = self.Settings.value("2pass",QVariant(pass2)).toBool()
+        print "Current settings:"
+        print
+        print self.pass2
+        if self.pass2:
+            print "Two-pass conversion;"
+            print "Pass 1: ",  self.mencoderpass1
+            print "Pass 2: ",  self.mencoderpass2
+        else:
+            print "Single-pass conversion;"
+            print "Options used: ",  self.mencodersinglepass
 
     def convert(self,args, FINALPREFIX =  None):
         """
@@ -90,6 +101,7 @@ class Fuze():
                     mencoderpass1.append(argument)
                     mencoderpass1.append("-o")
                     mencoderpass1.append(OUTPUT)
+                    print "\nExecuting", mencoderpass1, "\n"
                     check_call(mencoderpass1)
                 except Exception, e:
                     print e

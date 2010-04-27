@@ -1,17 +1,19 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
-import video4fuze
+import info
 from distutils.core import setup
 
-setup (name=video4fuze.NAME,
-       version=video4fuze.VERSION,
-       description=video4fuze.SHORT_DES,
-       url=video4fuze.URL,
-       author_email=video4fuze.AUTHORS.split()[-1][1:-1],
-       author=video4fuze.AUTHORS,
+setup(name=info.NAME,
+       version=info.VERSION,
+       description=info.SHORT_DES,
+       url=info.URL,
+       author_email=info.AUTHORS.split()[-1][1:-1],
+       author=info.AUTHORS,
        license=['GPLv3'],
        data_files=[('share/video4fuze',
                    ['fuze.py',
+                    'info.py', 
                     'p2fuze.py',
                     'video4fuze.pyw',
                     'video4fuze_rc.py',
@@ -29,11 +31,11 @@ setup (name=video4fuze.NAME,
                     'GUI/Ui_Preferences.py',
                     'GUI/__init__.py',
                     'GUI/v4fPreferences.py']),
-		   ('share/applications',
-		   ['video4fuze.desktop']),
-		   ('share/pixmaps',
-	           ['icons/blackfuze.png']),
-	           ('bin/',
-		   ['dist/video4fuze'])
-		   ]
-	)
+                   ('share/applications',
+                   ['video4fuze.desktop']),
+                   ('share/pixmaps',
+                   ['icons/blackfuze.png']),
+                   ('bin/',
+                   ['dist/video4fuze'])
+    ]
+)

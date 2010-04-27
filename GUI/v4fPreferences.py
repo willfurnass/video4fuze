@@ -24,6 +24,8 @@ class PreferencesDialog(QDialog, Ui_PreferencesDialog):
         self.connect(self.DefaultsButton, SIGNAL("clicked()"),self.on_DefaultsButton_clicked)
         self.connect(self.okButton, SIGNAL("clicked()"),self.on_okButton_clicked)
         self.connect(self.Pass2Check, SIGNAL("toggled(bool)"), self.loadSettings)
+        self.Pass2Check.setChecked(QSettings().value("2pass",QVariant("True")).toBool())
+            
 
     def loadSettings(self, pass2):
         if pass2:
@@ -32,6 +34,7 @@ class PreferencesDialog(QDialog, Ui_PreferencesDialog):
             self.mencoderpass1Edit.setPlainText(QSettings().value("mencoderpass1",QVariant(fuze.mencoderpass1)).toString())
             self.mencoderpass2Edit.setPlainText(QSettings().value("mencoderpass2",QVariant(fuze.mencoderpass2)).toString())
         else:
+            print "loading settings for single pass"
             self.mencoderpass1Edit.setPlainText(QSettings().value("mencodersinglepass",QVariant(fuze.mencodersinglepass)).toString())
         self.Wiline.setText(QSettings().value("imagew",QVariant(str(p2fuze.defaultsize[0]))).toString())
         self.Heline.setText(QSettings().value("imageh",QVariant(str(p2fuze.defaultsize[1]))).toString())
