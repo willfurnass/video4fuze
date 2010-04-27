@@ -1,0 +1,6 @@
+#!/bin/sh
+# installation directory
+V4FDIR=/usr/share/video4fuze
+cd $V4FDIR
+python video4fuze.pyw
+cd
