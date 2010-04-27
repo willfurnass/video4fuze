@@ -23,7 +23,7 @@ class Fuze():
         self.GUI = GUI
         self.CWD = os.getcwd()
         self.qobject = QObject()
-        if self.GUI != None:
+        if self.GUI:
             self.qobject.connect(self.qobject, SIGNAL("stop"),GUI.WAIT)
             self.qobject.connect(self.qobject, SIGNAL("working"),GUI.Status)
             self.qobject.connect(self.qobject, SIGNAL("Exception"),GUI.ErrorDiag)
@@ -31,7 +31,7 @@ class Fuze():
             self.qobject.connect(self.qobject, SIGNAL("finished"),GUI.getReady)
         self.LoadSettings()
         self.xterm = None
-        self.AMGPrefix = tempfile.gettempdir()
+        self.fuzemuxPrefix = tempfile.gettempdir()
         if os.name == 'nt':
             self.FFMPEG = os.path.join(self.CWD, "ffmpeg.exe")
             self.mencoderpass1 = self.mencoderpass1.replace("mencoder",os.path.join(self.CWD, "mencoder.exe"))
@@ -64,15 +64,16 @@ class Fuze():
         """
         This method converts any video file passed as argument to a file suitable for the sansa fuze.
         """
-        os.chdir(self.AMGPrefix)
-        self.qobject.emit(SIGNAL("stop"),self.GUI.Video)
+        os.chdir(self.fuzemuxPrefix)
+        if self.GUI:
+	  self.qobject.emit(SIGNAL("stop"),self.GUI.Video)
         for argument in args:
 #################################mencoder pass 1###################
             if os.path.isfile(argument):
                 if os.name == 'nt':
-                    OUTPUT = os.path.join(self.AMGPrefix,os.path.splitext(os.path.basename(argument))[0] + ".temp.avi")
+                    OUTPUT = os.path.join(self.fuzemuxPrefix,os.path.splitext(os.path.basename(argument))[0] + ".temp.avi")
                 else:
-                    OUTPUT = unicodedata.normalize('NFKD',os.path.join(self.AMGPrefix,os.path.splitext(os.path.basename(argument))[0] + ".temp.avi")).encode("ascii", "ignore")
+                    OUTPUT = unicodedata.normalize('NFKD',os.path.join(self.fuzemuxPrefix.decode('utf-8'),os.path.splitext(os.path.basename(argument))[0] + ".temp.avi")).encode("ascii", "ignore")
                 try:
                     if self.pass2:
                         print "Calling mencoder #1"
@@ -155,7 +156,8 @@ class Fuze():
                 print e
                 print  "Ooops not moving final video"
                 self.qobject.emit(SIGNAL("Exception"),e)
-        self.qobject.emit(SIGNAL("finished"),self.GUI.Video)
+	if self.GUI:
+	  self.qobject.emit(SIGNAL("finished"),self.GUI.Video)
 
 if __name__ == "__main__":
     if sys.argv[1:] == [] :
