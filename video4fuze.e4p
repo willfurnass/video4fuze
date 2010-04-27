@@ -41,6 +41,7 @@
     <Translation>translations/v4f_es.qm</Translation>
     <Translation>translations/v4f_en.qm</Translation>
     <Translation>translations/v4f_ca.qm</Translation>
+    <Translation>translations/v4f_de.ts</Translation>
   </Translations>
   <Resources>
     <Resource>video4fuze.qrc</Resource>

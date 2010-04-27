@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-Module implementing MainWindow. Playlist edition capabilities are inspired by Dunny's YAPL, and had been possible to write thanks to his help about the
+Module implementing video4fuze's MainWindow. Playlist edition capabilities are inspired by Dunny's YAPL, and had been possible to write thanks to his help about the
 # .pla playlist format.
 """
 import os, fuze, p2fuze
-from PyQt4.QtGui import QMainWindow,QFileDialog,QMessageBox, QLabel, QTableWidgetItem, QListWidgetItem, QIcon
-from PyQt4.QtCore import QString,QT_TR_NOOP,SIGNAL,QObject,Qt,QSettings,QVariant, QSize, QCoreApplication
+from PyQt4.QtGui import QMainWindow,QFileDialog,QMessageBox, QLabel, QListWidgetItem, QIcon
+from PyQt4.QtCore import QString,QT_TR_NOOP,SIGNAL,QObject,QSettings,QVariant, QCoreApplication
 from threading import Thread
 from Ui_MainWindow import Ui_MainWindow
 from v4fPreferences import PreferencesDialog
@@ -189,6 +189,18 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             except:
                 print "Weird things happening between python and c++"
 
+    def on_RemoveButton_3_clicked(self):
+        """
+        Removes files to convert
+        """
+        remlist = []
+        for item in self.playlistWidget.selectedItems():
+            try:
+                if item.column() == 0:
+                    self.playlistWidget.takeItem(self.playlistWidget.row(item))
+            except:
+                print "Weird things happening between python and c++"
+
     def on_ConvertButton_clicked(self):
         """
         Starts conversion
@@ -327,14 +339,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         """
         self.fuzePath("/mmc:0:")
 
-    def on_RemoveButton_3_clicked(self):
-        """
-        Removes files to convert
-        """
-        remlist = []
-        for item in self.playlistWidget.selectedItems():
-            self.playlistWidget.takeItem(self.playlistWidget.row(item))
-
     def on_OpenPlaylist_clicked(self):
         """
         Load and parse a .pla.refs file
@@ -366,7 +370,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.playlistWidget.addItem(listItem)
             PL.close()
 
-#Here come two _very_ ugly threaded worker classes
+###Here come two _very_ ugly threaded worker classes###
 class Converter(Thread):
     """
     Doing the job in a different thread is always good.
