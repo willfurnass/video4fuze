@@ -22,15 +22,15 @@ class AboutV4F(QDialog, Ui_Dialog):
         self.Appinfo.setText(QCoreApplication.applicationName()+" "+QCoreApplication.applicationVersion())
         try:
             READMEfile = open("README.txt","rb")
-            README = unicode(READMEfile.read())
+            README = QString(READMEfile.read())
             READMEfile.close()
-        except e:
+        except Exception, e:
             README = unicode(e)
         try:
             LICENSEfile = open("LICENSE.html","rb")
             LICENSE= LICENSEfile.read()
             LICENSEfile.close()
-        except e:
+        except Exception, e:
             LICENSE = unicode(e)
         self.ReadmeText.setText(README)
         self.LicenseText.setText(LICENSE)
