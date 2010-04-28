@@ -1,0 +1,15 @@
+prune *
+include README.txt
+include LICENSE.txt
+include LICENSE.html
+include *.py
+include *.pyw
+recursive-include GUI *.ui *.py
+recursive-include icons *.png
+include dist/video4fuze
+include dist/fuze
+recursive-include translations *.ts
+include *.pro
+include *.desktop
+prune icons/Sansa_Fuze_Icon_Pack_by_benbrooks
+
