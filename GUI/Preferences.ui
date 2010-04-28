@@ -17,6 +17,9 @@
    <iconset resource="../video4fuze.qrc">
     <normaloff>:/icons/blue.png</normaloff>:/icons/blue.png</iconset>
   </property>
+  <property name="locale">
+   <locale language="C" country="AnyCountry"/>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
    <item>
     <widget class="QLabel" name="label_3">
@@ -40,10 +43,10 @@
       <bool>true</bool>
      </property>
      <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
+      <enum>QFrame::NoFrame</enum>
      </property>
      <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
+      <enum>QFrame::Plain</enum>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
@@ -72,8 +75,11 @@
       </item>
       <item>
        <widget class="QPlainTextEdit" name="mencoderpass1Edit">
+        <property name="locale">
+         <locale language="C" country="AnyCountry"/>
+        </property>
         <property name="plainText">
-         <string/>
+         <string notr="true"/>
         </property>
        </widget>
       </item>
@@ -110,13 +116,13 @@
    <item>
     <widget class="QFrame" name="frame">
      <property name="enabled">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
+      <enum>QFrame::NoFrame</enum>
      </property>
      <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
+      <enum>QFrame::Plain</enum>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
@@ -146,7 +152,7 @@
       <item>
        <widget class="QPlainTextEdit" name="mencoderpass2Edit">
         <property name="plainText">
-         <string/>
+         <string notr="true"/>
         </property>
        </widget>
       </item>
@@ -181,7 +187,7 @@
      <item>
       <widget class="QLabel" name="label_5">
        <property name="text">
-        <string>x</string>
+        <string notr="true">x</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -259,8 +265,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>393</x>
-     <y>424</y>
+     <x>407</x>
+     <y>519</y>
     </hint>
     <hint type="destinationlabel">
      <x>96</x>
@@ -275,8 +281,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>479</x>
-     <y>424</y>
+     <x>487</x>
+     <y>519</y>
     </hint>
     <hint type="destinationlabel">
      <x>179</x>

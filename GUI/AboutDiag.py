@@ -20,7 +20,7 @@ class AboutV4F(QDialog, Ui_Dialog):
         """
         QDialog.__init__(self, parent)
         self.setupUi(self)
-        self.Appinfo.setText(QCoreApplication.applicationName()+" "+QCoreApplication.applicationVersion())
+        self.Appinfo.setText(self.Appinfo.text().replace("Info",QCoreApplication.applicationName()+" "+QCoreApplication.applicationVersion()))
         try:
             READMEfile = codecs.open("README.txt","rb", "utf-8")
             README = READMEfile.read()

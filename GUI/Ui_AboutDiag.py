@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file '/home/ssorgatem/Documents/python/video4fuze/GUI/AboutDiag.ui'
 #
-# Created: Wed Apr 28 09:50:02 2010
+# Created: Wed Apr 28 17:56:23 2010
 #      by: PyQt4 UI code generator 4.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -24,15 +24,25 @@ class Ui_Dialog(object):
         self.horizontalLayout = QtGui.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.Appinfo = QtGui.QLabel(Dialog)
-        self.Appinfo.setCursor(QtCore.Qt.WhatsThisCursor)
-        self.Appinfo.setText("TextLabel")
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.Appinfo.sizePolicy().hasHeightForWidth())
+        self.Appinfo.setSizePolicy(sizePolicy)
+        self.Appinfo.setCursor(QtCore.Qt.BlankCursor)
+        self.Appinfo.setText("""<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">
+<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">
+p, li { white-space: pre-wrap; }
+</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; font-weight:400; font-style:normal;\">
+<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; font-weight:600;\">Info</span></p></body></html>""")
+        self.Appinfo.setTextFormat(QtCore.Qt.RichText)
         self.Appinfo.setAlignment(QtCore.Qt.AlignCenter)
         self.Appinfo.setWordWrap(True)
         self.Appinfo.setObjectName("Appinfo")
         self.horizontalLayout.addWidget(self.Appinfo)
         self.gridLayout_2 = QtGui.QGridLayout()
         self.gridLayout_2.setObjectName("gridLayout_2")
-        spacerItem = QtGui.QSpacerItem(0, 0, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        spacerItem = QtGui.QSpacerItem(0, 0, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Minimum)
         self.gridLayout_2.addItem(spacerItem, 0, 0, 1, 1)
         self.logo = QtGui.QLabel(Dialog)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Minimum)

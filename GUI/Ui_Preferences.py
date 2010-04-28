@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file '/home/ssorgatem/Documents/python/video4fuze/GUI/Preferences.ui'
 #
-# Created: Wed Apr 28 10:51:48 2010
+# Created: Wed Apr 28 17:03:39 2010
 #      by: PyQt4 UI code generator 4.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -26,8 +26,8 @@ class Ui_PreferencesDialog(object):
         self.verticalLayout_3.addWidget(self.label_3)
         self.frame_2 = QtGui.QFrame(PreferencesDialog)
         self.frame_2.setEnabled(True)
-        self.frame_2.setFrameShape(QtGui.QFrame.StyledPanel)
-        self.frame_2.setFrameShadow(QtGui.QFrame.Raised)
+        self.frame_2.setFrameShape(QtGui.QFrame.NoFrame)
+        self.frame_2.setFrameShadow(QtGui.QFrame.Plain)
         self.frame_2.setObjectName("frame_2")
         self.verticalLayout = QtGui.QVBoxLayout(self.frame_2)
         self.verticalLayout.setObjectName("verticalLayout")
@@ -53,9 +53,9 @@ class Ui_PreferencesDialog(object):
         self.horizontalLayout.addItem(spacerItem1)
         self.verticalLayout_3.addLayout(self.horizontalLayout)
         self.frame = QtGui.QFrame(PreferencesDialog)
-        self.frame.setEnabled(True)
-        self.frame.setFrameShape(QtGui.QFrame.StyledPanel)
-        self.frame.setFrameShadow(QtGui.QFrame.Raised)
+        self.frame.setEnabled(False)
+        self.frame.setFrameShape(QtGui.QFrame.NoFrame)
+        self.frame.setFrameShadow(QtGui.QFrame.Plain)
         self.frame.setObjectName("frame")
         self.verticalLayout_2 = QtGui.QVBoxLayout(self.frame)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
@@ -82,6 +82,7 @@ class Ui_PreferencesDialog(object):
         self.Wiline.setObjectName("Wiline")
         self.horizontalLayout_4.addWidget(self.Wiline)
         self.label_5 = QtGui.QLabel(PreferencesDialog)
+        self.label_5.setText("x")
         self.label_5.setAlignment(QtCore.Qt.AlignCenter)
         self.label_5.setObjectName("label_5")
         self.horizontalLayout_4.addWidget(self.label_5)
@@ -121,7 +122,6 @@ class Ui_PreferencesDialog(object):
         self.Pass2Check.setText(QtGui.QApplication.translate("PreferencesDialog", "Two passes", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setText(QtGui.QApplication.translate("PreferencesDialog", "Mencoder pass 2 command line:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_4.setText(QtGui.QApplication.translate("PreferencesDialog", "Converted image size:", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_5.setText(QtGui.QApplication.translate("PreferencesDialog", "x", None, QtGui.QApplication.UnicodeUTF8))
         self.DefaultsButton.setText(QtGui.QApplication.translate("PreferencesDialog", "Defaults", None, QtGui.QApplication.UnicodeUTF8))
         self.okButton.setText(QtGui.QApplication.translate("PreferencesDialog", "&OK", None, QtGui.QApplication.UnicodeUTF8))
         self.cancelButton.setText(QtGui.QApplication.translate("PreferencesDialog", "&Cancel", None, QtGui.QApplication.UnicodeUTF8))

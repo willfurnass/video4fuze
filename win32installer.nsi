@@ -2,7 +2,7 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "video4fuze"
-!define PRODUCT_VERSION "0.5"
+!define PRODUCT_VERSION "0.5.1"
 !define PRODUCT_PUBLISHER "ssorgatem productions"
 !define PRODUCT_WEB_SITE "http://code.google.com/p/video4fuze/"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\video4fuze.exe"
@@ -55,6 +55,7 @@ var ICONS_GROUP
 !insertmacro MUI_LANGUAGE "English"
 !insertmacro MUI_LANGUAGE "Spanish"
 !insertmacro MUI_LANGUAGE "Catalan"
+!insertmacro MUI_LANGUAGE "German"
 
 ; Reserve files
 !insertmacro MUI_RESERVEFILE_INSTALLOPTIONS
@@ -104,6 +105,7 @@ Section "Principal" SEC01
   File "translations\v4f_es.qm"
   File "translations\v4f_en.qm"
   File "translations\v4f_ca.qm"
+  File "translations\v4f_de.qm"
   SetOutPath "$INSTDIR"
 
 
@@ -206,6 +208,7 @@ Section Uninstall
   Delete "$INSTDIR\translations\v4f_ca.qm"
   Delete "$INSTDIR\translations\v4f_en.qm"
   Delete "$INSTDIR\translations\v4f_es.qm"
+  Delete "$INSTDIR\translations\v4f_de.qm"
 
   Delete "$SMPROGRAMS\$ICONS_GROUP\Uninstall.lnk"
   Delete "$SMPROGRAMS\$ICONS_GROUP\Website.lnk"

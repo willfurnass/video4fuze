@@ -15,14 +15,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     """
     video4fuze's main window, implementing too playlist management logic
     """
-    def __init__(self, v4fhome, parent = None):
+    def __init__(self, parent = None):
         """
         Constructor
         """
         QMainWindow.__init__(self, parent) #Use QMainWindow.__init___
         self.setupUi(self) #setup the ui...
         #IMPORTANT: the line "QtCore.QMetaObject.connectSlotsByName(MainWindow)" in UI_MainWindow.py MUST be commented.
-        self.v4fhome = v4fhome #Where are we?
         self.settings = QSettings(QSettings.IniFormat, QSettings.UserScope, QCoreApplication.organizationName(), QCoreApplication.applicationName()) #Instantiate QSettings, using ini format always
         self.Fuze = fuze.Fuze(self) #Instantiate the Fuze class.
         self.resis = p2fuze.TransFuze(self) #AnotherTestPlugin her useful class.
