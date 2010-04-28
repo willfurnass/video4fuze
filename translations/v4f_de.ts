@@ -4,262 +4,273 @@
 <context>
     <name>@default</name>
     <message>
-        <location filename="GUI/MainWindow.py" line="123"/>
+        <location filename="GUI/MainWindow.py" line="100"/>
         <source>Unknown error</source>
-        <translation type="unfinished">Unbekannter Fehler</translation>
+        <translation>Unbekannter Fehler</translation>
+    </message>
+</context>
+<context>
+    <name>Dialog</name>
+    <message>
+        <location filename="GUI/Ui_AboutDiag.py" line="100"/>
+        <source>About</source>
+        <translation>Über</translation>
+    </message>
+    <message>
+        <location filename="GUI/Ui_AboutDiag.py" line="101"/>
+        <source>Readme</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="GUI/Ui_AboutDiag.py" line="102"/>
+        <source>License</source>
+        <translation>Lizenz</translation>
+    </message>
+    <message>
+        <location filename="GUI/Ui_AboutDiag.py" line="103"/>
+        <source>Ok</source>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="GUI/Ui_MainWindow.py" line="238"/>
+        <location filename="GUI/Ui_MainWindow.py" line="436"/>
         <source>Remove files</source>
-        <translation type="unfinished">Dateien entfernen</translation>
+        <translation>Dateien entfernen</translation>
     </message>
     <message>
-        <location filename="GUI/Ui_MainWindow.py" line="242"/>
+        <location filename="GUI/Ui_MainWindow.py" line="437"/>
         <source>Convert!</source>
-        <translation type="unfinished">Konvertieren!</translation>
+        <translation>Konvertieren!</translation>
     </message>
     <message>
-        <location filename="GUI/Ui_MainWindow.py" line="259"/>
+        <location filename="GUI/Ui_MainWindow.py" line="426"/>
         <source>Add files...</source>
-        <translation type="unfinished">Dateien hinzufügen...</translation>
+        <translation>Dateien hinzufügen...</translation>
     </message>
     <message>
-        <location filename="GUI/Ui_MainWindow.py" line="263"/>
+        <location filename="GUI/Ui_MainWindow.py" line="435"/>
         <source>Select output folder</source>
-        <translation type="unfinished">Ausgabeordner</translation>
+        <translation>Ausgabeordner</translation>
     </message>
     <message>
-        <location filename="GUI/Ui_MainWindow.py" line="257"/>
+        <location filename="GUI/Ui_MainWindow.py" line="453"/>
         <source>Help</source>
-        <translation type="unfinished">Hilfe</translation>
+        <translation>Hilfe</translation>
     </message>
     <message>
-        <location filename="GUI/Ui_MainWindow.py" line="260"/>
+        <location filename="GUI/Ui_MainWindow.py" line="455"/>
         <source>About video4fuze</source>
-        <translation type="unfinished">Über video4fuze</translation>
+        <translation>Über video4fuze</translation>
     </message>
     <message>
-        <location filename="GUI/Ui_MainWindow.py" line="261"/>
+        <location filename="GUI/Ui_MainWindow.py" line="456"/>
         <source>About Qt</source>
-        <translation type="unfinished">Über Qt</translation>
+        <translation>Über Qt</translation>
     </message>
     <message>
-        <location filename="GUI/Ui_MainWindow.py" line="262"/>
-        <source>Remove selected files</source>
-        <translation type="unfinished">Markierte Dateien entfernen</translation>
-    </message>
-    <message>
-        <location filename="GUI/Ui_MainWindow.py" line="239"/>
+        <location filename="GUI/Ui_MainWindow.py" line="438"/>
         <source>Input files</source>
-        <translation type="unfinished">Quelldateien</translation>
+        <translation>Quelldateien</translation>
     </message>
     <message>
-        <location filename="GUI/Ui_MainWindow.py" line="240"/>
+        <location filename="GUI/Ui_MainWindow.py" line="439"/>
         <source>Output folder</source>
-        <translation type="unfinished">Ausgabeordner</translation>
+        <translation>Ausgabeordner</translation>
     </message>
     <message>
-        <location filename="GUI/MainWindow.py" line="128"/>
+        <location filename="GUI/MainWindow.py" line="105"/>
         <source>Error</source>
-        <translation type="unfinished">Fehler</translation>
+        <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="GUI/MainWindow.py" line="128"/>
+        <location filename="GUI/MainWindow.py" line="105"/>
         <source>An error has ocurred:</source>
-        <translation type="unfinished">Es ist ein Fehler aufgetreten:</translation>
+        <translation>Es ist ein Fehler aufgetreten:</translation>
     </message>
     <message>
-        <location filename="GUI/MainWindow.py" line="140"/>
+        <location filename="GUI/MainWindow.py" line="117"/>
         <source>Done</source>
-        <translation type="unfinished">Fertig</translation>
+        <translation>Fertig</translation>
     </message>
     <message>
-        <location filename="GUI/MainWindow.py" line="287"/>
+        <location filename="GUI/MainWindow.py" line="262"/>
         <source>Select files to add to the convert queue</source>
-        <translation type="unfinished">Dateien auswählen, die zur Warteschlange hinzugefügt werden sollen</translation>
+        <translation>Dateien auswählen, die zur Warteschlange hinzugefügt werden sollen</translation>
     </message>
     <message>
-        <location filename="GUI/MainWindow.py" line="177"/>
+        <location filename="GUI/MainWindow.py" line="154"/>
         <source>Select output directory</source>
-        <translation type="unfinished">Ausgabeverzeichnis wählen</translation>
+        <translation>Ausgabeverzeichnis wählen</translation>
     </message>
     <message>
-        <location filename="GUI/Ui_MainWindow.py" line="258"/>
+        <location filename="GUI/Ui_MainWindow.py" line="454"/>
         <source>Advanced</source>
-        <translation type="unfinished">Erweitert</translation>
+        <translation>Erweitert</translation>
     </message>
     <message>
-        <location filename="GUI/Ui_MainWindow.py" line="264"/>
+        <location filename="GUI/Ui_MainWindow.py" line="457"/>
         <source>Preferences</source>
-        <translation type="unfinished">Einstellungen</translation>
+        <translation>Einstellungen</translation>
     </message>
     <message>
-        <location filename="GUI/Ui_MainWindow.py" line="236"/>
+        <location filename="GUI/Ui_MainWindow.py" line="432"/>
         <source>Video</source>
-        <translation type="unfinished">Videos</translation>
+        <translation>Videos</translation>
     </message>
     <message>
-        <location filename="GUI/Ui_MainWindow.py" line="244"/>
+        <location filename="GUI/Ui_MainWindow.py" line="440"/>
         <source>Photos</source>
         <translation>Fotos</translation>
     </message>
     <message>
-        <location filename="GUI/Ui_MainWindow.py" line="237"/>
+        <location filename="GUI/Ui_MainWindow.py" line="434"/>
         <source>Add images...</source>
-        <translation type="unfinished">Bilder hinzufügen...</translation>
+        <translation>Bilder hinzufügen...</translation>
     </message>
     <message>
-        <location filename="GUI/Ui_MainWindow.py" line="235"/>
+        <location filename="GUI/Ui_MainWindow.py" line="425"/>
         <source>Video converter</source>
-        <translation type="unfinished">Videokonverter</translation>
+        <translation>Videokonverter</translation>
     </message>
     <message>
-        <location filename="GUI/Ui_MainWindow.py" line="243"/>
+        <location filename="GUI/Ui_MainWindow.py" line="433"/>
         <source>Image converter</source>
-        <translation type="unfinished">Bildkonverter</translation>
+        <translation>Bildkonverter</translation>
     </message>
     <message>
-        <location filename="GUI/Ui_MainWindow.py" line="256"/>
+        <location filename="GUI/Ui_MainWindow.py" line="452"/>
         <source>Playlists</source>
-        <translation type="unfinished">Wiedergabelisten</translation>
+        <translation>Wiedergabelisten</translation>
     </message>
     <message>
-        <location filename="GUI/Ui_MainWindow.py" line="245"/>
+        <location filename="GUI/Ui_MainWindow.py" line="449"/>
         <source>Save playlist</source>
-        <translation type="unfinished">Wiedergabeliste speichern</translation>
+        <translation>Wiedergabeliste speichern</translation>
     </message>
     <message utf8="true">
-        <location filename="GUI/Ui_MainWindow.py" line="247"/>
+        <location filename="GUI/Ui_MainWindow.py" line="447"/>
         <source>Fuze&apos;s µSD slot</source>
-        <translation type="unfinished">microSD Slot</translation>
+        <translation>µSD Slot</translation>
     </message>
     <message>
-        <location filename="GUI/Ui_MainWindow.py" line="248"/>
+        <location filename="GUI/Ui_MainWindow.py" line="448"/>
         <source>Remove songs</source>
-        <translation type="unfinished">Lieder entfernen</translation>
+        <translation>Lieder entfernen</translation>
     </message>
     <message>
-        <location filename="GUI/Ui_MainWindow.py" line="250"/>
+        <location filename="GUI/Ui_MainWindow.py" line="445"/>
         <source>Fuze&apos;s internal storage</source>
-        <translation type="unfinished">Interner Speicher</translation>
+        <translation>Interner Speicher</translation>
     </message>
     <message>
-        <location filename="GUI/Ui_MainWindow.py" line="253"/>
+        <location filename="GUI/Ui_MainWindow.py" line="443"/>
         <source>Open playlist</source>
-        <translation type="unfinished">Wiedergabeliste öffnen</translation>
+        <translation>Wiedergabeliste öffnen</translation>
     </message>
     <message>
-        <location filename="GUI/MainWindow.py" line="92"/>
+        <location filename="GUI/MainWindow.py" line="69"/>
         <source>Select songs to add to the playlist</source>
-        <translation type="unfinished">Lieder auswählen, die zur Wiedergabeliste hinzugefügt werden sollen</translation>
+        <translation>Lieder auswählen, die zur Wiedergabeliste hinzugefügt werden sollen</translation>
     </message>
     <message>
-        <location filename="GUI/MainWindow.py" line="359"/>
+        <location filename="GUI/MainWindow.py" line="308"/>
         <source>Save your playlist</source>
-        <translation type="unfinished">Wiedergabeliste speichern</translation>
+        <translation>Wiedergabeliste speichern</translation>
     </message>
     <message>
-        <location filename="GUI/MainWindow.py" line="412"/>
+        <location filename="GUI/MainWindow.py" line="349"/>
         <source>*.pla</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="GUI/MainWindow.py" line="412"/>
+        <location filename="GUI/MainWindow.py" line="349"/>
         <source>Select playlist to edit</source>
-        <translation type="unfinished">Wiedergabeliste bearbeiten</translation>
-    </message>
-    <message>
-        <location filename="GUI/Ui_MainWindow.py" line="228"/>
-        <source>video4fuze 0.5</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiedergabeliste bearbeiten</translation>
     </message>
     <message utf8="true">
-        <location filename="GUI/Ui_MainWindow.py" line="246"/>
+        <location filename="GUI/Ui_MainWindow.py" line="446"/>
         <source>Choose songs from µSD card</source>
-        <translation type="unfinished">Lieder von der microSD Karte wählen </translation>
+        <translation>Lieder von der microSD Karte wählen</translation>
     </message>
     <message>
-        <location filename="GUI/Ui_MainWindow.py" line="249"/>
+        <location filename="GUI/Ui_MainWindow.py" line="444"/>
         <source>Choose songs from the fuze&apos;s internal memory</source>
-        <translation type="unfinished">Lieder vom internen Speicher wählen</translation>
+        <translation>Lieder vom internen Speicher wählen</translation>
     </message>
     <message utf8="true">
-        <location filename="GUI/Ui_MainWindow.py" line="251"/>
+        <location filename="GUI/Ui_MainWindow.py" line="441"/>
         <source>Playlist editor: Add songs from µSD or internal flash</source>
-        <translation type="unfinished">Wiedergablisteneditor: Lieder von microSD  oder internem Speicher hinzufügen</translation>
+        <translation>Wiedergablisteneditor: Lieder von microSD  oder internem Speicher hinzufügen</translation>
     </message>
     <message>
-        <location filename="GUI/Ui_MainWindow.py" line="254"/>
+        <location filename="GUI/Ui_MainWindow.py" line="450"/>
         <source>Load an existing playlist</source>
-        <translation type="unfinished">Bestehende Wiedergabeliste öffnen</translation>
+        <translation>Bestehende Wiedergabeliste öffnen</translation>
     </message>
     <message>
-        <location filename="GUI/Ui_MainWindow.py" line="255"/>
+        <location filename="GUI/Ui_MainWindow.py" line="451"/>
         <source>Sort alphabetically</source>
-        <translation type="unfinished">Alphabetisch sortieren</translation>
+        <translation>Alphabetisch sortieren</translation>
     </message>
     <message>
-        <location filename="GUI/MainWindow.py" line="92"/>
+        <location filename="GUI/MainWindow.py" line="69"/>
         <source>*.ogg *.OGG *.mp3 *.MP3 *.wma *.WMA *.flac *.FLAC</source>
         <translation></translation>
-    </message>
-    <message>
-        <location filename="GUI/MainWindow.py" line="337"/>
-        <source>About video4fuze 0.5</source>
-        <translation type="unfinished">Über video4fuze 0.5</translation>
-    </message>
-    <message>
-        <location filename="GUI/MainWindow.py" line="337"/>
-        <source>This applications uses mencoder and fuzemux in order to convert your video files to be seen in you sansa fuze.
-
-Thanks to ewelot and  earthcrosser  from the sansa forums for finding the way to convert the videos, without their findings this app wouldn&apos;t exist.</source>
-        <translation type="unfinished">Dieses Programm nutzt mencoder und fuzwmux um Videodateien für ihren Sansa Fuze umzuwandeln.
-
-Vielen Dank an ewelot und earthcrosser aus den Sansa Foren für das Finden einer Möglichkeit Videos zu konvertieren. Ohne diese Erkenntnisse würde es diese Anwendung nicht geben.</translation>
     </message>
 </context>
 <context>
     <name>PreferencesDialog</name>
     <message>
-        <location filename="GUI/Ui_Preferences.py" line="64"/>
+        <location filename="GUI/Ui_Preferences.py" line="118"/>
         <source>video4fuze preferences</source>
-        <translation type="unfinished">video4fuze Einstellungen</translation>
+        <translation>video4fuze Einstellungen</translation>
     </message>
     <message>
-        <location filename="GUI/Ui_Preferences.py" line="65"/>
+        <location filename="GUI/Ui_Preferences.py" line="125"/>
         <source>Defaults</source>
-        <translation type="unfinished">Standardeinstellungen</translation>
+        <translation>Standardeinstellungen</translation>
     </message>
     <message>
-        <location filename="GUI/Ui_Preferences.py" line="66"/>
+        <location filename="GUI/Ui_Preferences.py" line="126"/>
         <source>&amp;OK</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="GUI/Ui_Preferences.py" line="67"/>
+        <location filename="GUI/Ui_Preferences.py" line="127"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Abbrechen</translation>
+        <translation>&amp;Abbrechen</translation>
     </message>
     <message>
-        <location filename="GUI/Ui_Preferences.py" line="68"/>
+        <location filename="GUI/Ui_Preferences.py" line="120"/>
         <source>Mencoder pass 1 command line:</source>
-        <translation type="unfinished">Kommandozeile - Mencoder Durchgang 1:</translation>
+        <translation>Kommandozeile - Mencoder Durchgang 1:</translation>
     </message>
     <message>
-        <location filename="GUI/Ui_Preferences.py" line="69"/>
+        <location filename="GUI/Ui_Preferences.py" line="122"/>
         <source>Mencoder pass 2 command line:</source>
-        <translation type="unfinished">Kommandozeile - Mencoder Durchgang 2:</translation>
+        <translation>Kommandozeile - Mencoder Durchgang 2:</translation>
     </message>
     <message>
-        <location filename="GUI/Ui_Preferences.py" line="70"/>
-        <source>Warning: invalid command line arguments for mencoder may cause video4fuze to crash.
-These settings will be remembered, so if you only want them for just this conversion, remember to revert them to defaults or setting them as you wish.</source>
-        <translation type="unfinished">Warnung:
-Ungültige Kommandozeilenargumente für Mencoder können zu Abstürzen von video4fuze führen.
-Diese Einstellungen werden dauerhaft gespeichert. Falls sie nur für diese Umwandlung gewünscht sind, sollten sie anschließend wieder auf die Standardwerte zurückgesetzt bzw. vor der nächsten Umwandlung angepasst werden.</translation>
+        <location filename="GUI/Ui_Preferences.py" line="119"/>
+        <source>Caution: Modify these settings only if you really know what you do. You have been warned</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="GUI/Ui_Preferences.py" line="121"/>
+        <source>Two passes</source>
+        <translation>Zwei Durchgänge</translation>
+    </message>
+    <message>
+        <location filename="GUI/Ui_Preferences.py" line="123"/>
+        <source>Converted image size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="GUI/Ui_Preferences.py" line="124"/>
+        <source>x</source>
+        <translation></translation>
     </message>
 </context>
 </TS>

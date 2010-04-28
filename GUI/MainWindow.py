@@ -4,7 +4,7 @@ Module implementing video4fuze's MainWindow. Playlist edition capabilities are i
 # .pla playlist format.
 """
 import os, fuze, p2fuze
-from PyQt4.QtGui import QMainWindow,QFileDialog,QMessageBox, QLabel, QListWidgetItem, QIcon
+from PyQt4.QtGui import QMainWindow,QFileDialog,QMessageBox, QLabel, QListWidgetItem, QIcon, QTableWidgetItem
 from PyQt4.QtCore import QString,QT_TR_NOOP,SIGNAL,QObject,QSettings,QVariant, QCoreApplication
 from threading import Thread
 from Ui_MainWindow import Ui_MainWindow
@@ -38,6 +38,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             print "Your version of PyQt4 seems a bit out of date. This may lead to problems. But may not :)" #Most probable. The fact is that it doesn't work in PySide and older PyQt4.
         self.output = toPython(self.settings.value("outputdir",QVariant(os.path.expanduser("~"))).toString()) #Where to output things.
         self.setWindowTitle(QCoreApplication.applicationName()+" "+QCoreApplication.applicationVersion())
+        
+        ##### These should be commented in case QtCore.QMetaObject.connectSlotsByName(MainWindow) in UI_MainWindow.py isn't commented.
         self.connect(self.actionAbout_Qt, SIGNAL("triggered()"),self.on_actionAbout_Qt_triggered)
         self.connect(self.RemoveButton, SIGNAL("clicked()"),self.on_RemoveButton_clicked)
         self.connect(self.RemoveButton_2, SIGNAL("clicked()"),self.on_RemoveButton_2_clicked)
@@ -48,13 +50,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.connect(self.actionAbout_video4fuze, SIGNAL("triggered()"),self.on_actionAbout_video4fuze_triggered)
         self.connect(self.AddButton, SIGNAL("clicked()"),self.on_AddButton_clicked)
         self.connect(self.AddButton_2, SIGNAL("clicked()"),self.on_AddButton_2_clicked)
-        self.connect(self.SelectOutputButton, SIGNAL("clicked()"),self.SelectOutput)
-        self.connect(self.SelectOutputButton_2, SIGNAL("clicked()"),self.SelectOutput)
         self.connect(self.SavePlaylist, SIGNAL("clicked()"),self.on_SavePlaylist_clicked)
         self.connect(self.SongsFromSD, SIGNAL("clicked()"),self.on_SongsFromSD_clicked)
         self.connect(self.SongsFromFuze, SIGNAL("clicked()"),self.on_SongsFromFuze_clicked)
         self.connect(self.OpenPlaylist, SIGNAL("clicked()"),self.on_OpenPlaylist_clicked)
+        #####
         self.connect(self.ToggleSort, SIGNAL("clicked()"),self.playlistWidget.sortItems)
+        self.connect(self.SelectOutputButton, SIGNAL("clicked()"),self.SelectOutput)
+        self.connect(self.SelectOutputButton_2, SIGNAL("clicked()"),self.SelectOutput)
 
 
     def fuzePath(self,prefix): #TODO: Tags display & sorting
@@ -196,9 +199,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         remlist = []
         for item in self.playlistWidget.selectedItems():
             try:
-                if item.column() == 0:
-                    self.playlistWidget.takeItem(self.playlistWidget.row(item))
-            except:
+                self.playlistWidget.takeItem(self.playlistWidget.row(item))
+            except Exception,  e:
+                print e
                 print "Weird things happening between python and c++"
 
     def on_ConvertButton_clicked(self):
@@ -232,12 +235,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         files = QFileDialog.getOpenFileNames(\
             None,
             self.trUtf8("Select files to add to the convert queue"),
-            self.settings.value("lastdir",QVariant(os.path.expanduser("~"))).toString(),
+            self.settings.value("lastvideodir",QVariant(os.path.expanduser("~"))).toString(),
             QString(),
             None) # A cute QFileDialog asks the user for the files to convert, for both videos and images.
         if not files.isEmpty(): #If nothing, do nothing.
             try:
-                self.settings.setValue("lastdir", QVariant(os.path.split(toPython(files[0]))[0]))
+                self.settings.setValue("lastvideodir", QVariant(os.path.split(toPython(files[0]))[0]))
                 #Remembering last used dir comes always in handy.
             except:
                 print files #Debugging stuff...
@@ -259,12 +262,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         files = QFileDialog.getOpenFileNames(\
             None,
             self.trUtf8("Select files to add to the convert queue"),
-            self.settings.value("lastdir",QVariant(os.path.expanduser("~"))).toString(),
+            self.settings.value("lastphotodir",QVariant(os.path.expanduser("~"))).toString(),
             QString(),
             None) # A cute QFileDialog asks the user for the files to convert, for both videos and images.
         if not files.isEmpty(): #If nothing, do nothing.
             try:
-                self.settings.setValue("lastdir", QVariant(os.path.split(toPython(files[0]))[0]))
+                self.settings.setValue("lastphotodir", QVariant(os.path.split(toPython(files[0]))[0]))
                 #Remembering last used dir comes always in handy.
             except:
                 print files #Debugging stuff...

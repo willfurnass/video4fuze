@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file '/home/ssorgatem/Documents/python/video4fuze/GUI/AboutDiag.ui'
 #
-# Created: Tue Apr 27 21:24:37 2010
-#      by: PyQt4 UI code generator 4.7.3
+# Created: Wed Apr 28 09:50:02 2010
+#      by: PyQt4 UI code generator 4.6
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -19,14 +19,12 @@ class Ui_Dialog(object):
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(":/icons/silver.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         Dialog.setWindowIcon(icon)
-        Dialog.setLocale(QtCore.QLocale(QtCore.QLocale.C, QtCore.QLocale.AnyCountry))
         self.verticalLayout = QtGui.QVBoxLayout(Dialog)
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout = QtGui.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.Appinfo = QtGui.QLabel(Dialog)
         self.Appinfo.setCursor(QtCore.Qt.WhatsThisCursor)
-        self.Appinfo.setToolTip("")
         self.Appinfo.setText("TextLabel")
         self.Appinfo.setAlignment(QtCore.Qt.AlignCenter)
         self.Appinfo.setWordWrap(True)
@@ -45,8 +43,6 @@ class Ui_Dialog(object):
         self.logo.setMaximumSize(QtCore.QSize(35, 52))
         self.logo.setCursor(QtCore.Qt.WhatsThisCursor)
         self.logo.setAutoFillBackground(False)
-        self.logo.setLocale(QtCore.QLocale(QtCore.QLocale.C, QtCore.QLocale.AnyCountry))
-        self.logo.setText("")
         self.logo.setPixmap(QtGui.QPixmap(":/icons/black.png"))
         self.logo.setScaledContents(True)
         self.logo.setAlignment(QtCore.Qt.AlignCenter)

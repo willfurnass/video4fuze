@@ -14,7 +14,7 @@ mencoderpass1 = "mencoder -msglevel all=0:statusline=5 -ffourcc DX50 -ofps 20 -v
 mencoderpass2 = "mencoder -msglevel all=0:statusline=5 -ffourcc DX50 -ofps 20 -vf pp=li,expand=:::::224/176,scale=224:176,harddup     -ovc lavc -lavcopts vcodec=mpeg4:vbitrate=683:vmax_b_frames=0:keyint=15:vpass=2 -srate 44100 -af resample=44100:0:1,format=s16le -oac mp3lame -lameopts cbr:br=128"
 
 mencodersinglepass = "mencoder  -msglevel all=0:statusline=5 -ofps 20 -ovc lavc -lavcopts vcodec=mpeg4:vqscale=3:keyint=15  -vf field,expand=:::::224/176,scale=224:176,harddup -srate 44100 -af resample=44100:0:1,format=s16le -oac mp3lame -lameopts cbr:br=128"
-pass2 = True
+pass2 = False
 ####################################################################
 class Fuze():
     """

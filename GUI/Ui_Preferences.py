@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file '/home/ssorgatem/Documents/python/video4fuze/GUI/Preferences.ui'
 #
-# Created: Tue Apr 27 21:24:41 2010
-#      by: PyQt4 UI code generator 4.7.3
+# Created: Wed Apr 28 10:51:48 2010
+#      by: PyQt4 UI code generator 4.6
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -40,14 +40,13 @@ class Ui_PreferencesDialog(object):
         self.horizontalLayout_3.addItem(spacerItem)
         self.verticalLayout.addLayout(self.horizontalLayout_3)
         self.mencoderpass1Edit = QtGui.QPlainTextEdit(self.frame_2)
-        self.mencoderpass1Edit.setPlainText("")
         self.mencoderpass1Edit.setObjectName("mencoderpass1Edit")
         self.verticalLayout.addWidget(self.mencoderpass1Edit)
         self.verticalLayout_3.addWidget(self.frame_2)
         self.horizontalLayout = QtGui.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.Pass2Check = QtGui.QCheckBox(PreferencesDialog)
-        self.Pass2Check.setChecked(True)
+        self.Pass2Check.setChecked(False)
         self.Pass2Check.setObjectName("Pass2Check")
         self.horizontalLayout.addWidget(self.Pass2Check)
         spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
@@ -69,7 +68,6 @@ class Ui_PreferencesDialog(object):
         self.horizontalLayout_2.addItem(spacerItem2)
         self.verticalLayout_2.addLayout(self.horizontalLayout_2)
         self.mencoderpass2Edit = QtGui.QPlainTextEdit(self.frame)
-        self.mencoderpass2Edit.setPlainText("")
         self.mencoderpass2Edit.setObjectName("mencoderpass2Edit")
         self.verticalLayout_2.addWidget(self.mencoderpass2Edit)
         self.verticalLayout_3.addWidget(self.frame)
@@ -104,7 +102,6 @@ class Ui_PreferencesDialog(object):
         self.okButton.setObjectName("okButton")
         self.hboxlayout.addWidget(self.okButton)
         self.cancelButton = QtGui.QPushButton(PreferencesDialog)
-        self.cancelButton.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
         self.cancelButton.setDefault(True)
         self.cancelButton.setFlat(False)
         self.cancelButton.setObjectName("cancelButton")
