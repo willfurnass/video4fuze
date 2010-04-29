@@ -36,6 +36,7 @@ setup(name=info.NAME,
                    ('share/pixmaps',
                    ['icons/blackfuze.png']),
                    ('bin/',
-                   ['dist/video4fuze'])
+                   ['dist/video4fuze',
+		    'dist/fuze'])
     ]
 )
