@@ -98,6 +98,7 @@ Section "Principal" SEC01
   File "..\vcredist_x86.exe"
   ExecWait "$TEMP\vcredist_x86.exe /q"
   Delete "$TEMP\vcredist_x86.exe"
+  SetOutPath "$INSTDIR"
 
 ; Shortcuts
   !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
@@ -108,12 +109,13 @@ Section "Principal" SEC01
 SectionEnd
 
 Section "Translations" SEC02
-  SetOutPath "$INSTDIR"
+  SetOutPath "$INSTDIR\translations"
   SetOverwrite try
   File "dist\win32\translations\v4f_ca.qm"
   File "dist\win32\translations\v4f_de.qm"
   File "dist\win32\translations\v4f_en.qm"
   File "dist\win32\translations\v4f_es.qm"
+  SetOutPath "$INSTDIR"
 
 ; Shortcuts
   !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
@@ -176,12 +178,12 @@ SectionEnd
 
 Function un.onUninstSuccess
   HideWindow
-  MessageBox MB_ICONINFORMATION|MB_OK "La desinstalación de $(^Name) finalizó satisfactoriamente."
+  MessageBox MB_ICONINFORMATION|MB_OK "La desinstalaci贸n de $(^Name) finaliz贸 satisfactoriamente."
 FunctionEnd
 
 Function un.onInit
 !insertmacro MUI_UNGETLANGUAGE
-  MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 "¿Está completamente seguro que desea desinstalar $(^Name) junto con todos sus componentes?" IDYES +2
+  MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 "驴Est谩 completamente seguro que desea desinstalar $(^Name) junto con todos sus componentes?" IDYES +2
   Abort
 FunctionEnd
 
