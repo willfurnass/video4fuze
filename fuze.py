@@ -3,7 +3,7 @@
 """
 Class and methods to convert video for the fuze
 """
-import os, tempfile, shutil, sys, commands, unicodedata
+import os, tempfile, shutil, commands, unicodedata
 import info
 from subprocess import check_call, call
 from PyQt4.QtCore import QT_TR_NOOP,SIGNAL,QObject,QString,QVariant, QSettings
@@ -62,7 +62,6 @@ class Fuze():
         self.pass2 = self.Settings.value("2pass",QVariant(pass2)).toBool()
         print "Current settings:"
         print
-        print self.pass2
         if self.pass2:
             print "Two-pass conversion;"
             print "Pass 1: ",  self.mencoderpass1
@@ -172,8 +171,20 @@ class Fuze():
 	  self.qobject.emit(SIGNAL("finished"),self.GUI.Video)
 
 if __name__ == "__main__":
-    if sys.argv[1:] == [] :
-        print """Usage:
-        python fuze.py INPUTVIDEO1 INPUTVIDEO2 ..."""
-        exit(1)
-    Fuze().convert(sys.argv[1:])
+    from optparse import OptionParser
+    
+    parser = OptionParser()
+    parser.add_option("-o","--outputdir", dest="outputdir", help="save the converted files to OUTPUTDIR", metavar="OUTPUTDIR")
+    options, args = parser.parse_args()
+    
+    if options.outputdir:
+        if not os.path.isdir(options.outputdir):
+            print options.outputdir,  "is not a directory!"
+            print "Aborting..."
+            exit(1)
+        print "Output directory:", options.outputdir
+    else:
+        print "Output directory: same as source"
+    print "Files to convert:", args
+    
+    Fuze().convert(args,options.outputdir) 

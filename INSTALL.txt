@@ -1,0 +1,26 @@
+To install video4fuze, you only need to:
+
+* Meet all its requirements:
+    fuzemux
+    mencoder
+    ffmpeg 
+    PyQt 4.5 or newer
+    Qt 4.5 or newer
+    python 2.5 or newer [not python3.x]
+    Python Imaging library [PIL]
+    
+    And that's all, if you have them all installed, you should be able of running videofuze by typing:
+   
+    $ python video4fuze.pyw
+    
+* [optional] If you want to use video4fuze in a language other than english, you must release the translation files, with:
+
+    $ lrelease video4fuze_e4x.pro
+    
+    That will generate all the compiled (.qm) translation files
+    
+* [optional] If now you want to install video4fuze, just type:
+
+    python setup.py install
+    
+    And now you should have two scripts ion your path: "video4fuze", to start the GUI, and "fuze" for the command-line converter

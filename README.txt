@@ -22,7 +22,7 @@ If you are using the source distribution of video4fuze, you need the following i
 * Python >=2.5, < 3.0
 * PyQt4 >= 4.5 (debian package: python-qt4)
 * PIL (Python Imaging Library) (debian package: python-imaging)
-* Mencoder (debian package: mplayer)
+* Mencoder (debian package: mencoder)
 * FFMPEG (debian package: ffmpeg)
 * fuzemux (Deb packages available for downloadfrom video4fuze's google code site. win32 build included in win32 versions, source at http://code.google.com/p/fuzemux/)
 * xterm (not needed, but recommended)

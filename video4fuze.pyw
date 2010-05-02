@@ -43,11 +43,5 @@ def main():
     print sys.argv
     sys.exit(Vapp.exec_()) #When the app finishes, exit.
 
-#def Setup():
-#    """
-#    Setup the Qapplication, translators and properties used to load settings
-#    """
-
-
 if __name__ == "__main__":
     main()

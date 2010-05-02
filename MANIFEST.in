@@ -1,4 +1,5 @@
 prune *
+include INSTALL.txt
 include README.txt
 include LICENSE.txt
 include LICENSE.html
