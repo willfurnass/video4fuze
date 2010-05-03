@@ -119,18 +119,28 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         """
         Clean items and/or objects from the different tabs. This function is intended to be a slot to connect with signals on other threads.
         """
+        print "Deleting",  itemText,  "from conversion queue"
+        itemText = os.path.abspath(itemText)
         if image:
             row = 0
             while row < self.tableWidget_2.rowCount():
-                if itemText == toPython(self.tableWidget_2.item(row,0).text()):
+                print "is",  itemText, " equal to",os.path.abspath(toPython(self.tableWidget_2.item(row,0).text())), "?"
+                if itemText == os.path.abspath(toPython(self.tableWidget_2.item(row,0).text())):
                     self.tableWidget_2.removeRow(row)
+                    print "yes"
                     break
+                else:
+                    print no
                 row += 1
         else:
             row = 0
             while row < self.tableWidget.rowCount():
-                if itemText == toPython(self.tableWidget.item(row,0).text()):
+                print "is",  itemText, " equal to",os.path.abspath(toPython(self.tableWidget.item(row,0).text())), "?"
+                if itemText == os.path.abspath(toPython(self.tableWidget.item(row,0).text())):
                     self.tableWidget.removeRow(row)
+                    print "yes"
+                else:
+                    print "no"
                     break
                 row += 1
 

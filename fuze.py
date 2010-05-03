@@ -35,8 +35,8 @@ class Fuze():
         self.fuzemuxPrefix = tempfile.gettempdir()
         if os.name == 'nt':
             self.FFMPEG = os.path.join(self.CWD, "ffmpeg.exe")
-            self.mencoderpass1 = self.mencoderpass1.replace("mencoder",os.path.join(self.CWD, "mencoder.exe"))
-            self.mencoderpass2 = self.mencoderpass2.replace("mencoder",os.path.join(self.CWD, "mencoder.exe"))
+            #self.mencoderpass1 = self.mencoderpass1.replace("mencoder",os.path.join(self.CWD, "mencoder.exe"))
+            #self.mencoderpass2 = self.mencoderpass2.replace("mencoder",os.path.join(self.CWD, "mencoder.exe"))
             self.fuzemux = os.path.join(self.CWD, "fuzemux.exe")
         else:
             self.FFMPEG = "ffmpeg"
@@ -75,7 +75,7 @@ class Fuze():
         This method converts any video file passed as argument to a file suitable for the sansa fuze.
         """
         if self.GUI:
-	  self.qobject.emit(SIGNAL("stop"),self.GUI.Video)
+            self.qobject.emit(SIGNAL("stop"),self.GUI.Video)
         for argument in args:
             argument = os.path.abspath(argument)
             os.chdir(self.fuzemuxPrefix)
@@ -164,12 +164,14 @@ class Fuze():
                     print e
                     print  "Ooops not moving final video"
                     self.qobject.emit(SIGNAL("Exception"),e)
+                if self.GUI:
+                    self.qobject.emit(SIGNAL("finished"),self.GUI.Video)
+                    print "Finished!"
             else:
-                print "\'" + argument + "\'" + ": file not found"
+                error = "\'" + argument + "\'" + ": file not found"
+                self.qobject.emit(SIGNAL("Exception"),error)
+                print error
             os.chdir(self.CWD)
-	if self.GUI:
-	  self.qobject.emit(SIGNAL("finished"),self.GUI.Video)
-
 if __name__ == "__main__":
     from optparse import OptionParser
     

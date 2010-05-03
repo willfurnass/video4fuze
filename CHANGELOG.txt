@@ -1,9 +1,13 @@
 ###CHANGELOG###
---0.5.1--
-* Lots of bugfixes
+--0.6--
+* Changed default settings to single-pass operation
+* Improved installer (it doesn't leave temporary files any more)
+* Improved command-line interface (fuze.py)
+* Added fuze.py option to select output directory
 * UI vastly enhanced: now it supports properly resizing and full-screen
 * Fixed settings being saved only partially in .ini files
 * Added setup.py script for easier installation from source
+* And LOTS of bugfixes
 --0.5--
 * Fixed launch of v4f in OSX
 * UI enhancements

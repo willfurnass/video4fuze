@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project video4fuze -->
-<!-- Saved: 2010-04-27, 16:06:31 -->
+<!-- Saved: 2010-05-03, 02:56:25 -->
 <!-- Copyright (C) 2010 ssorgatem, ssorgatem@esdebian.org -->
 <Project version="4.6">
   <Language>en</Language>
@@ -64,6 +64,8 @@
     <Other>fuzemux-0.1.0/fuzemux.c</Other>
     <Other>fuzemux-0.1.0/riff.c</Other>
     <Other>fuzemux-0.1.0/riff.h</Other>
+    <Other>INSTALL.txt</Other>
+    <Other>MANIFEST.in</Other>
   </Others>
   <MainScript>video4fuze.pyw</MainScript>
   <Vcs>

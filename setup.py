@@ -38,8 +38,8 @@ setup(name=info.NAME,
                    ['video4fuze.desktop']),
                    ('share/pixmaps',
                    ['icons/blackfuze.png']),
-                   ('bin/',
+                   ('bin',
                    ['dist/video4fuze',
-		    'dist/fuze'])
+                    'dist/fuze'])
     ]
 )
