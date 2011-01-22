@@ -8,8 +8,8 @@
 #
 # @author Vadim Zaliva <lord@crocodile.org>
 #
-# Adapted for video4fuze by Adrián Cereto <ssorgatem@esdebian.org>
-#
+# Adapted for video4fuze by Adrián Cereto <ssorgatem@gmail.com>
+# Enhanced by <russs.com@gmail.com>
 # ----------------------------------------------------------------------
 # LICENSE:
 #
@@ -18,7 +18,7 @@
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
-# as published by the Free Software Foundation; either version 2
+# as published by the Free Software Foundation; either version 3
 # of the License, or (at your option) any later version.
 #
 # This program is distributed in the hope that it will be useful,
@@ -63,13 +63,37 @@ def copy_thumb(src, dst, thumb):
     else:
         shutil.copyfile(src, dst)
 
-def find_thumb(infile, outfile, nframes, alsosave, verbose, thumb, FFMPEG = "ffmpeg"):
+def find_thumb_from_image (src, destthumb):
+    try:
+        srcthumb = ''
+        #print "src =", src
+        if os.path.isdir(src):
+            if os.path.isfile (src + '/backdrop.jpg'):
+                srcthumb = src + '/backdrop.jpg'
+            elif os.path.isfile (src + '/folder.jpg'):
+                srcthumb = src + '/folder.jpg'
+            elif os.path.isfile (src + '/mymovies-front.jpg'):
+                srcthumb = src + '/mymovies-front.jpg'
+            elif os.path.isfile (src + '.jpg'):
+                srcthumb = src + '.jpg'
+        elif os.path.isfile(src):
+            if os.path.isfile (os.path.splitext (src)[0] + '.jpg'):
+                srcthumb = os.path.splitext (src)[0] + '.jpg'
+        if srcthumb != '':
+            print 'thumb from', srcthumb, 'to', destthumb
+            copy_thumb (srcthumb, destthumb, True)
+            return True
+    except Exception, e:
+        print e
+    return False
+
+def find_thumb2(infile, outfile, startframe, nframes, alsosave, verbose, thumb, FFMPEG = "ffmpeg"):
     if verbose:
         infile = '\"' + infile + '\"'
         print "Processing %s" % infile
         print "Extracting frames"
     framemask = "frame" + str(time.time()) + ".%d.jpg"
-    cmd = "%s -y -vframes %d -i %s %s" % (FFMPEG, nframes, infile, framemask)
+    cmd = "%s -y -r 5 -vframes %d -i %s %s" % (FFMPEG, startframe+nframes-1, infile, framemask)
     if not verbose:
         cmd = cmd + " -v -1" #> /dev/null 2>&1"
     if os.system(cmd) != 0:
@@ -79,7 +103,7 @@ def find_thumb(infile, outfile, nframes, alsosave, verbose, thumb, FFMPEG = "ffm
     if verbose:
         print "Analyzing frames"
     hist=[]
-    for i in range(1,nframes+1):
+    for i in range(startframe,startframe+nframes):
         fname = framemask % i
         if not os.path.exists(fname):
             break
@@ -110,8 +134,8 @@ def find_thumb(infile, outfile, nframes, alsosave, verbose, thumb, FFMPEG = "ffm
 
     minn = -1
     minRMSE = -1
-    for i in range(1,n+1):
-        rmse = frame_rmse(hist[i-1], avg);
+    for i in range(startframe,startframe+n):
+        rmse = frame_rmse(hist[i-startframe], avg);
         if minn==-1 or rmse<minRMSE:
             minn = i
             minRMSE = rmse
@@ -122,7 +146,7 @@ def find_thumb(infile, outfile, nframes, alsosave, verbose, thumb, FFMPEG = "ffm
     rc = 0
     try:
         # Copy best
-        copy_thumb(framemask % (minn), outfile + ".thm", thumb)
+        copy_thumb(framemask % (minn), outfile, thumb)
     except:
         print "Error copying thumb file"
         rc = 100
@@ -133,3 +157,44 @@ def find_thumb(infile, outfile, nframes, alsosave, verbose, thumb, FFMPEG = "ffm
         fname = framemask % i
         os.unlink(fname)
     return rc
+
+def find_thumb(infile, outfile, nframes, alsosave, verbose, thumb, FFMPEG = "ffmpeg"):
+    find_thumb2 (infile, outfile, 1, nframes, alsosave, verbose, thumb, FFMPEG)
+
+if __name__ == "__main__":
+    from optparse import OptionParser
+
+    parser = OptionParser()
+    parser.usage = "%prog <file> [options]"
+    parser.add_option("-f","--first", dest="firstframe", help="first frame to analyze in source file (default 1)", metavar="<n>", default=1)
+    parser.add_option("-c","--count", dest="framecount", help="number of frames to analyze (default 100)", metavar="<n>", default=100)
+    parser.add_option("-j","--jpg-only", action="store_true", dest="jpgonly", default=False, help="only generate thumb from jpg image")
+    parser.add_option("-n","--no-jpg", action="store_true", dest="nojpg", default=False, help="don't generate thumb from jpg image")
+    parser.add_option("-v","--verbose", action="store_true", dest="verbose", default=False, help="verbose")
+    parser.add_option("-d","--dest", dest="dest", help="destination image (default same as source with .thm extension)", metavar="<file>", default='')
+
+    options, args = parser.parse_args()
+    if len (args) != 1:
+        parser.error ("file not specified", len(args), args)
+
+    file = args [0]
+    if not file or (not os.path.isfile(file) and not os.path.isdir(file)):
+        parser.error ("file not specified")
+    if options.jpgonly and options.nojpg:
+        parser.error ("can't specify both --jpg-only and --no-jpg")
+
+    if options.dest == '':
+        dest = os.path.splitext (file)[0] + '.thm'
+    else:
+        dest = options.dest
+        if os.path.isdir (dest):
+            dest = os.path.join (dest, os.path.splitext (os.path.split(file)[1])[0] + '_fuze.thm')
+
+    print "Generating", dest
+    done = False
+    if not options.nojpg:
+        done = find_thumb_from_image (os.path.splitext (file)[0], dest)
+
+    if not done and not options.jpgonly:
+        find_thumb2 (file, dest, int(options.firstframe), int(options.framecount), [], options.verbose, False, "ffmpeg")
+
