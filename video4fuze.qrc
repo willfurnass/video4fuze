@@ -6,4 +6,10 @@
     <file>icons/blue.png</file>
     <file>icons/red.png</file>
   </qresource>
+  <qresource prefix="translations">
+    <file>translations/v4f_ca.qm</file>
+    <file>translations/v4f_de.qm</file>
+    <file>translations/v4f_en.qm</file>
+    <file>translations/v4f_es.qm</file>
+  </qresource>
 </RCC>
