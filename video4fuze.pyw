@@ -20,6 +20,7 @@
 
 import sys
 import info
+from multiprocessing import freeze_support
 from PyQt4.QtGui import QApplication
 from PyQt4.QtCore import QTranslator, QString, QLocale
 from GUI.MainWindow import MainWindow
@@ -44,4 +45,5 @@ def main():
     sys.exit(Vapp.exec_()) #When the app finishes, exit.
 
 if __name__ == "__main__":
+    freeze_support()
     main()

@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file '/home/ssorgatem/Documents/python/video4fuze/GUI/Preferences.ui'
 #
-# Created: Wed Apr 28 17:03:39 2010
-#      by: PyQt4 UI code generator 4.6
+# Created: Sun Jan 23 02:30:17 2011
+#      by: PyQt4 UI code generator 4.7.3
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -16,6 +16,7 @@ class Ui_PreferencesDialog(object):
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(":/icons/blue.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         PreferencesDialog.setWindowIcon(icon)
+        PreferencesDialog.setLocale(QtCore.QLocale(QtCore.QLocale.C, QtCore.QLocale.AnyCountry))
         self.verticalLayout_3 = QtGui.QVBoxLayout(PreferencesDialog)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.label_3 = QtGui.QLabel(PreferencesDialog)
@@ -40,6 +41,8 @@ class Ui_PreferencesDialog(object):
         self.horizontalLayout_3.addItem(spacerItem)
         self.verticalLayout.addLayout(self.horizontalLayout_3)
         self.mencoderpass1Edit = QtGui.QPlainTextEdit(self.frame_2)
+        self.mencoderpass1Edit.setLocale(QtCore.QLocale(QtCore.QLocale.C, QtCore.QLocale.AnyCountry))
+        self.mencoderpass1Edit.setPlainText("None")
         self.mencoderpass1Edit.setObjectName("mencoderpass1Edit")
         self.verticalLayout.addWidget(self.mencoderpass1Edit)
         self.verticalLayout_3.addWidget(self.frame_2)
@@ -68,6 +71,7 @@ class Ui_PreferencesDialog(object):
         self.horizontalLayout_2.addItem(spacerItem2)
         self.verticalLayout_2.addLayout(self.horizontalLayout_2)
         self.mencoderpass2Edit = QtGui.QPlainTextEdit(self.frame)
+        self.mencoderpass2Edit.setPlainText("None")
         self.mencoderpass2Edit.setObjectName("mencoderpass2Edit")
         self.verticalLayout_2.addWidget(self.mencoderpass2Edit)
         self.verticalLayout_3.addWidget(self.frame)
@@ -103,6 +107,7 @@ class Ui_PreferencesDialog(object):
         self.okButton.setObjectName("okButton")
         self.hboxlayout.addWidget(self.okButton)
         self.cancelButton = QtGui.QPushButton(PreferencesDialog)
+        self.cancelButton.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
         self.cancelButton.setDefault(True)
         self.cancelButton.setFlat(False)
         self.cancelButton.setObjectName("cancelButton")

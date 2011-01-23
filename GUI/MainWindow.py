@@ -37,7 +37,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             print "Your version of PyQt4 seems a bit out of date. This may lead to problems. But may not :)" #Most probable. The fact is that it doesn't work in PySide and older PyQt4.
         self.output = toPython(self.settings.value("outputdir",QVariant(os.path.expanduser("~"))).toString()) #Where to output things.
         self.setWindowTitle(QCoreApplication.applicationName()+" "+QCoreApplication.applicationVersion())
-        
+
         ##### These should be commented in case QtCore.QMetaObject.connectSlotsByName(MainWindow) in UI_MainWindow.py isn't commented.
         self.connect(self.actionAbout_Qt, SIGNAL("triggered()"),self.on_actionAbout_Qt_triggered)
         self.connect(self.RemoveButton, SIGNAL("clicked()"),self.on_RemoveButton_clicked)
@@ -392,6 +392,7 @@ class Converter(Thread):
         self.args = args
         self.FINALPREFIX = FINALPREFIX
         self.parent = parent
+
     def run(self):
         self.parent.Fuze.LoadSettings()
         self.parent.Fuze.convert(self.args, self.FINALPREFIX)
@@ -407,6 +408,7 @@ class Resizer(Thread):
         self.parent = parent
     def run(self):
         self.parent.resis.convert(self.args, self.FINALPREFIX)
+
 
 ###And now two global hacky functions###
 def mountpoint(dir):

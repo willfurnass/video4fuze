@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file '/home/ssorgatem/Documents/python/video4fuze/GUI/MainWindow.ui'
 #
-# Created: Wed Apr 28 10:47:20 2010
-#      by: PyQt4 UI code generator 4.6
+# Created: Sun Jan 23 02:30:14 2011
+#      by: PyQt4 UI code generator 4.7.3
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -21,6 +21,7 @@ class Ui_MainWindow(object):
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(":/icons/blue.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
+        MainWindow.setLocale(QtCore.QLocale(QtCore.QLocale.C, QtCore.QLocale.AnyCountry))
         MainWindow.setUnifiedTitleAndToolBarOnMac(True)
         self.centralWidget = QtGui.QWidget(MainWindow)
         self.centralWidget.setObjectName("centralWidget")
@@ -94,6 +95,7 @@ class Ui_MainWindow(object):
         spacerItem4 = QtGui.QSpacerItem(0, 0, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem4)
         self.label = QtGui.QLabel(self.Video)
+        self.label.setText("")
         self.label.setPixmap(QtGui.QPixmap(":/icons/black.png"))
         self.label.setScaledContents(True)
         self.label.setAlignment(QtCore.Qt.AlignCenter)
@@ -103,9 +105,12 @@ class Ui_MainWindow(object):
         spacerItem5 = QtGui.QSpacerItem(0, 0, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem5)
         self.verticalLayout.addLayout(self.horizontalLayout_3)
+        self.recursiveCheck = QtGui.QCheckBox(self.Video)
+        self.recursiveCheck.setObjectName("recursiveCheck")
+        self.verticalLayout.addWidget(self.recursiveCheck)
         self.horizontalLayout = QtGui.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
-        spacerItem6 = QtGui.QSpacerItem(0, 0, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Minimum)
+        spacerItem6 = QtGui.QSpacerItem(13, 13, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem6)
         self.ConvertButton = QtGui.QPushButton(self.Video)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Minimum)
@@ -115,7 +120,7 @@ class Ui_MainWindow(object):
         self.ConvertButton.setSizePolicy(sizePolicy)
         self.ConvertButton.setObjectName("ConvertButton")
         self.horizontalLayout.addWidget(self.ConvertButton)
-        spacerItem7 = QtGui.QSpacerItem(0, 0, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Minimum)
+        spacerItem7 = QtGui.QSpacerItem(13, 13, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem7)
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.horizontalLayout_10.addLayout(self.verticalLayout)
@@ -214,6 +219,7 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.label_2.sizePolicy().hasHeightForWidth())
         self.label_2.setSizePolicy(sizePolicy)
+        self.label_2.setText("")
         self.label_2.setPixmap(QtGui.QPixmap(":/icons/red.png"))
         self.label_2.setScaledContents(True)
         self.label_2.setAlignment(QtCore.Qt.AlignCenter)
@@ -346,6 +352,7 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.label_3.sizePolicy().hasHeightForWidth())
         self.label_3.setSizePolicy(sizePolicy)
+        self.label_3.setText("")
         self.label_3.setPixmap(QtGui.QPixmap(":/icons/silver.png"))
         self.label_3.setScaledContents(True)
         self.label_3.setAlignment(QtCore.Qt.AlignCenter)
@@ -398,7 +405,7 @@ class Ui_MainWindow(object):
         self.statusBar.setObjectName("statusBar")
         MainWindow.setStatusBar(self.statusBar)
         self.menuBar = QtGui.QMenuBar(MainWindow)
-        self.menuBar.setGeometry(QtCore.QRect(0, 0, 814, 21))
+        self.menuBar.setGeometry(QtCore.QRect(0, 0, 814, 23))
         self.menuBar.setObjectName("menuBar")
         self.menuHelp = QtGui.QMenu(self.menuBar)
         self.menuHelp.setObjectName("menuHelp")
@@ -426,6 +433,8 @@ class Ui_MainWindow(object):
         self.AddButton.setText(QtGui.QApplication.translate("MainWindow", "Add files...", None, QtGui.QApplication.UnicodeUTF8))
         self.SelectOutputButton.setText(QtGui.QApplication.translate("MainWindow", "Select output folder", None, QtGui.QApplication.UnicodeUTF8))
         self.RemoveButton.setText(QtGui.QApplication.translate("MainWindow", "Remove files", None, QtGui.QApplication.UnicodeUTF8))
+        self.recursiveCheck.setToolTip(QtGui.QApplication.translate("MainWindow", "Convert files in all directories and subdirectories", None, QtGui.QApplication.UnicodeUTF8))
+        self.recursiveCheck.setText(QtGui.QApplication.translate("MainWindow", "Recursive", None, QtGui.QApplication.UnicodeUTF8))
         self.ConvertButton.setText(QtGui.QApplication.translate("MainWindow", "Convert!", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidget.horizontalHeaderItem(0).setText(QtGui.QApplication.translate("MainWindow", "Input files", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidget.horizontalHeaderItem(1).setText(QtGui.QApplication.translate("MainWindow", "Output folder", None, QtGui.QApplication.UnicodeUTF8))

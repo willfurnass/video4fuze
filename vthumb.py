@@ -94,9 +94,10 @@ def find_thumb2(infile, outfile, startframe, nframes, alsosave, verbose, thumb, 
         print "Extracting frames"
     framemask = "frame" + str(time.time()) + ".%d.jpg"
     cmd = "%s -y -r 5 -vframes %d -i %s %s" % (FFMPEG, startframe+nframes-1, infile, framemask)
+    print cmd
     if not verbose:
         cmd = cmd + " -v -1" #> /dev/null 2>&1"
-    if os.system(cmd) != 0:
+    if os.system(cmd):
         print "Error invoking ffmpeg"
         return 10
 

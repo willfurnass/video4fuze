@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file '/home/ssorgatem/Documents/python/video4fuze/GUI/AboutDiag.ui'
 #
-# Created: Tue Jun 22 01:18:21 2010
+# Created: Sun Jan 23 02:30:17 2011
 #      by: PyQt4 UI code generator 4.7.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -44,8 +44,11 @@ class Ui_Dialog(object):
         self.horizontalLayout.addWidget(self.Appinfo)
         self.label = QtGui.QLabel(Dialog)
         font = QtGui.QFont()
+        font.setWeight(75)
+        font.setItalic(False)
+        font.setBold(True)
         self.label.setFont(font)
-        self.label.setAutoFillBackground(True)
+        self.label.setAutoFillBackground(False)
         self.label.setFrameShape(QtGui.QFrame.StyledPanel)
         self.label.setFrameShadow(QtGui.QFrame.Raised)
         self.label.setLineWidth(2)
