@@ -3,7 +3,7 @@
 Module implementing video4fuze's MainWindow. Playlist edition capabilities are inspired by Dunny's YAPL, and had been possible to write thanks to his help about the
 # .pla playlist format.
 """
-import os, fuze, p2fuze
+import os, fuze, p2fuze, glob
 from PyQt4.QtGui import QMainWindow,QFileDialog,QMessageBox, QLabel, QListWidgetItem, QIcon, QTableWidgetItem
 from PyQt4.QtCore import QString,QT_TR_NOOP,SIGNAL,QObject,QSettings,QVariant, QCoreApplication
 from threading import Thread
@@ -48,6 +48,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.connect(self.actionPreferences, SIGNAL("triggered()"),self.on_actionPreferences_triggered)
         self.connect(self.actionAbout_video4fuze, SIGNAL("triggered()"),self.on_actionAbout_video4fuze_triggered)
         self.connect(self.AddButton, SIGNAL("clicked()"),self.on_AddButton_clicked)
+        self.connect(self.AddDirButton, SIGNAL("clicked()"),self.on_AddDirButton_clicked)
         self.connect(self.AddButton_2, SIGNAL("clicked()"),self.on_AddButton_2_clicked)
         self.connect(self.SavePlaylist, SIGNAL("clicked()"),self.on_SavePlaylist_clicked)
         self.connect(self.SongsFromSD, SIGNAL("clicked()"),self.on_SongsFromSD_clicked)
@@ -237,6 +238,39 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         Resize = Resizer(args, self, self.output)
         Resize.start()
 
+    def on_AddDirButton_clicked(self):
+        """
+        Now it's time to add those files we were avoiding to emiting extra signals, right? xD
+        """
+        dir = QFileDialog.getExistingDirectory(\
+            None
+            ,self.trUtf8("Select files to add to the convert queue")
+            ,self.settings.value("lastvideodir",QVariant(os.path.expanduser("~"))).toString()
+            )
+        dir = toPython(dir)
+        if os.path.isdir(dir):
+            if os.path.isdir(dir + '/VIDEO_TS') or os.path.isdir(dir + '/BDMV/STREAM'):
+                self.enqueue_paths(dir)
+                return
+            glob_path = os.path.abspath(dir) + '/*'
+            glob_files = glob.glob(glob_path)
+            if self.recursiveCheck.isChecked():
+                no_more_dirs = 0
+                while not no_more_dirs:
+                    dirs = []
+                    for file in glob_files:
+                        if os.path.isdir(file):
+                            glob_files.remove(file)
+                            glob_path =  file + '/*'
+                            glob_files += glob.glob(glob_path)
+                            continue
+                    no_more_dirs = 1
+            else:
+                glob_files = [file for file in glob_files if os.path.isfile(file)]
+
+        if dir and glob_files:
+            self.enqueue_paths(glob_files)
+
     def on_AddButton_clicked(self):
         """
         Now it's time to add those files we were avoiding to emiting extra signals, right? xD
@@ -248,11 +282,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             QString(),
             None) # A cute QFileDialog asks the user for the files to convert, for both videos and images.
         if not files.isEmpty(): #If nothing, do nothing.
-            try:
-                self.settings.setValue("lastvideodir", QVariant(os.path.split(toPython(files[0]))[0]))
-                #Remembering last used dir comes always in handy.
-            except:
-                print files #Debugging stuff...
+            self.enqueue_paths(files)
+
+    def enqueue_paths(self, files):
+        try:
+            self.settings.setValue("lastvideodir", QVariant(os.path.split(toPython(files[0]))[0]))
+            #Remembering last used dir comes always in handy.
+        except:
+            print files #Debugging stuff...
         for file in files:
             currentrow = self.tableWidget.rowCount()
             self.tableWidget.insertRow(currentrow)

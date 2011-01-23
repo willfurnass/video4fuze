@@ -117,7 +117,7 @@
                 </property>
                </widget>
               </item>
-              <item row="1" column="1">
+              <item row="2" column="1">
                <widget class="QPushButton" name="SelectOutputButton">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
@@ -130,7 +130,7 @@
                 </property>
                </widget>
               </item>
-              <item row="2" column="1">
+              <item row="3" column="1">
                <widget class="QPushButton" name="RemoveButton">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
@@ -159,7 +159,7 @@
                 </property>
                </spacer>
               </item>
-              <item row="1" column="2">
+              <item row="2" column="2">
                <spacer name="horizontalSpacer_2">
                 <property name="orientation">
                  <enum>Qt::Horizontal</enum>
@@ -174,6 +174,13 @@
                  </size>
                 </property>
                </spacer>
+              </item>
+              <item row="1" column="1">
+               <widget class="QPushButton" name="AddDirButton">
+                <property name="text">
+                 <string>Add directories...</string>
+                </property>
+               </widget>
               </item>
              </layout>
             </item>

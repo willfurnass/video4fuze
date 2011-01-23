@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file '/home/ssorgatem/Documents/python/video4fuze/GUI/MainWindow.ui'
 #
-# Created: Sun Jan 23 02:30:14 2011
+# Created: Sun Jan 23 14:38:15 2011
 #      by: PyQt4 UI code generator 4.7.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -76,7 +76,7 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.SelectOutputButton.sizePolicy().hasHeightForWidth())
         self.SelectOutputButton.setSizePolicy(sizePolicy)
         self.SelectOutputButton.setObjectName("SelectOutputButton")
-        self.gridLayout_2.addWidget(self.SelectOutputButton, 1, 1, 1, 1)
+        self.gridLayout_2.addWidget(self.SelectOutputButton, 2, 1, 1, 1)
         self.RemoveButton = QtGui.QPushButton(self.Video)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Minimum)
         sizePolicy.setHorizontalStretch(0)
@@ -84,11 +84,14 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.RemoveButton.sizePolicy().hasHeightForWidth())
         self.RemoveButton.setSizePolicy(sizePolicy)
         self.RemoveButton.setObjectName("RemoveButton")
-        self.gridLayout_2.addWidget(self.RemoveButton, 2, 1, 1, 1)
+        self.gridLayout_2.addWidget(self.RemoveButton, 3, 1, 1, 1)
         spacerItem2 = QtGui.QSpacerItem(0, 0, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Minimum)
         self.gridLayout_2.addItem(spacerItem2, 0, 0, 1, 1)
         spacerItem3 = QtGui.QSpacerItem(0, 0, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Minimum)
-        self.gridLayout_2.addItem(spacerItem3, 1, 2, 1, 1)
+        self.gridLayout_2.addItem(spacerItem3, 2, 2, 1, 1)
+        self.AddDirButton = QtGui.QPushButton(self.Video)
+        self.AddDirButton.setObjectName("AddDirButton")
+        self.gridLayout_2.addWidget(self.AddDirButton, 1, 1, 1, 1)
         self.verticalLayout.addLayout(self.gridLayout_2)
         self.horizontalLayout_3 = QtGui.QHBoxLayout()
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
@@ -433,6 +436,7 @@ class Ui_MainWindow(object):
         self.AddButton.setText(QtGui.QApplication.translate("MainWindow", "Add files...", None, QtGui.QApplication.UnicodeUTF8))
         self.SelectOutputButton.setText(QtGui.QApplication.translate("MainWindow", "Select output folder", None, QtGui.QApplication.UnicodeUTF8))
         self.RemoveButton.setText(QtGui.QApplication.translate("MainWindow", "Remove files", None, QtGui.QApplication.UnicodeUTF8))
+        self.AddDirButton.setText(QtGui.QApplication.translate("MainWindow", "Add directories...", None, QtGui.QApplication.UnicodeUTF8))
         self.recursiveCheck.setToolTip(QtGui.QApplication.translate("MainWindow", "Convert files in all directories and subdirectories", None, QtGui.QApplication.UnicodeUTF8))
         self.recursiveCheck.setText(QtGui.QApplication.translate("MainWindow", "Recursive", None, QtGui.QApplication.UnicodeUTF8))
         self.ConvertButton.setText(QtGui.QApplication.translate("MainWindow", "Convert!", None, QtGui.QApplication.UnicodeUTF8))
