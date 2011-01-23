@@ -19,7 +19,5 @@ FORMS = GUI/MainWindow.ui \
 TRANSLATIONS = translations/v4f_es.ts \
 	translations/v4f_en.ts \
 	translations/v4f_ca.ts \
-	translations/v4f_de.ts \
-        translations/v4f_fr.ts \
-	translations/v4f_pt.ts
+	translations/v4f_de.ts 
 

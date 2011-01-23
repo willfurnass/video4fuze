@@ -1,5 +1,6 @@
 <RCC>
   <qresource>
+    <file>icons/sansa_fuze_v2.svg</file>
     <file>icons/silver.png</file>
     <file>icons/black.png</file>
     <file>icons/blue.png</file>

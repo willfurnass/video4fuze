@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file '/home/ssorgatem/Documents/python/video4fuze/GUI/MainWindow.ui'
 #
-# Created: Sun Jan 23 14:38:15 2011
+# Created: Sun Jan 23 18:17:58 2011
 #      by: PyQt4 UI code generator 4.7.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -19,7 +19,7 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
         MainWindow.setSizePolicy(sizePolicy)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(":/icons/blue.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(":/icons/sansa_fuze_v2.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
         MainWindow.setLocale(QtCore.QLocale(QtCore.QLocale.C, QtCore.QLocale.AnyCountry))
         MainWindow.setUnifiedTitleAndToolBarOnMac(True)
@@ -469,7 +469,6 @@ class Ui_MainWindow(object):
         self.actionAbout_Qt.setText(QtGui.QApplication.translate("MainWindow", "About Qt", None, QtGui.QApplication.UnicodeUTF8))
         self.actionPreferences.setText(QtGui.QApplication.translate("MainWindow", "Preferences", None, QtGui.QApplication.UnicodeUTF8))
 
-import video4fuze_rc
 import video4fuze_rc
 
 if __name__ == "__main__":

@@ -18,7 +18,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="../video4fuze.qrc">
-    <normaloff>:/icons/blue.png</normaloff>:/icons/blue.png</iconset>
+    <normaloff>:/icons/sansa_fuze_v2.svg</normaloff>:/icons/sansa_fuze_v2.svg</iconset>
   </property>
   <property name="locale">
    <locale language="C" country="AnyCountry"/>
@@ -1077,7 +1077,6 @@
   </action>
  </widget>
  <resources>
-  <include location="../video4fuze.qrc"/>
   <include location="../video4fuze.qrc"/>
  </resources>
  <connections/>
